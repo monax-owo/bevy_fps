@@ -1,7 +1,7 @@
 pub mod game;
 
 use bevy::{diagnostic::FrameTimeDiagnosticsPlugin, prelude::*};
-use bevy_editor_pls::EditorPlugin;
+// use bevy_editor_pls::EditorPlugin;
 use game::plugin::GamePlugin;
 // use bevy_rapier3d::prelude::*;
 
@@ -10,7 +10,7 @@ fn main() {
     .add_plugins((
       DefaultPlugins,
       FrameTimeDiagnosticsPlugin::default(),
-      EditorPlugin::default(),
+      // EditorPlugin::default(),
       GamePlugin,
     ))
     .run();

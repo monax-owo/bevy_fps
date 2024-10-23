@@ -5,6 +5,7 @@
     "egui",
     "euler",
     "srgb",
+    "srgba",
     "tonemapping"
   ]
 }

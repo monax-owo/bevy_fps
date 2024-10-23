@@ -2,37 +2,53 @@ use bevy::prelude::*;
 
 #[derive(Component)]
 pub struct Crosshair {
-  color: Color,
+  pub color: Color,
 }
 
-pub fn init_crosshair(
-  mut commands: Commands,
-  mut meshes: ResMut<Assets<Mesh>>,
-  mut materials: ResMut<Assets<StandardMaterial>>,
-) {
+impl Default for Crosshair {
+  fn default() -> Self {
+    Self {
+      color: Color::srgb(1.0, 1.0, 1.0),
+    }
+  }
+}
+
+#[derive(Bundle)]
+pub struct CrosshairBundle {
+  crosshair: Crosshair,
+  children: Children,
+}
+
+pub fn init_crosshair(mut commands: Commands) {
   commands
     .spawn(NodeBundle {
       style: Style {
         width: Val::Percent(100.0),
         height: Val::Percent(100.0),
+        justify_content: JustifyContent::Center,
+        align_content: AlignContent::Center,
+        flex_wrap: FlexWrap::Wrap,
+        display: Display::Flex,
         ..default()
       },
       ..default()
     })
     // .push_children(&[]);
     .with_children(|parent| {
-      parent
-        .spawn((Crosshair {
+      parent.spawn((
+        Crosshair {
           color: Color::srgb_u8(255, 255, 255),
-        },))
-        .with_children(|parent| {
-          for i in 1..=4 {
-            parent.spawn(MaterialMeshBundle {
-              mesh: meshes.add(Rectangle::new(1.0, 4.0)),
-              material: materials.add(Color::srgb_u8(255, 255, 255)),
-              ..default()
-            });
-          }
-        });
+        },
+        NodeBundle {
+          style: Style {
+            width: Val::Px(16.0),
+            height: Val::Px(4.0),
+            display: Display::Block,
+            ..default()
+          },
+          background_color: Color::srgba(1.0, 1.0, 1.0, 0.4).into(),
+          ..default()
+        },
+      ));
     });
 }
