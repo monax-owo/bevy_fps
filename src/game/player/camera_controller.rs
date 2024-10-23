@@ -16,12 +16,16 @@ pub fn update_camera_controller(
     (player.get_single_mut(), camera_controller.get_single_mut())
   {
     for motion in mouse_motion.read() {
-      let (_, pitch, _) = camera_controller_transform.rotation.to_euler(EulerRot::YXZ);
       // 左右
       player.rotate_y(-motion.delta.x * camera_controller.sensitivity);
-      let pitch = pitch - motion.delta.y * camera_controller.sensitivity;
       // 上下
-      camera_controller_transform.rotation = Quat::from_euler(EulerRot::YXZ, 0.0, pitch, 0.0);
+      let val = camera_controller_transform
+        .rotation
+        .to_euler(EulerRot::YXZ)
+        .1
+        - motion.delta.y * camera_controller.sensitivity;
+      dbg!(val);
+      camera_controller_transform.rotation = Quat::from_rotation_x(val);
     }
   };
 }
