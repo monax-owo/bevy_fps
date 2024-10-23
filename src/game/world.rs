@@ -17,7 +17,9 @@ pub fn init_world(
   ));
   // Gizmo
   commands.spawn(PbrBundle {
-    mesh: meshes.add(Sphere::new(0.1)),
+    mesh: meshes.add(Rhombus {
+      half_diagonals: Vec2::splat(0.1),
+    }),
     material: materials.add(Color::srgb_u8(255, 0, 0)),
     ..default()
   });
@@ -30,9 +32,9 @@ pub fn init_world(
   });
   // Gizmo 2
   commands.spawn(PbrBundle {
-    mesh: meshes.add(Sphere::new(0.02)),
+    mesh: meshes.add(Sphere::new(0.1)),
     material: materials.add(Color::srgb_u8(255, 0, 0)),
-    transform: Transform::from_xyz(0.0, 2.0, -1.0),
+    transform: Transform::from_xyz(0.0, 4.0, -1.0),
     ..default()
   });
   // Light

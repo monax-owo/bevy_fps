@@ -2,15 +2,21 @@ use bevy::{core_pipeline::tonemapping::DebandDither, prelude::*};
 
 use super::camera_controller::CameraController;
 
-#[derive(Debug, Component)]
+#[derive(Component)]
 pub struct Player;
 
-pub fn init_player(mut commands: Commands) {
+pub fn init_player(
+  mut commands: Commands,
+  mut meshes: ResMut<Assets<Mesh>>,
+  mut materials: ResMut<Assets<StandardMaterial>>,
+) {
   commands
     .spawn((
       Player,
-      SpatialBundle {
-        transform: Transform::from_xyz(0.0, 2.0, 0.0),
+      PbrBundle {
+        mesh: meshes.add(Capsule3d::new(0.6, 1.4)),
+        material: materials.add(Color::srgb_u8(0, 255, 255)),
+        transform: Transform::from_xyz(0.0, 1.3, 0.0),
         ..default()
       },
     ))
@@ -23,9 +29,10 @@ pub fn init_player(mut commands: Commands) {
             ..default()
           },
           projection: Projection::Perspective(PerspectiveProjection {
-            fov: 70.0,
+            fov: 90.0,
             ..default()
           }),
+          transform: Transform::from_xyz(0.0, 2.0, 0.0),
           ..default()
         },
         CameraController { sensitivity: 0.001 },

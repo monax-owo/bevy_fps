@@ -1,8 +1,10 @@
+use core::f32;
+
 use bevy::{input::mouse::MouseMotion, prelude::*};
 
 use super::player::Player;
 
-#[derive(Debug, Component)]
+#[derive(Component)]
 pub struct CameraController {
   pub sensitivity: f32,
 }
@@ -19,13 +21,15 @@ pub fn update_camera_controller(
       // 左右
       player.rotate_y(-motion.delta.x * camera_controller.sensitivity);
       // 上下
-      let val = camera_controller_transform
-        .rotation
-        .to_euler(EulerRot::YXZ)
-        .1
-        - motion.delta.y * camera_controller.sensitivity;
-      dbg!(val);
-      camera_controller_transform.rotation = Quat::from_rotation_x(val);
+
+      camera_controller_transform.rotation = Quat::from_rotation_x(
+        (camera_controller_transform
+          .rotation
+          .to_euler(EulerRot::YXZ)
+          .1
+          - motion.delta.y * camera_controller.sensitivity)
+          .clamp(-f32::consts::FRAC_PI_2, f32::consts::FRAC_PI_2),
+      );
     }
   };
 }

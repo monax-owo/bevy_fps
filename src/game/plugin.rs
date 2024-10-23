@@ -3,14 +3,14 @@ use bevy::{
   prelude::Component,
 };
 
-use super::{player::plugin::PlayerPlugin, world::init_world};
+use super::{player::plugin::PlayerPlugin, ui::plugin::UiPlugin, world::init_world};
 
-#[derive(Debug, Component)]
+#[derive(Component)]
 pub struct GamePlugin;
 impl Plugin for GamePlugin {
   fn build(&self, app: &mut bevy::prelude::App) {
     app
-      .add_plugins(PlayerPlugin)
+      .add_plugins((UiPlugin, PlayerPlugin))
       .add_systems(Startup, init_world);
   }
 }
