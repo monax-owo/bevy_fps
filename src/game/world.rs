@@ -36,14 +36,14 @@ pub fn init_world(
     ..default()
   });
   // Light
-  commands.spawn(PointLightBundle {
-    point_light: PointLight {
+  commands.spawn(DirectionalLightBundle {
+    directional_light: DirectionalLight {
       color: Color::srgb_u8(255, 255, 255),
       shadows_enabled: true,
-      intensity: 3000000.0,
+      illuminance: 800.0,
       ..default()
     },
-    transform: Transform::from_xyz(0.0, 10.0, 2.0),
+    transform: Transform::from_xyz(0.0, 10.0, 2.0).looking_at(Vec3::ZERO, Vec3::Y),
     ..default()
   });
 }

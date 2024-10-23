@@ -1,4 +1,4 @@
-use bevy::prelude::*;
+use bevy::{core_pipeline::tonemapping::DebandDither, prelude::*};
 
 use super::camera_controller::CameraController;
 
@@ -17,6 +17,7 @@ pub fn init_player(mut commands: Commands) {
     .with_children(|parent| {
       parent.spawn((
         Camera3dBundle {
+          deband_dither: DebandDither::Disabled,
           camera: Camera {
             order: 1,
             ..default()
