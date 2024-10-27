@@ -1,4 +1,4 @@
-
+#import bevy_pbr::mesh_view_bindings::globals
 #import bevy_pbr::forward_io::VertexOutput
 // we can import items from shader modules in the assets folder with a quoted path
 
@@ -8,5 +8,5 @@
 
 @fragment
 fn fragment() -> @location(0) vec4<f32> {
-    return vec4(vec3(1.0) - material_color.rgb, material_color.a);
+    return vec4(abs(vec3(abs(sin(globals.time))) - material_color.rgb), material_color.a);
 }
