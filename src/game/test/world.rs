@@ -13,7 +13,7 @@ pub(super) fn init_world(
       color: LinearRgba::WHITE,
       ..default()
     }),
-    transform: Transform::from_xyz(0.0, 4.0, 0.0),
+    transform: Transform::from_xyz(0.0, 4.0, -2.0),
     ..default()
   });
 }
