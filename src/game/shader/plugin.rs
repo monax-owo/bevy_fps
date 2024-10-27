@@ -1,4 +1,4 @@
-use bevy::{app::Plugin, prelude::*};
+use bevy::prelude::*;
 
 use super::shader::PostProcessMaterial;
 

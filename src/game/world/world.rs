@@ -55,10 +55,3 @@ pub(super) fn init_world(
     ..default()
   });
 }
-
-// transform: Transform::from_rotation(Quat::from_euler(
-//   EulerRot::YXZ,
-//   0.25,
-//   0.25,
-//   0.25,
-// )),

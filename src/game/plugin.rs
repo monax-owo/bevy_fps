@@ -1,23 +1,17 @@
-use bevy::{
-  app::{Plugin, Startup},
-  prelude::Component,
-};
+use bevy::prelude::*;
 
 use super::{
   player::plugin::PlayerPlugin, shader::plugin::ShaderPlugin, test::plugin::TestPlugin,
-  ui::plugin::UiPlugin, world::init_world,
+  ui::plugin::UiPlugin,
 };
 
-#[derive(Component)]
 pub struct GamePlugin;
+
 impl Plugin for GamePlugin {
   fn build(&self, app: &mut bevy::prelude::App) {
-    let app = app
-      .add_plugins((UiPlugin, PlayerPlugin, ShaderPlugin))
-      .add_systems(Startup, init_world);
+    let app = app.add_plugins((UiPlugin, PlayerPlugin, ShaderPlugin));
 
-    #[cfg(debug_assertions)]
-    {
+    if cfg!(debug_assertions) {
       app.add_plugins(TestPlugin);
     }
   }
