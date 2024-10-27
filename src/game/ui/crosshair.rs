@@ -47,7 +47,6 @@ pub(super) fn spawn_crosshair(mut commands: Commands) {
           // flex_wrap: FlexWrap::Wrap,
           ..default()
         },
-        visibility: Visibility::Hidden,
         background_color: BackgroundColor(Color::srgb_u8(255, 255, 255)),
         ..default()
       });
