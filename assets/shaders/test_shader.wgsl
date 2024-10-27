@@ -7,6 +7,6 @@
 @group(2) @binding(2) var material_color_sampler: sampler;
 
 @fragment
-fn fragment(mesh: VertexOutput) -> @location(0) vec4<f32> {
+fn fragment() -> @location(0) vec4<f32> {
     return vec4(vec3(1.0) - material_color.rgb, material_color.a);
 }
