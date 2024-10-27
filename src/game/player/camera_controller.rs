@@ -5,11 +5,11 @@ use bevy::{input::mouse::MouseMotion, prelude::*};
 use super::player::Player;
 
 #[derive(Component)]
- pub  struct CameraController {
-   pub  sensitivity: f32,
+pub(super) struct CameraController {
+  pub(super) sensitivity: f32,
 }
 
- pub  fn update_camera_controller(
+pub(super) fn update_camera_controller(
   mut mouse_motion: EventReader<MouseMotion>,
   mut player: Query<&mut Transform, With<Player>>,
   mut camera_controller: Query<(&mut CameraController, &mut Transform), Without<Player>>,

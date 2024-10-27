@@ -1,2 +1,2 @@
- pub  mod plugin;
- pub  mod shader;
+pub(super) mod plugin;
+pub(super) mod shader;

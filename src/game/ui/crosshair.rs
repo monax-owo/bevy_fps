@@ -1,8 +1,8 @@
 use bevy::prelude::*;
 
 #[derive(Component)]
- pub  struct Crosshair {
-   pub  color: Color,
+pub(super) struct Crosshair {
+  pub(super) color: Color,
 }
 
 impl Default for Crosshair {
@@ -14,12 +14,12 @@ impl Default for Crosshair {
 }
 
 #[derive(Bundle)]
- pub  struct CrosshairBundle {
+pub(super) struct CrosshairBundle {
   crosshair: Crosshair,
   children: Children,
 }
 
- pub  fn spawn_crosshair(mut commands: Commands) {
+pub(super) fn spawn_crosshair(mut commands: Commands) {
   commands
     .spawn((
       NodeBundle {
@@ -73,7 +73,7 @@ impl Default for Crosshair {
     });
 }
 
- pub  fn init_crosshair(
+pub(super) fn init_crosshair(
   crosshair: Query<&Crosshair, With<Node>>,
   mut _bg: Query<&BackgroundColor, (With<Node>, Without<Crosshair>)>,
 ) {

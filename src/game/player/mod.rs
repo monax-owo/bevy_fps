@@ -1,4 +1,3 @@
-
- pub  mod camera_controller;
- pub  mod player;
- pub  mod plugin;
+pub(super) mod camera_controller;
+pub(super) mod player;
+pub(super) mod plugin;

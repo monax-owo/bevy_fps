@@ -1,4 +1,3 @@
-
- pub  mod crosshair;
- pub  mod plugin;
- pub  mod ui;
+pub(super) mod crosshair;
+pub(super) mod plugin;
+pub(super) mod ui;

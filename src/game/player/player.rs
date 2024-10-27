@@ -3,9 +3,9 @@ use bevy::{core_pipeline::tonemapping::DebandDither, prelude::*};
 use super::camera_controller::CameraController;
 
 #[derive(Component)]
- pub  struct Player;
+pub(super) struct Player;
 
- pub  fn init_player(
+pub(super) fn init_player(
   mut commands: Commands,
   mut meshes: ResMut<Assets<Mesh>>,
   mut materials: ResMut<Assets<StandardMaterial>>,
