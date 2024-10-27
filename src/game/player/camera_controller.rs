@@ -20,8 +20,8 @@ pub(super) fn update_camera_controller(
     for motion in mouse_motion.read() {
       // 左右
       player.rotate_y(-motion.delta.x * camera_controller.sensitivity);
-      // 上下
 
+      // 上下
       camera_controller_transform.rotation = Quat::from_rotation_x(
         (camera_controller_transform
           .rotation

@@ -17,6 +17,7 @@ pub(super) fn init_world(
       ..default()
     },
   ));
+
   // Gizmo
   commands.spawn(PbrBundle {
     mesh: meshes.add(Rhombus {
@@ -25,6 +26,7 @@ pub(super) fn init_world(
     material: materials.add(Color::srgb_u8(255, 0, 0)),
     ..default()
   });
+
   // Sphere top
   commands.spawn(PbrBundle {
     mesh: meshes.add(Sphere::new(SPHERE_SIZE)),
@@ -32,6 +34,7 @@ pub(super) fn init_world(
     transform: Transform::from_xyz(0.0, 4.0, 0.0),
     ..default()
   });
+
   // Sphere forward
   commands.spawn(PbrBundle {
     mesh: meshes.add(Sphere::new(SPHERE_SIZE)),
@@ -39,6 +42,7 @@ pub(super) fn init_world(
     transform: Transform::from_xyz(0.0, 4.0, -1.0),
     ..default()
   });
+
   // Light
   commands.spawn(DirectionalLightBundle {
     directional_light: DirectionalLight {
