@@ -1,11 +1,13 @@
 use bevy::prelude::*;
 use bevy_rapier3d::prelude::Collider;
 
-pub fn init_world(
+ pub  fn init_world(
   mut commands: Commands,
   mut meshes: ResMut<Assets<Mesh>>,
   mut materials: ResMut<Assets<StandardMaterial>>,
 ) {
+  const SPHERE_SIZE: f32 = 0.04;
+
   // Ground
   commands.spawn((
     Collider::cuboid(10.0, 0.0, 10.0),
@@ -23,16 +25,16 @@ pub fn init_world(
     material: materials.add(Color::srgb_u8(255, 0, 0)),
     ..default()
   });
-  // Gizmo top
+  // Sphere top
   commands.spawn(PbrBundle {
-    mesh: meshes.add(Sphere::new(0.1)),
+    mesh: meshes.add(Sphere::new(SPHERE_SIZE)),
     material: materials.add(Color::srgb_u8(255, 0, 0)),
     transform: Transform::from_xyz(0.0, 4.0, 0.0),
     ..default()
   });
-  // Gizmo 2
+  // Sphere forward
   commands.spawn(PbrBundle {
-    mesh: meshes.add(Sphere::new(0.1)),
+    mesh: meshes.add(Sphere::new(SPHERE_SIZE)),
     material: materials.add(Color::srgb_u8(255, 0, 0)),
     transform: Transform::from_xyz(0.0, 4.0, -1.0),
     ..default()

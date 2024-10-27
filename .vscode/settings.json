@@ -6,6 +6,8 @@
     "euler",
     "srgb",
     "srgba",
-    "tonemapping"
+    "tonemapping",
+    "Unorm",
+    "wgsl"
   ]
 }
