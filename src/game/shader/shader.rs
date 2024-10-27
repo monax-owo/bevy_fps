@@ -19,6 +19,7 @@ impl Default for PostProcessMaterial {
   }
 }
 
+// TODO:<https://bevyengine.org/examples/2d-rendering/pixel-grid-snap/>これでよくない？試します
 impl Material for PostProcessMaterial {
   fn fragment_shader() -> bevy::render::render_resource::ShaderRef {
     "shaders/test_shader.wgsl".into()
