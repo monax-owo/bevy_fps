@@ -24,7 +24,7 @@ pub(super) fn init_world(
     RigidBody::Dynamic,
     PbrBundle {
       mesh: meshes.add(Cuboid::new(2.0, 2.0, 2.0)),
-      material: materials.add(Color::srgb_u8(255, 0, 127)),
+      material: materials.add(Color::srgb_u8(255, 0, 0)),
       transform: Transform::from_xyz(0.0, 4.0, -4.0),
       ..default()
     },

@@ -3,7 +3,6 @@ use bevy_rapier3d::prelude::*;
 
 use super::player::Player;
 
-// TODO:プレイヤーが奈落に落ちないのを治す
 pub(super) fn update_movement(
   key: Res<ButtonInput<KeyCode>>,
   time: Res<Time>,
