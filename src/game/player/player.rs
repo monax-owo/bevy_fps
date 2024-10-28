@@ -3,7 +3,9 @@ use bevy::{core_pipeline::tonemapping::DebandDither, prelude::*};
 use super::camera_controller::CameraController;
 
 #[derive(Component)]
-pub(super) struct Player;
+pub(super) struct Player {
+  pub speed: f32,
+}
 
 pub(super) fn init_player(
   mut commands: Commands,
@@ -12,7 +14,7 @@ pub(super) fn init_player(
 ) {
   commands
     .spawn((
-      Player,
+      Player { speed: 8.0 },
       PbrBundle {
         mesh: meshes.add(Capsule3d::new(0.6, 1.4)),
         material: materials.add(Color::srgb_u8(0, 255, 255)),
