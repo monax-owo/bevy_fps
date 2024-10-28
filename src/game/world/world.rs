@@ -1,5 +1,5 @@
 use bevy::prelude::*;
-use bevy_rapier3d::prelude::Collider;
+use bevy_rapier3d::prelude::*;
 
 pub(super) fn init_world(
   mut commands: Commands,
@@ -14,6 +14,18 @@ pub(super) fn init_world(
     PbrBundle {
       mesh: meshes.add(Plane3d::new(Vec3::Y, Vec2::splat(10.0))),
       material: materials.add(Color::srgb_u8(255, 0, 127)),
+      ..default()
+    },
+  ));
+
+  // Box
+  commands.spawn((
+    Collider::cuboid(1.0, 1.0, 1.0),
+    RigidBody::Dynamic,
+    PbrBundle {
+      mesh: meshes.add(Cuboid::new(2.0, 2.0, 2.0)),
+      material: materials.add(Color::srgb_u8(255, 0, 127)),
+      transform: Transform::from_xyz(0.0, 4.0, -4.0),
       ..default()
     },
   ));
