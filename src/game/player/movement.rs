@@ -7,47 +7,54 @@ pub(super) fn update_movement(
   key: Res<ButtonInput<KeyCode>>,
   time: Res<Time>,
   mut query: Query<(
-    &Player,
+    &mut Player,
     &Transform,
     &mut KinematicCharacterController,
     Option<&KinematicCharacterControllerOutput>,
   )>,
 ) {
-  if let Ok((player, player_transform, mut controller, controller_output)) = query.get_single_mut()
+  if let Ok((mut player, player_transform, mut controller, controller_output)) =
+    query.get_single_mut()
   {
     // TODO:directionをVec2,重力を別の変数にする
-    let mut direction = Vec3::ZERO;
+    // Vec3(x,y,z) Vec2(x,z)
+    let mut horizontal_direction = Vec2::ZERO;
 
     if key.pressed(KeyCode::KeyW) {
-      direction += *player_transform.forward();
+      horizontal_direction += player_transform.forward().xz();
     }
 
     if key.pressed(KeyCode::KeyA) {
-      direction += *player_transform.left();
+      horizontal_direction += player_transform.left().xz();
     }
 
     if key.pressed(KeyCode::KeyS) {
-      direction += *player_transform.back();
+      horizontal_direction += player_transform.back().xz();
     }
 
     if key.pressed(KeyCode::KeyD) {
-      direction += *player_transform.right();
+      horizontal_direction += player_transform.right().xz();
     }
 
-    direction = direction.clamp_length(0.0, 1.0);
+    horizontal_direction = horizontal_direction.clamp_length(0.0, 1.0) * player.horizontal_speed;
+
+    // player.gravity.signum() <- 符号取れる -1,0,1
 
     if let Some(controller_output) = controller_output {
+      // 地面に付いて無いときは重力を加える
       if controller_output.grounded {
         if key.pressed(KeyCode::Space) {
-          // TODO:normalizeしない
-          direction.y += 10.0;
+          player.gravity = -100.0;
         }
-      } else {
-        direction.y -= player.gravity;
       }
     }
 
-    controller.translation =
-      Some(direction.normalize_or_zero() * player.speed * time.delta_seconds());
+    player.direction = Vec3::from((
+      horizontal_direction.x,
+      player.direction.y,
+      horizontal_direction.y,
+    )) * time.delta_seconds();
+
+    controller.translation = Some(player.direction);
   }
 }

@@ -9,7 +9,7 @@ fn main() {
   app.add_plugins((DefaultPlugins, GamePlugin));
 
   // 必要なときのみtrue
-  if false {
+  if true {
     use bevy_editor_pls::EditorPlugin;
     app.add_plugins(EditorPlugin::default());
   }

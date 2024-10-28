@@ -5,8 +5,14 @@ use super::camera_controller::CameraController;
 
 #[derive(Component)]
 pub(super) struct Player {
-  pub speed: f32,
+  /// 力が加わる向きと速度(大きさ)
+  pub direction: Vec3,
+  /// 重力の掛かる方向
+  /// 正の値だと下向きの力が掛かり
+  /// 負の値だと上向きの力が掛かる(ジャンプ)
   pub gravity: f32,
+  /// 水平方向の移動速度
+  pub horizontal_speed: f32,
 }
 
 pub(super) fn init_player(
@@ -17,8 +23,9 @@ pub(super) fn init_player(
   commands
     .spawn((
       Player {
-        speed: 8.0,
-        gravity: 2.0,
+        direction: Vec3::ZERO,
+        gravity: 1.0,
+        horizontal_speed: 8.0,
       },
       Collider::cuboid(0.6, 1.4, 0.6),
       PbrBundle {
