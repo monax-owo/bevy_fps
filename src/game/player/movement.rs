@@ -7,9 +7,16 @@ use super::player::Player;
 pub(super) fn update_movement(
   key: Res<ButtonInput<KeyCode>>,
   time: Res<Time>,
-  mut query: Query<(&Player, &Transform, &mut KinematicCharacterController)>,
+  mut query: Query<(
+    &Player,
+    &Transform,
+    &mut KinematicCharacterController,
+    Option<&KinematicCharacterControllerOutput>,
+  )>,
 ) {
-  if let Ok((player, player_transform, mut kinematic_controller)) = query.get_single_mut() {
+  if let Ok((player, player_transform, mut controller, controller_output)) = query.get_single_mut()
+  {
+    // TODO:directionをVec2,重力を別の変数にする
     let mut direction = Vec3::ZERO;
 
     if key.pressed(KeyCode::KeyW) {
@@ -28,12 +35,20 @@ pub(super) fn update_movement(
       direction += *player_transform.right();
     }
 
+    direction = direction.clamp_length(0.0, 1.0);
+
     if key.pressed(KeyCode::Space) {
       // TODO
       // direction += *player_transform.forward();
     }
 
-    kinematic_controller.translation =
-      Some(direction.clamp_length(0.0, 1.0).normalize() * player.speed * time.delta_seconds());
+    if let Some(controller_output) = controller_output {
+      if !controller_output.grounded {
+        direction.y -= player.gravity;
+      }
+    }
+
+    controller.translation =
+      Some(direction.normalize_or_zero() * player.speed * time.delta_seconds());
   }
 }

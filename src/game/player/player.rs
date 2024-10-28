@@ -6,6 +6,7 @@ use super::camera_controller::CameraController;
 #[derive(Component)]
 pub(super) struct Player {
   pub speed: f32,
+  pub gravity: f32,
 }
 
 pub(super) fn init_player(
@@ -15,7 +16,10 @@ pub(super) fn init_player(
 ) {
   commands
     .spawn((
-      Player { speed: 8.0 },
+      Player {
+        speed: 8.0,
+        gravity: 2.0,
+      },
       Collider::cuboid(0.6, 1.4, 0.6),
       PbrBundle {
         mesh: meshes.add(Cuboid::new(1.2, 2.8, 1.2)),
@@ -27,6 +31,7 @@ pub(super) fn init_player(
       KinematicCharacterController {
         up: Vec3::Y,
         offset: CharacterLength::Absolute(0.001),
+        snap_to_ground: Some(CharacterLength::Absolute(0.5)),
         ..default()
       },
     ))
