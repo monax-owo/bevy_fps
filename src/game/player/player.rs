@@ -16,9 +16,9 @@ pub(super) fn init_player(
   commands
     .spawn((
       Player { speed: 8.0 },
-      Collider::cuboid(0.6, 0.6, 0.6),
+      Collider::cuboid(0.6, 1.4, 0.6),
       PbrBundle {
-        mesh: meshes.add(Cuboid::new(1.2, 1.2, 1.2)),
+        mesh: meshes.add(Cuboid::new(1.2, 2.8, 1.2)),
         material: materials.add(Color::srgb_u8(0, 255, 255)),
         transform: Transform::from_xyz(0.0, 1.4, 0.0),
         ..default()
