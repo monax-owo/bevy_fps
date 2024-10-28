@@ -8,7 +8,8 @@ fn main() {
   let mut app = App::new();
   app.add_plugins((DefaultPlugins, GamePlugin));
 
-  if true {
+  // 必要なときのみtrue
+  if false {
     use bevy_editor_pls::EditorPlugin;
     app.add_plugins(EditorPlugin::default());
   }
