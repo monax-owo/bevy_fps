@@ -36,13 +36,13 @@ pub(super) fn update_movement(
 
     direction = direction.clamp_length(0.0, 1.0);
 
-    if key.pressed(KeyCode::Space) {
-      // TODO
-      // direction += *player_transform.forward();
-    }
-
     if let Some(controller_output) = controller_output {
-      if !controller_output.grounded {
+      if controller_output.grounded {
+        if key.pressed(KeyCode::Space) {
+          // TODO:normalizeしない
+          direction.y += 10.0;
+        }
+      } else {
         direction.y -= player.gravity;
       }
     }
