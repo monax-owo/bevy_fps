@@ -1,4 +1,5 @@
 use bevy::{core_pipeline::tonemapping::DebandDither, prelude::*};
+use bevy_rapier3d::prelude::*;
 
 use super::camera_controller::CameraController;
 
@@ -15,10 +16,17 @@ pub(super) fn init_player(
   commands
     .spawn((
       Player { speed: 8.0 },
+      Collider::cuboid(0.6, 0.6, 0.6),
       PbrBundle {
-        mesh: meshes.add(Capsule3d::new(0.6, 1.4)),
+        mesh: meshes.add(Cuboid::new(1.2, 1.2, 1.2)),
         material: materials.add(Color::srgb_u8(0, 255, 255)),
-        transform: Transform::from_xyz(0.0, 1.3, 0.0),
+        transform: Transform::from_xyz(0.0, 1.4, 0.0),
+        ..default()
+      },
+      RigidBody::KinematicPositionBased,
+      KinematicCharacterController {
+        up: Vec3::Y,
+        offset: CharacterLength::Absolute(0.001),
         ..default()
       },
     ))

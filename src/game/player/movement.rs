@@ -1,14 +1,15 @@
 use bevy::prelude::*;
+use bevy_rapier3d::prelude::*;
 
 use super::player::Player;
 
-// TODO:プレイヤーを動かせるようにする
+// TODO:プレイヤーが奈落に落ちないのを治す
 pub(super) fn update_movement(
   key: Res<ButtonInput<KeyCode>>,
   time: Res<Time>,
-  mut query: Query<(&Player, &mut Transform)>,
+  mut query: Query<(&Player, &Transform, &mut KinematicCharacterController)>,
 ) {
-  if let Ok((player, mut player_transform)) = query.get_single_mut() {
+  if let Ok((player, player_transform, mut kinematic_controller)) = query.get_single_mut() {
     let mut direction = Vec3::ZERO;
 
     if key.pressed(KeyCode::KeyW) {
@@ -27,7 +28,12 @@ pub(super) fn update_movement(
       direction += *player_transform.right();
     }
 
-    player_transform.translation +=
-      direction.clamp_length(0.0, 1.0).normalize_or_zero() * player.speed * time.delta_seconds();
+    if key.pressed(KeyCode::Space) {
+      // TODO
+      // direction += *player_transform.forward();
+    }
+
+    kinematic_controller.translation =
+      Some(direction.clamp_length(0.0, 1.0).normalize() * player.speed * time.delta_seconds());
   }
 }
