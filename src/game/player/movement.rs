@@ -47,6 +47,11 @@ pub(super) fn update_movement(
           player.gravity = -100.0;
         }
       }
+
+      // 丸める
+      if player.gravity.round_ties_even() == 0.0 {
+        player.gravity = 0.0;
+      }
     }
 
     player.direction = Vec3::from((
