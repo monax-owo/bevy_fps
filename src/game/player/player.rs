@@ -50,6 +50,7 @@ pub(super) fn init_player(
         Camera3dBundle {
           deband_dither: DebandDither::Disabled,
           camera: Camera {
+            hdr: true,
             order: 1,
             ..default()
           },
