@@ -13,6 +13,8 @@ pub(super) struct Player {
   pub gravity: f32,
   /// 水平方向の移動速度
   pub horizontal_speed: f32,
+  /// 垂直方向の移動速度
+  pub vertical_speed: f32,
 }
 
 pub(super) fn init_player(
@@ -26,6 +28,7 @@ pub(super) fn init_player(
         direction: Vec3::ZERO,
         gravity: 1.0,
         horizontal_speed: 8.0,
+        vertical_speed: 8.0,
       },
       Collider::cuboid(0.6, 1.4, 0.6),
       PbrBundle {
