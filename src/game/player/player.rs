@@ -3,7 +3,7 @@ use bevy_rapier3d::prelude::*;
 
 use super::camera_controller::CameraController;
 
-#[derive(Component)]
+#[derive(Default, Component, Reflect)]
 pub(super) struct Player {
   /// 力が加わる向きと速度(大きさ)
   pub direction: Vec3,
@@ -28,7 +28,7 @@ pub(super) fn init_player(
         direction: Vec3::ZERO,
         gravity: 1.0,
         horizontal_speed: 8.0,
-        vertical_speed: 8.0,
+        vertical_speed: 0.8,
       },
       Collider::cuboid(0.6, 1.4, 0.6),
       PbrBundle {
