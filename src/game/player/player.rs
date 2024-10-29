@@ -28,7 +28,7 @@ pub(super) fn init_player(
         direction: Vec3::ZERO,
         gravity: 1.0,
         horizontal_speed: 8.0,
-        vertical_speed: 0.8,
+        vertical_speed: 8.0,
       },
       Collider::cuboid(0.6, 1.4, 0.6),
       PbrBundle {

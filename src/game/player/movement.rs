@@ -41,29 +41,15 @@ pub(super) fn update_movement(
     if let Some(controller_output) = controller_output {
       // 地面に付いて無いときは重力を加える
       if controller_output.grounded {
+        player.gravity = 0.0;
         if key.pressed(KeyCode::Space) {
-          player.gravity = -100.0;
+          player.gravity = -16.0;
         }
       } else {
-        player.gravity += 2.0;
+        player.gravity += 4.0 * player.vertical_speed * time.delta_seconds();
       }
 
-      player.direction.y -= player.gravity * player.vertical_speed;
-
-      if player.gravity.signum() != 0.0 {
-        // 正の値なら下
-        if player.gravity.is_sign_positive() {
-          player.gravity -= (player.vertical_speed).min(0.0);
-        } else {
-          // ジャンプ
-          player.gravity += (player.vertical_speed).max(0.0);
-        }
-      }
-
-      // 丸める
-      // if player.gravity.round_ties_even() == 0.0 {
-      //   player.gravity = 0.0;
-      // }
+      player.direction.y -= player.gravity * 0.2;
     }
 
     player.direction = Vec3::from((
