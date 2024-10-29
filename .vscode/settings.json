@@ -4,6 +4,7 @@
     "deband",
     "egui",
     "euler",
+    "signum",
     "srgb",
     "srgba",
     "tonemapping",
