@@ -38,30 +38,26 @@ pub(super) fn update_movement(
 
     horizontal_direction = horizontal_direction.clamp_length(0.0, 1.0) * player.horizontal_speed;
 
-    // player.gravity.signum() <- 符号取れる -1,0,1
-
     if let Some(controller_output) = controller_output {
       // 地面に付いて無いときは重力を加える
       if controller_output.grounded {
         if key.pressed(KeyCode::Space) {
           player.gravity = -100.0;
         }
+      } else {
+        player.gravity += 2.0;
       }
 
-      println!("{:?}", controller.translation);
+      player.direction.y -= player.gravity * player.vertical_speed;
 
       if player.gravity.signum() != 0.0 {
         // 正の値なら下
         if player.gravity.is_sign_positive() {
-          player.direction.y -= player.vertical_speed * 0.6;
-          player.gravity -= (player.vertical_speed * 0.6).min(0.0);
+          player.gravity -= (player.vertical_speed).min(0.0);
         } else {
           // ジャンプ
-          player.direction.y += player.vertical_speed * 0.6;
-          player.gravity += (player.vertical_speed * 0.6).max(0.0);
+          player.gravity += (player.vertical_speed).max(0.0);
         }
-      } else if !controller_output.grounded {
-        player.gravity = 4.0;
       }
 
       // 丸める
