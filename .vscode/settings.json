@@ -5,6 +5,7 @@
     "egui",
     "euler",
     "signum",
+    "skybox",
     "srgb",
     "srgba",
     "tonemapping",
