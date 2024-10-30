@@ -33,7 +33,6 @@ pub(super) fn update_movement(
     horizontal_direction = horizontal_direction.clamp_length(0.0, 1.0) * player.horizontal_speed;
 
     // 地面に付いて無いときは重力を加える
-    // TODO:接地判定を変える
     let grounded = rapier_context
       .cast_ray(
         Vec3::new(
@@ -47,7 +46,6 @@ pub(super) fn update_movement(
         QueryFilter::exclude_kinematic(),
       )
       .is_some();
-    // println!("{}", grounded);
 
     if grounded {
       player.gravity = 0.0;
