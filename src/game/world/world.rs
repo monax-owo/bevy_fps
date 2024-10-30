@@ -16,7 +16,7 @@ pub(super) fn init_world(
 
   // Ground
   commands.spawn((
-    Collider::cuboid(100.0, 1.0, 100.0),
+    Collider::cuboid(100.0, 0.01, 100.0),
     PbrBundle {
       mesh: meshes.add(Plane3d::new(Vec3::Y, Vec2::splat(100.0))),
       material: materials.add(Color::srgb_u8(255, 0, 127)),
