@@ -6,6 +6,8 @@ pub struct WorldPlugin;
 
 impl Plugin for WorldPlugin {
   fn build(&self, app: &mut App) {
-    app.add_systems(Startup, init_world);
+    app
+      .insert_resource(ClearColor(Color::srgb(0.52, 0.76, 0.88)))
+      .add_systems(Startup, init_world);
   }
 }
