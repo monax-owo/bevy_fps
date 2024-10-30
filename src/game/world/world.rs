@@ -8,6 +8,12 @@ pub(super) fn init_world(
 ) {
   const SPHERE_SIZE: f32 = 0.04;
 
+  // AmbientLight
+  commands.insert_resource(AmbientLight {
+    color: Color::srgb_u8(210, 220, 240),
+    brightness: 1.0,
+  });
+
   // Ground
   commands.spawn((
     Collider::cuboid(10.0, 0.0, 10.0),
