@@ -11,7 +11,7 @@ pub(super) fn init_world(
   // AmbientLight
   commands.insert_resource(AmbientLight {
     color: Color::srgb_u8(210, 220, 240),
-    brightness: 1.0,
+    brightness: 280.0,
   });
 
   // Ground
@@ -61,15 +61,16 @@ pub(super) fn init_world(
     ..default()
   });
 
-  // Light
-  commands.spawn(DirectionalLightBundle {
-    directional_light: DirectionalLight {
-      color: Color::srgb_u8(255, 255, 255),
+  // PointLight
+  commands.spawn(PointLightBundle {
+    point_light: PointLight {
+      color: Color::srgb(1.0, 1.0, 0.8),
+      intensity: 600000.0,
+      range: 60.0,
       shadows_enabled: true,
-      illuminance: 800.0,
       ..default()
     },
-    transform: Transform::from_xyz(0.0, 10.0, 2.0).looking_at(Vec3::ZERO, Vec3::Y),
+    transform: Transform::from_xyz(0.0, 8.0, 0.0),
     ..default()
   });
 }
