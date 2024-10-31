@@ -1,6 +1,21 @@
 use bevy::prelude::*;
 use bevy_rapier3d::prelude::*;
 
+#[derive(Bundle)]
+pub(super) struct BoxBundle {
+  collider: Collider,
+  rigid_body: RigidBody,
+}
+
+impl Default for BoxBundle {
+  fn default() -> Self {
+    Self {
+      collider: Collider::cuboid(1.0, 1.0, 1.0),
+      rigid_body: RigidBody::Dynamic,
+    }
+  }
+}
+
 pub(super) fn init_world(
   mut commands: Commands,
   mut meshes: ResMut<Assets<Mesh>>,
@@ -28,11 +43,14 @@ pub(super) fn init_world(
     .with_children(|parent| {
       // Box
       parent.spawn((
-        Collider::cuboid(1.0, 1.0, 1.0),
-        RigidBody::Dynamic,
+        BoxBundle::default(),
         PbrBundle {
           mesh: meshes.add(Cuboid::new(2.0, 2.0, 2.0)),
-          material: materials.add(Color::srgb_u8(255, 0, 0)),
+          material: materials.add(StandardMaterial {
+            base_color: Color::srgb_u8(255, 0, 0),
+            metallic: 0.2,
+            ..default()
+          }),
           transform: Transform::from_xyz(0.0, 4.0, -4.0),
           ..default()
         },
