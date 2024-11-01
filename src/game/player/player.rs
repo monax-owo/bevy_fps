@@ -7,6 +7,8 @@ use super::camera_controller::CameraController;
 pub(super) struct Player {
   /// 力が加わる向きと速度(大きさ)
   pub direction: Vec3,
+  // 接地しているか
+  pub grounded: bool,
   /// 重力の掛かる方向
   /// 正の値だと下向きの力が掛かり
   /// 負の値だと上向きの力が掛かる(ジャンプ)
@@ -29,6 +31,7 @@ pub(super) fn init_player(
         gravity: 1.0,
         horizontal_speed: 8.0,
         vertical_speed: 18.0,
+        ..default()
       },
       Collider::cuboid(0.4, 1.4, 0.4),
       PbrBundle {

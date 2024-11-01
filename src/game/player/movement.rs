@@ -33,7 +33,7 @@ pub(super) fn update_movement(
     horizontal_direction = horizontal_direction.clamp_length(0.0, 1.0) * player.horizontal_speed;
 
     // 地面に付いて無いときは重力を加える
-    let grounded = rapier_context
+    player.grounded = rapier_context
       .cast_ray(
         Vec3::new(
           player_transform.translation.x,
@@ -47,7 +47,7 @@ pub(super) fn update_movement(
       )
       .is_some();
 
-    if grounded {
+    if player.grounded {
       player.gravity = 0.0;
       if key.pressed(KeyCode::Space) {
         player.gravity = -32.0;
