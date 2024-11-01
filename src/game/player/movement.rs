@@ -10,7 +10,6 @@ pub(super) fn update_movement(
   mut player_query: Query<(&mut Player, &Transform, &mut KinematicCharacterController)>,
 ) {
   if let Ok((mut player, player_transform, mut controller)) = player_query.get_single_mut() {
-    // TODO:directionをVec2,重力を別の変数にする
     // Vec3(x,y,z) Vec2(x,z)
     let mut horizontal_direction = Vec2::ZERO;
 
@@ -32,7 +31,6 @@ pub(super) fn update_movement(
 
     horizontal_direction = horizontal_direction.clamp_length(0.0, 1.0) * player.horizontal_speed;
 
-    // 地面に付いて無いときは重力を加える
     player.grounded = rapier_context
       .cast_ray(
         Vec3::new(
@@ -47,6 +45,7 @@ pub(super) fn update_movement(
       )
       .is_some();
 
+    // 地面に付いて無いときは重力を加える
     if player.grounded {
       player.gravity = 0.0;
       if key.pressed(KeyCode::Space) {
