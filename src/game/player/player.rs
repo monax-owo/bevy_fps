@@ -1,3 +1,5 @@
+use std::str;
+
 use bevy::{color::palettes::css, core_pipeline::tonemapping::DebandDither, prelude::*};
 use bevy_rapier3d::prelude::*;
 
@@ -19,6 +21,9 @@ pub(super) struct Player {
   pub vertical_speed: f32,
 }
 
+#[derive(Default, Component, Reflect)]
+pub(super) struct Body;
+
 pub(super) fn init_player(
   mut commands: Commands,
   mut meshes: ResMut<Assets<Mesh>>,
@@ -35,6 +40,7 @@ pub(super) fn init_player(
       },
       Name::new("Player"),
       // Collider::cuboid(0.4, 1.4, 0.4),
+      Collider::capsule_y(1.0, 0.4),
       PbrBundle {
         mesh: meshes.add(Cuboid::new(0.8, 2.8, 0.8)),
         material: materials.add(Color::Srgba(css::LIGHT_CYAN)),
@@ -56,6 +62,22 @@ pub(super) fn init_player(
         ..default()
       },
     ))
+    .with_children(|parent| {
+      parent.spawn((
+        Body,
+        PbrBundle {
+          mesh: meshes.add(Cuboid::new(0.4, 0.4, 1.6)),
+          material: materials.add(Color::Srgba(css::BEIGE)),
+          transform: Transform::from_xyz(1.0, 1.0, -0.2).with_rotation(Quat::from_euler(
+            EulerRot::XYZ,
+            0.3,
+            0.2,
+            0.0,
+          )),
+          ..default()
+        },
+      ));
+    })
     .with_children(|parent| {
       parent.spawn((
         Camera3dBundle {
