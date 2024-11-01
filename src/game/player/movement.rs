@@ -49,11 +49,11 @@ pub(super) fn update_movement(
     if player.grounded {
       player.gravity = 0.0;
       if key.pressed(KeyCode::Space) {
-        player.gravity = -32.0;
+        player.gravity = -64.0;
       }
     } else {
       player.gravity =
-        (player.gravity + 5.0 * player.vertical_speed * time.delta_seconds()).clamp(-500.0, 500.0);
+        (player.gravity + 9.8 * player.vertical_speed * time.delta_seconds()).clamp(-500.0, 500.0);
     }
 
     player.direction.y -= player.gravity * 0.2;
