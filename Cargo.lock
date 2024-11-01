@@ -419,6 +419,7 @@ dependencies = [
  "bevy_editor_pls",
  "bevy_rapier3d",
  "serde",
+ "serde_json",
 ]
 
 [[package]]
