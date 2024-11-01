@@ -3,6 +3,7 @@ use bevy_rapier3d::prelude::*;
 
 #[derive(Bundle)]
 pub(super) struct BoxBundle {
+  name: Name,
   collider: Collider,
   rigid_body: RigidBody,
 }
@@ -10,6 +11,7 @@ pub(super) struct BoxBundle {
 impl Default for BoxBundle {
   fn default() -> Self {
     Self {
+      name: Name::new("Box"),
       collider: Collider::cuboid(1.0, 1.0, 1.0),
       rigid_body: RigidBody::Dynamic,
     }

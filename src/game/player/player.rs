@@ -33,6 +33,7 @@ pub(super) fn init_player(
         vertical_speed: 18.0,
         ..default()
       },
+      Name::new("Player"),
       Collider::cuboid(0.4, 1.4, 0.4),
       PbrBundle {
         mesh: meshes.add(Cuboid::new(0.8, 2.8, 0.8)),
