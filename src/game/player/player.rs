@@ -1,4 +1,4 @@
-use bevy::{core_pipeline::tonemapping::DebandDither, prelude::*};
+use bevy::{color::palettes::css, core_pipeline::tonemapping::DebandDither, prelude::*};
 use bevy_rapier3d::prelude::*;
 
 use super::camera_controller::CameraController;
@@ -36,7 +36,7 @@ pub(super) fn init_player(
       Collider::cuboid(0.4, 1.4, 0.4),
       PbrBundle {
         mesh: meshes.add(Cuboid::new(0.8, 2.8, 0.8)),
-        material: materials.add(Color::srgb_u8(0, 255, 255)),
+        material: materials.add(Color::Srgba(css::LIGHT_CYAN)),
         transform: Transform::from_xyz(0.0, 1.4, 0.0),
         ..default()
       },
@@ -44,7 +44,9 @@ pub(super) fn init_player(
       KinematicCharacterController {
         up: Vec3::Y,
         offset: CharacterLength::Absolute(0.001),
-        snap_to_ground: Some(CharacterLength::Absolute(0.5)),
+        // snap_to_ground: Some(CharacterLength::Absolute(0.5)),
+        max_slope_climb_angle: 45_f32.to_radians(),
+        min_slope_slide_angle: 30_f32.to_radians(),
         ..default()
       },
     ))
@@ -67,4 +69,19 @@ pub(super) fn init_player(
         CameraController { sensitivity: 0.001 },
       ));
     });
+}
+
+pub(super) fn update_player(
+  mut materials: ResMut<Assets<StandardMaterial>>,
+  mut player_query: Query<(&Player, &Handle<StandardMaterial>)>,
+) {
+  if let Ok((player, material_handle)) = player_query.get_single_mut() {
+    if let Some(material) = materials.get_mut(material_handle) {
+      material.base_color = Color::Srgba(if player.grounded {
+        css::LIGHT_CYAN
+      } else {
+        css::ORANGE
+      });
+    }
+  }
 }

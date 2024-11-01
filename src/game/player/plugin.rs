@@ -3,7 +3,7 @@ use bevy::prelude::*;
 use super::{
   camera_controller::update_camera_controller,
   movement::update_movement,
-  player::{init_player, Player},
+  player::{init_player, update_player, Player},
 };
 
 pub struct PlayerPlugin;
@@ -13,6 +13,9 @@ impl Plugin for PlayerPlugin {
     app
       .register_type::<Player>()
       .add_systems(Startup, init_player)
-      .add_systems(Update, (update_camera_controller, update_movement));
+      .add_systems(
+        Update,
+        (update_camera_controller, update_movement, update_player),
+      );
   }
 }
