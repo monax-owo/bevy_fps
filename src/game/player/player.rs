@@ -47,7 +47,7 @@ pub(super) fn init_player(
         transform: Transform::from_xyz(0.0, 1.4, 0.0),
         ..default()
       },
-      RigidBody::KinematicPositionBased,
+      RigidBody::KinematicVelocityBased,
       KinematicCharacterController {
         up: Vec3::Y,
         offset: CharacterLength::Absolute(0.001),
