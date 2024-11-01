@@ -1,10 +1,9 @@
 use bevy::prelude::*;
 use bevy_rapier3d::prelude::*;
+use serde::Deserialize;
+use serde_json::Value;
 
 use crate::game::shader::shader::PostProcessMaterial;
-
-#[derive(Component)]
-pub struct GenerateCollider(ComputedColliderShape);
 
 pub(super) fn init_world(
   mut commands: Commands,
@@ -24,29 +23,47 @@ pub(super) fn init_world(
 
   commands.spawn((
     SceneBundle {
-      scene: asset_server.load("models/kusa.glb#Scene0"),
+      scene: asset_server.load("models/kusa1.glb#Scene0"),
       ..default()
     },
-    GenerateCollider(ComputedColliderShape::TriMesh),
+    Name::new("Kusa"),
   ));
+}
+
+#[derive(Debug, Deserialize)]
+pub struct SerDeGenerateCollider {
+  collider: Option<Value>,
 }
 
 // TODO:Colliderを自動生成
 pub(super) fn generate_collider(
   mut commands: Commands,
   meshes: Res<Assets<Mesh>>,
-  query: Query<(Entity, &Handle<Mesh>), (Added<Name>, Without<Collider>)>,
+  query: Query<(Entity, &GltfExtras, &Children), Added<GltfExtras>>,
+  generate_collider_query: Query<(&Name, &Handle<Mesh>), Without<Collider>>,
 ) {
-  // &GenerateCollider,
-  // , generate_collider
-  for (entity, mesh) in query.iter() {
-    println!("{}", entity.index());
-    // commands.entity(entity).insert(
-    //   (Collider::from_bevy_mesh(
-    //     meshes.get(mesh).unwrap(),
-    //     &ComputedColliderShape::ConvexDecomposition(VHACDParameters {}),
-    //   ))
-    //   .unwrap(),
-    // );
+  for (entity, gltf_extras, children) in query.iter() {
+    let de = serde_json::from_str::<SerDeGenerateCollider>(&gltf_extras.value)
+      .expect("failure parse GltfExtras");
+
+    println!("{} {}", entity.index(), de.collider.is_some());
+
+    // let option = ComputedColliderShape::ConvexDecomposition(VHACDParameters {
+    //   concavity: 0.01,
+    //   resolution: 64,
+    //   ..default()
+    // });
+
+    let option = ComputedColliderShape::TriMesh;
+
+    for &child in children.iter() {
+      if let Ok((name, mesh)) = generate_collider_query.get(child) {
+        println!("{} {:?}", name.as_str(), mesh);
+
+        commands
+          .entity(child)
+          .insert(Collider::from_bevy_mesh(meshes.get(mesh).unwrap(), &option).unwrap());
+      }
+    }
   }
 }
