@@ -52,7 +52,8 @@ pub(super) fn update_movement(
         player.gravity = -32.0;
       }
     } else {
-      player.gravity += 5.0 * player.vertical_speed * time.delta_seconds();
+      player.gravity =
+        (player.gravity + 5.0 * player.vertical_speed * time.delta_seconds()).clamp(-500.0, 500.0);
     }
 
     player.direction.y -= player.gravity * 0.2;
