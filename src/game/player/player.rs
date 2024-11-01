@@ -34,7 +34,7 @@ pub(super) fn init_player(
         ..default()
       },
       Name::new("Player"),
-      Collider::cuboid(0.4, 1.4, 0.4),
+      // Collider::cuboid(0.4, 1.4, 0.4),
       PbrBundle {
         mesh: meshes.add(Cuboid::new(0.8, 2.8, 0.8)),
         material: materials.add(Color::Srgba(css::LIGHT_CYAN)),
@@ -48,6 +48,11 @@ pub(super) fn init_player(
         // snap_to_ground: Some(CharacterLength::Absolute(0.5)),
         max_slope_climb_angle: 45_f32.to_radians(),
         min_slope_slide_angle: 30_f32.to_radians(),
+        custom_shape: Some((
+          Collider::cuboid(0.3, 0.2, 0.3),
+          Vec3::new(0.0, -1.2, 0.0),
+          Quat::default(),
+        )),
         ..default()
       },
     ))
