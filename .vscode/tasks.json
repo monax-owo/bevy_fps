@@ -6,7 +6,7 @@
     {
       "type": "cargo",
       "command": "watch",
-      "args": ["-x \"run -- --gui\""],
+      "args": ["-x", "run -- --gui"],
       "problemMatcher": ["$rustc"],
       "label": "rust: hot reload with gui"
     }
