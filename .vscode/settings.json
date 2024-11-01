@@ -4,6 +4,7 @@
     "deband",
     "egui",
     "euler",
+    "gltf",
     "signum",
     "skybox",
     "srgb",
