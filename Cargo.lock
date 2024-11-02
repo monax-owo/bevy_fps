@@ -411,18 +411,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "bevy_2"
-version = "0.1.0"
-dependencies = [
- "bevy",
- "bevy-inspector-egui 0.27.0",
- "bevy_editor_pls",
- "bevy_rapier3d",
- "serde",
- "serde_json",
-]
-
-[[package]]
 name = "bevy_a11y"
 version = "0.14.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -753,6 +741,18 @@ checksum = "d06c9693847a2a6ea61d6b86288dd4d8b6a79f05d4bf6e27b96d4f5c8d552fe4"
 dependencies = [
  "bevy_macro_utils",
  "encase_derive_impl",
+]
+
+[[package]]
+name = "bevy_fps"
+version = "0.1.0"
+dependencies = [
+ "bevy",
+ "bevy-inspector-egui 0.27.0",
+ "bevy_editor_pls",
+ "bevy_rapier3d",
+ "serde",
+ "serde_json",
 ]
 
 [[package]]
