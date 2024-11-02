@@ -39,7 +39,7 @@ pub(super) fn init_player(
       Name::new("Player"),
       Collider::capsule_y(1.0, 0.4),
       PbrBundle {
-        mesh: meshes.add(Cuboid::new(0.8, 2.8, 0.8)),
+        mesh: meshes.add(Capsule3d::new(0.4, 2.0)),
         material: materials.add(Color::Srgba(css::LIGHT_CYAN)),
         transform: Transform::from_xyz(0.0, 1.5, 0.0),
         ..default()
