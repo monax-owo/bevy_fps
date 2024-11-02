@@ -3,7 +3,7 @@ use bevy_rapier3d::prelude::*;
 use serde::Deserialize;
 use serde_json::Value;
 
-use crate::game::shader::shader::PostProcessMaterial;
+use crate::game::shader::core::PostProcessMaterial;
 
 pub(super) fn init_world(
   mut commands: Commands,

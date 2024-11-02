@@ -1,7 +1,7 @@
 use bevy::prelude::*;
 
 use super::{
-  test::TestTag,
+  core::TestTag,
   world::{generate_collider, init_world},
 };
 

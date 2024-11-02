@@ -1,4 +1,4 @@
 pub(super) mod camera_controller;
+pub(super) mod core;
 pub(super) mod movement;
-pub(super) mod player;
 pub(super) mod plugin;

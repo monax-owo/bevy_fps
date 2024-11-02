@@ -2,8 +2,8 @@ use bevy::prelude::*;
 
 use super::{
   camera_controller::update_camera_controller,
+  core::{init_player, update_player, Body, Player},
   movement::{update_grounded, update_movement, GroundSensor},
-  player::{init_player, update_player, Body, Player},
 };
 
 pub struct PlayerPlugin;

@@ -1,7 +1,7 @@
 use bevy::prelude::*;
 use bevy_rapier3d::prelude::*;
 
-use super::player::Player;
+use super::core::Player;
 
 #[derive(Component, Reflect)]
 pub(super) struct GroundSensor {

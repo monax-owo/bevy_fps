@@ -1,6 +1,6 @@
 use bevy::prelude::*;
 
-use super::shader::PostProcessMaterial;
+use super::core::PostProcessMaterial;
 
 pub struct ShaderPlugin;
 
