@@ -60,7 +60,6 @@ pub(super) fn update_movement(
     player.direction =
       Vec3::from((direction.x, player.direction.y, direction.y)) * time.delta_seconds();
 
-    // TODO:translationじゃなくてvelocityを使う？
     controller.translation = Some(player.direction);
   }
 }
@@ -73,11 +72,7 @@ pub(super) fn update_grounded(
   for (mut ground_sensor, transform) in ground_sensor_query.iter_mut() {
     ground_sensor.grounded = rapier_context
       .cast_ray(
-        Vec3::new(
-          transform.translation.x,
-          transform.translation.y - 1.4,
-          transform.translation.z,
-        ),
+        transform.translation.with_y(transform.translation.y - 1.4),
         -Vec3::Y,
         0.02,
         true,
