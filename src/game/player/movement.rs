@@ -72,12 +72,12 @@ pub(super) fn update_grounded(
       .cast_shape(
         transform
           .translation
-          .with_y(transform.translation.y - 1.4 + 0.1),
+          .with_y(transform.translation.y - 1.4 + 0.2),
         Quat::default(),
         -Vec3::Y,
-        &Collider::cylinder(0.2, 0.2),
+        &Collider::cylinder(0.2, 0.16),
         ShapeCastOptions {
-          max_time_of_impact: 0.01,
+          max_time_of_impact: 0.02,
           ..default()
         },
         QueryFilter::exclude_kinematic(),
