@@ -48,7 +48,7 @@ pub(super) fn init_player(
       KinematicCharacterController {
         up: Vec3::Y,
         offset: CharacterLength::Absolute(0.001),
-        snap_to_ground: Some(CharacterLength::Absolute(0.2)),
+        // snap_to_ground: Some(CharacterLength::Absolute(0.8)),
         max_slope_climb_angle: 45_f32.to_radians(),
         min_slope_slide_angle: 30_f32.to_radians(),
         custom_shape: Some((
