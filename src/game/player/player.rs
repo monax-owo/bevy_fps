@@ -3,7 +3,7 @@ use std::str;
 use bevy::{color::palettes::css, core_pipeline::tonemapping::DebandDither, prelude::*};
 use bevy_rapier3d::prelude::*;
 
-use super::camera_controller::CameraController;
+use super::{camera_controller::CameraController, movement::GroundSensor};
 
 #[derive(Default, Component, Reflect)]
 pub(super) struct Player {
@@ -39,7 +39,6 @@ pub(super) fn init_player(
         ..default()
       },
       Name::new("Player"),
-      // Collider::cuboid(0.4, 1.4, 0.4),
       Collider::capsule_y(1.0, 0.4),
       PbrBundle {
         mesh: meshes.add(Cuboid::new(0.8, 2.8, 0.8)),
@@ -61,6 +60,7 @@ pub(super) fn init_player(
         )),
         ..default()
       },
+      GroundSensor::default(),
     ))
     .with_children(|parent| {
       parent.spawn((

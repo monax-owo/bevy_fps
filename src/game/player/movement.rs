@@ -3,6 +3,9 @@ use bevy_rapier3d::prelude::*;
 
 use super::player::Player;
 
+#[derive(Default, Component, Reflect)]
+pub(super) struct GroundSensor(bool);
+
 pub(super) fn update_movement(
   key: Res<ButtonInput<KeyCode>>,
   time: Res<Time>,
@@ -43,8 +46,7 @@ pub(super) fn update_movement(
         true,
         QueryFilter::exclude_kinematic(),
       )
-      .is_some()
-      || controller.translation.is_some_and(|v| v.y == 0.0);
+      .is_some();
 
     // 地面に付いて無いときは重力を加える
     if player.grounded {
@@ -57,7 +59,9 @@ pub(super) fn update_movement(
         (player.gravity + 9.8 * player.vertical_speed * time.delta_seconds()).clamp(-500.0, 500.0);
     }
 
-    player.direction.y -= player.gravity * 0.2;
+    if player.gravity != 0.0 {
+      player.direction.y -= player.gravity * 0.2;
+    }
 
     player.direction =
       Vec3::from((direction.x, player.direction.y, direction.y)) * time.delta_seconds();
@@ -66,3 +70,6 @@ pub(super) fn update_movement(
     controller.translation = Some(player.direction);
   }
 }
+
+// TODO:接地判定を分ける
+pub(super) fn _grounded(_ground_sensor_query: Query<(&GroundSensor, &Transform)>) {}
