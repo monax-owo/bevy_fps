@@ -70,11 +70,15 @@ pub(super) fn update_grounded(
 ) {
   for (mut ground_sensor, transform) in ground_sensor_query.iter_mut() {
     ground_sensor.grounded = rapier_context
-      .cast_ray(
+      .cast_shape(
         transform.translation.with_y(transform.translation.y - 1.4),
+        Quat::default(),
         -Vec3::Y,
-        0.02,
-        true,
+        &Collider::cylinder(0.1, 0.4),
+        ShapeCastOptions {
+          max_time_of_impact: 0.02,
+          ..default()
+        },
         QueryFilter::exclude_kinematic(),
       )
       .is_some();
