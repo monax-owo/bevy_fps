@@ -41,7 +41,7 @@ pub(super) fn init_player(
       PbrBundle {
         mesh: meshes.add(Cuboid::new(0.8, 2.8, 0.8)),
         material: materials.add(Color::Srgba(css::LIGHT_CYAN)),
-        transform: Transform::from_xyz(0.0, 1.4, 0.0),
+        transform: Transform::from_xyz(0.0, 1.5, 0.0),
         ..default()
       },
       RigidBody::KinematicVelocityBased,
@@ -51,12 +51,6 @@ pub(super) fn init_player(
         // snap_to_ground: Some(CharacterLength::Absolute(0.8)),
         max_slope_climb_angle: 45_f32.to_radians(),
         min_slope_slide_angle: 30_f32.to_radians(),
-        custom_shape: Some((
-          Collider::cuboid(0.3, 0.2, 0.3),
-          Vec3::new(0.0, -1.2, 0.0),
-          Quat::default(),
-        )),
-        slide: true,
         ..default()
       },
       GroundSensor::default(),
