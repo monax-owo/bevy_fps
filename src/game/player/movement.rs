@@ -85,7 +85,7 @@ pub(super) fn update_grounded(
         -Vec3::Y,
         &Collider::cylinder(HALF_HEIGHT, RADIUS),
         ShapeCastOptions {
-          max_time_of_impact: 0.02,
+          max_time_of_impact: 0.06,
           ..default()
         },
         QueryFilter::exclude_kinematic(),
