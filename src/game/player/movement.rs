@@ -64,7 +64,6 @@ pub(super) fn update_movement(
   }
 }
 
-// TODO:接地判定を分ける
 pub(super) fn update_grounded(
   rapier_context: Res<RapierContext>,
   mut ground_sensor_query: Query<(&mut GroundSensor, &Transform)>,
