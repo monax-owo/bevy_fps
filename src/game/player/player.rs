@@ -9,8 +9,6 @@ use super::{camera_controller::CameraController, movement::GroundSensor};
 pub(super) struct Player {
   /// 力が加わる向きと速度(大きさ)
   pub direction: Vec3,
-  // 接地しているか
-  pub grounded: bool,
   /// 重力の掛かる方向
   /// 正の値だと下向きの力が掛かり
   /// 負の値だと上向きの力が掛かる(ジャンプ)
@@ -101,11 +99,11 @@ pub(super) fn init_player(
 
 pub(super) fn update_player(
   mut materials: ResMut<Assets<StandardMaterial>>,
-  mut player_query: Query<(&Player, &Handle<StandardMaterial>)>,
+  mut player_query: Query<(&GroundSensor, &Handle<StandardMaterial>)>,
 ) {
-  if let Ok((player, material_handle)) = player_query.get_single_mut() {
+  if let Ok((ground_sensor, material_handle)) = player_query.get_single_mut() {
     if let Some(material) = materials.get_mut(material_handle) {
-      material.base_color = Color::Srgba(if player.grounded {
+      material.base_color = Color::Srgba(if ground_sensor.grounded {
         css::LIGHT_CYAN
       } else {
         css::ORANGE

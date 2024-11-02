@@ -4,15 +4,23 @@ use bevy_rapier3d::prelude::*;
 use super::player::Player;
 
 #[derive(Default, Component, Reflect)]
-pub(super) struct GroundSensor(bool);
+pub(super) struct GroundSensor {
+  pub grounded: bool,
+}
 
 pub(super) fn update_movement(
   key: Res<ButtonInput<KeyCode>>,
   time: Res<Time>,
-  rapier_context: Res<RapierContext>,
-  mut player_query: Query<(&mut Player, &Transform, &mut KinematicCharacterController)>,
+  mut player_query: Query<(
+    &mut Player,
+    &Transform,
+    &mut KinematicCharacterController,
+    &GroundSensor,
+  )>,
 ) {
-  if let Ok((mut player, player_transform, mut controller)) = player_query.get_single_mut() {
+  if let Ok((mut player, player_transform, mut controller, ground_sensor)) =
+    player_query.get_single_mut()
+  {
     // Vec3(x,y,z) Vec2(x,z)
     let mut direction = Vec2::ZERO;
 
@@ -34,22 +42,8 @@ pub(super) fn update_movement(
 
     direction = direction.clamp_length(0.0, 1.0) * player.horizontal_speed;
 
-    player.grounded = rapier_context
-      .cast_ray(
-        Vec3::new(
-          player_transform.translation.x,
-          player_transform.translation.y - 1.4,
-          player_transform.translation.z,
-        ),
-        -Vec3::Y,
-        0.02,
-        true,
-        QueryFilter::exclude_kinematic(),
-      )
-      .is_some();
-
     // 地面に付いて無いときは重力を加える
-    if player.grounded {
+    if ground_sensor.grounded {
       player.gravity = 0.0;
       if key.pressed(KeyCode::Space) {
         player.gravity = -64.0;
@@ -72,4 +66,23 @@ pub(super) fn update_movement(
 }
 
 // TODO:接地判定を分ける
-pub(super) fn _grounded(_ground_sensor_query: Query<(&GroundSensor, &Transform)>) {}
+pub(super) fn update_grounded(
+  rapier_context: Res<RapierContext>,
+  mut ground_sensor_query: Query<(&mut GroundSensor, &Transform)>,
+) {
+  for (mut ground_sensor, transform) in ground_sensor_query.iter_mut() {
+    ground_sensor.grounded = rapier_context
+      .cast_ray(
+        Vec3::new(
+          transform.translation.x,
+          transform.translation.y - 1.4,
+          transform.translation.z,
+        ),
+        -Vec3::Y,
+        0.02,
+        true,
+        QueryFilter::exclude_kinematic(),
+      )
+      .is_some();
+  }
+}
