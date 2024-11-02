@@ -43,7 +43,8 @@ pub(super) fn update_movement(
         true,
         QueryFilter::exclude_kinematic(),
       )
-      .is_some();
+      .is_some()
+      || controller.translation.is_some_and(|v| v.y == 0.0);
 
     // 地面に付いて無いときは重力を加える
     if player.grounded {

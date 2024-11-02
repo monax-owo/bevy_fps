@@ -10,7 +10,7 @@ fn main() {
   let mut app = App::new();
   app.add_plugins((DefaultPlugins, GamePlugin));
 
-  if env::args().find(|v| v == "--gui").is_some() {
+  if env::args().any(|v| &v == "--gui") {
     use bevy_editor_pls::EditorPlugin;
     app.add_plugins(EditorPlugin::default());
   }
