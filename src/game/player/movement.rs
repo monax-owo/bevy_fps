@@ -11,25 +11,25 @@ pub(super) fn update_movement(
 ) {
   if let Ok((mut player, player_transform, mut controller)) = player_query.get_single_mut() {
     // Vec3(x,y,z) Vec2(x,z)
-    let mut horizontal_direction = Vec2::ZERO;
+    let mut direction = Vec2::ZERO;
 
     if key.pressed(KeyCode::KeyW) {
-      horizontal_direction += player_transform.forward().xz();
+      direction += player_transform.forward().xz();
     }
 
     if key.pressed(KeyCode::KeyA) {
-      horizontal_direction += player_transform.left().xz();
+      direction += player_transform.left().xz();
     }
 
     if key.pressed(KeyCode::KeyS) {
-      horizontal_direction += player_transform.back().xz();
+      direction += player_transform.back().xz();
     }
 
     if key.pressed(KeyCode::KeyD) {
-      horizontal_direction += player_transform.right().xz();
+      direction += player_transform.right().xz();
     }
 
-    horizontal_direction = horizontal_direction.clamp_length(0.0, 1.0) * player.horizontal_speed;
+    direction = direction.clamp_length(0.0, 1.0) * player.horizontal_speed;
 
     player.grounded = rapier_context
       .cast_ray(
@@ -58,11 +58,8 @@ pub(super) fn update_movement(
 
     player.direction.y -= player.gravity * 0.2;
 
-    player.direction = Vec3::from((
-      horizontal_direction.x,
-      player.direction.y,
-      horizontal_direction.y,
-    )) * time.delta_seconds();
+    player.direction =
+      Vec3::from((direction.x, player.direction.y, direction.y)) * time.delta_seconds();
 
     // TODO:translationじゃなくてvelocityを使う？
     controller.translation = Some(player.direction);
