@@ -47,7 +47,7 @@ pub(super) fn update_movement(
       player.gravity =
         (player.gravity - player.vertical_speed * 2.0 * time.delta_seconds()).clamp(0.0, 10.0);
       if key.pressed(KeyCode::Space) {
-        player.gravity = -64.0;
+        player.gravity += -64.0;
       }
     } else {
       player.gravity =
@@ -75,7 +75,7 @@ pub(super) fn update_grounded(
           .with_y(transform.translation.y - 1.4 + 0.2),
         Quat::default(),
         -Vec3::Y,
-        &Collider::cylinder(0.4, 0.4),
+        &Collider::cylinder(0.4, 0.3),
         ShapeCastOptions {
           max_time_of_impact: 0.01,
           ..default()
