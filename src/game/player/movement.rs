@@ -3,10 +3,21 @@ use bevy_rapier3d::prelude::*;
 
 use super::player::Player;
 
-#[derive(Default, Component, Reflect)]
+#[derive(Component, Reflect)]
 pub(super) struct GroundSensor {
   /// 接地しているか
   pub grounded: bool,
+  /// TODO:テスト
+  pub toi: f32,
+}
+
+impl Default for GroundSensor {
+  fn default() -> Self {
+    Self {
+      grounded: Default::default(),
+      toi: 0.06,
+    }
+  }
 }
 
 pub(super) fn update_movement(
@@ -71,23 +82,34 @@ pub(super) fn update_grounded(
   rapier_context: Res<RapierContext>,
   mut ground_sensor_query: Query<(&mut GroundSensor, &Transform)>,
 ) {
-  const HALF_HEIGHT: f32 = 0.2;
-  const RADIUS: f32 = 0.16;
+  // const HALF_HEIGHT: f32 = 0.2;
+  // const RADIUS: f32 = 0.16;
 
-  // ray castでも良さそう？
+  // ray castでも良さそう？->ray castにした
+  // todo:おかしかったらshape castに戻す
   for (mut ground_sensor, transform) in ground_sensor_query.iter_mut() {
+    // ground_sensor.grounded = rapier_context
+    //   .cast_shape(
+    //     transform
+    //       .translation
+    //       .with_y(transform.translation.y - 1.4 + HALF_HEIGHT),
+    //     Quat::default(),
+    //     -Vec3::Y,
+    //     &Collider::cylinder(HALF_HEIGHT, RADIUS),
+    //     ShapeCastOptions {
+    //       max_time_of_impact: 0.06,
+    //       ..default()
+    //     },
+    //     QueryFilter::exclude_kinematic(),
+    //   )
+    //   .is_some();
+
     ground_sensor.grounded = rapier_context
-      .cast_shape(
-        transform
-          .translation
-          .with_y(transform.translation.y - 1.4 + HALF_HEIGHT),
-        Quat::default(),
+      .cast_ray(
+        transform.translation.with_y(transform.translation.y - 1.4),
         -Vec3::Y,
-        &Collider::cylinder(HALF_HEIGHT, RADIUS),
-        ShapeCastOptions {
-          max_time_of_impact: 0.06,
-          ..default()
-        },
+        ground_sensor.toi,
+        true,
         QueryFilter::exclude_kinematic(),
       )
       .is_some();
