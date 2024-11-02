@@ -59,17 +59,17 @@ pub(super) fn update_movement(
 
     // 地面に付いて無いときは重力を加える
     if ground_sensor.grounded {
-      player.gravity =
-        (player.gravity - player.vertical_speed * 2.2 * time.delta_seconds()).clamp(9.8, 20.0);
+      player.vertical_accel =
+        (player.vertical_accel - player.vertical_speed * 2.2 * time.delta_seconds()).clamp(9.8, 20.0);
       if key.pressed(KeyCode::Space) {
-        player.gravity += JUMP_HEIGHT;
+        player.vertical_accel += JUMP_HEIGHT;
       }
     } else {
-      player.gravity = (player.gravity + GRAVITY * player.vertical_speed * time.delta_seconds())
+      player.vertical_accel = (player.vertical_accel + GRAVITY * player.vertical_speed * time.delta_seconds())
         .clamp(-500.0, 500.0);
     }
 
-    player.direction.y -= player.gravity * 0.2;
+    player.direction.y -= player.vertical_accel * 0.2;
 
     player.direction =
       Vec3::from((direction.x, player.direction.y, direction.y)) * time.delta_seconds();
