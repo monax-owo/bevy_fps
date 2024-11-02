@@ -31,7 +31,7 @@ pub(super) fn update_movement(
   )>,
 ) {
   const GRAVITY: f32 = 9.8;
-  const JUMP_GRAVITY: f32 = -64.0;
+  const JUMP_HEIGHT: f32 = -80.0;
 
   if let Ok((mut player, player_transform, mut controller, ground_sensor)) =
     player_query.get_single_mut()
@@ -62,7 +62,7 @@ pub(super) fn update_movement(
       player.gravity =
         (player.gravity - player.vertical_speed * 2.2 * time.delta_seconds()).clamp(9.8, 20.0);
       if key.pressed(KeyCode::Space) {
-        player.gravity += JUMP_GRAVITY;
+        player.gravity += JUMP_HEIGHT;
       }
     } else {
       player.gravity = (player.gravity + GRAVITY * player.vertical_speed * time.delta_seconds())
