@@ -58,6 +58,18 @@ pub(super) fn init_world(
         },
       ));
 
+      parent.spawn((
+        Name::new("Slope"),
+        Collider::cuboid(1.0, 10.0, 3.0),
+        PbrBundle {
+          mesh: meshes.add(Cuboid::new(2.0, 20.0, 6.0)),
+          material: materials.add(Color::srgb_u8(255, 0, 0)),
+          transform: Transform::from_xyz(30.0, 0.0, 0.0)
+            .with_rotation(Quat::from_rotation_z(15_f32.to_radians())),
+          ..default()
+        },
+      ));
+
       // Gizmo
       parent.spawn(PbrBundle {
         mesh: meshes.add(Rhombus {
