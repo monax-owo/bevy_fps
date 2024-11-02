@@ -42,10 +42,11 @@ pub(super) fn update_movement(
 
     direction = direction.clamp_length(0.0, 1.0) * player.horizontal_speed;
 
+    // 定数に分ける
     // 地面に付いて無いときは重力を加える
     if ground_sensor.grounded {
       player.gravity =
-        (player.gravity - player.vertical_speed * 2.8 * time.delta_seconds()).clamp(0.0, 20.0);
+        (player.gravity - player.vertical_speed * 2.2 * time.delta_seconds()).clamp(9.8, 20.0);
       if key.pressed(KeyCode::Space) {
         player.gravity += -64.0;
       }
