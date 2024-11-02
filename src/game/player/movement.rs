@@ -71,15 +71,19 @@ pub(super) fn update_grounded(
   rapier_context: Res<RapierContext>,
   mut ground_sensor_query: Query<(&mut GroundSensor, &Transform)>,
 ) {
+  const HALF_HEIGHT: f32 = 0.2;
+  const RADIUS: f32 = 0.16;
+
+  // ray castでも良さそう？
   for (mut ground_sensor, transform) in ground_sensor_query.iter_mut() {
     ground_sensor.grounded = rapier_context
       .cast_shape(
         transform
           .translation
-          .with_y(transform.translation.y - 1.4 + 0.2),
+          .with_y(transform.translation.y - 1.4 + HALF_HEIGHT),
         Quat::default(),
         -Vec3::Y,
-        &Collider::cylinder(0.2, 0.16),
+        &Collider::cylinder(HALF_HEIGHT, RADIUS),
         ShapeCastOptions {
           max_time_of_impact: 0.02,
           ..default()
