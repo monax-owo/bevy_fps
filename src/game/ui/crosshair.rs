@@ -2,6 +2,7 @@ use bevy::prelude::*;
 
 #[derive(Component)]
 pub(super) struct Crosshair {
+  /// クロスヘアの色
   pub(super) color: Color,
 }
 

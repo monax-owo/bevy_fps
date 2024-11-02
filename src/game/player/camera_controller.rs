@@ -6,6 +6,7 @@ use super::player::Player;
 
 #[derive(Component)]
 pub(super) struct CameraController {
+  /// カメラの感度
   pub(super) sensitivity: f32,
 }
 

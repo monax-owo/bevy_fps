@@ -30,7 +30,6 @@ pub(super) fn init_player(
   commands
     .spawn((
       Player {
-        direction: Vec3::ZERO,
         gravity: 1.0,
         horizontal_speed: 8.0,
         vertical_speed: 18.0,

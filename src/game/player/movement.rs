@@ -5,6 +5,7 @@ use super::player::Player;
 
 #[derive(Default, Component, Reflect)]
 pub(super) struct GroundSensor {
+  /// 接地しているか
   pub grounded: bool,
 }
 
@@ -45,7 +46,6 @@ pub(super) fn update_movement(
 
     direction = direction.clamp_length(0.0, 1.0) * player.horizontal_speed;
 
-    // 定数に分ける
     // 地面に付いて無いときは重力を加える
     if ground_sensor.grounded {
       player.gravity =
