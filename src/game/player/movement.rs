@@ -69,12 +69,14 @@ pub(super) fn update_grounded(
   for (mut ground_sensor, transform) in ground_sensor_query.iter_mut() {
     ground_sensor.grounded = rapier_context
       .cast_shape(
-        transform.translation.with_y(transform.translation.y - 1.4),
+        transform
+          .translation
+          .with_y(transform.translation.y - 1.4 + 0.2),
         Quat::default(),
         -Vec3::Y,
-        &Collider::cylinder(0.1, 0.4),
+        &Collider::cylinder(0.2, 0.4),
         ShapeCastOptions {
-          max_time_of_impact: 0.02,
+          max_time_of_impact: 0.01,
           ..default()
         },
         QueryFilter::exclude_kinematic(),
