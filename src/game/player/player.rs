@@ -56,6 +56,7 @@ pub(super) fn init_player(
           Vec3::new(0.0, -1.2, 0.0),
           Quat::default(),
         )),
+        slide: true,
         ..default()
       },
       GroundSensor::default(),

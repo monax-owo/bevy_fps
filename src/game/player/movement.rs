@@ -53,9 +53,7 @@ pub(super) fn update_movement(
         (player.gravity + 9.8 * player.vertical_speed * time.delta_seconds()).clamp(-500.0, 500.0);
     }
 
-    if player.gravity != 0.0 {
-      player.direction.y -= player.gravity * 0.2;
-    }
+    player.direction.y -= player.gravity * 0.2;
 
     player.direction =
       Vec3::from((direction.x, player.direction.y, direction.y)) * time.delta_seconds();
