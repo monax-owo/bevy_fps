@@ -47,30 +47,14 @@ pub(super) fn init_player(
       RigidBody::KinematicVelocityBased,
       KinematicCharacterController {
         up: Vec3::Y,
-        offset: CharacterLength::Absolute(0.001),
-        // snap_to_ground: Some(CharacterLength::Absolute(0.8)),
+        offset: CharacterLength::Absolute(0.01),
+        snap_to_ground: Some(CharacterLength::Absolute(0.8)),
         max_slope_climb_angle: 45_f32.to_radians(),
         min_slope_slide_angle: 30_f32.to_radians(),
         ..default()
       },
       GroundSensor::default(),
     ))
-    .with_children(|parent| {
-      parent.spawn((
-        Body,
-        PbrBundle {
-          mesh: meshes.add(Cuboid::new(0.4, 0.4, 1.6)),
-          material: materials.add(Color::Srgba(css::BEIGE)),
-          transform: Transform::from_xyz(1.0, 1.0, -0.2).with_rotation(Quat::from_euler(
-            EulerRot::XYZ,
-            0.3,
-            0.2,
-            0.0,
-          )),
-          ..default()
-        },
-      ));
-    })
     .with_children(|parent| {
       parent.spawn((
         Camera3dBundle {
@@ -88,6 +72,21 @@ pub(super) fn init_player(
           ..default()
         },
         CameraController { sensitivity: 0.001 },
+      ));
+
+      parent.spawn((
+        Body,
+        PbrBundle {
+          mesh: meshes.add(Cuboid::new(0.4, 0.4, 1.6)),
+          material: materials.add(Color::Srgba(css::BEIGE)),
+          transform: Transform::from_xyz(1.0, 1.0, -0.2).with_rotation(Quat::from_euler(
+            EulerRot::XYZ,
+            0.3,
+            0.2,
+            0.0,
+          )),
+          ..default()
+        },
       ));
     });
 }
