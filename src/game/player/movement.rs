@@ -62,6 +62,8 @@ pub(super) fn update_movement(
       player.vertical_accel = (player.vertical_accel
         - player.vertical_speed * 2.2 * time.delta_seconds())
       .clamp(9.8, 20.0);
+
+      // jump
       if key.pressed(KeyCode::Space) {
         player.vertical_accel += JUMP_HEIGHT;
       }
