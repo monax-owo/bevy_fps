@@ -57,9 +57,6 @@ pub(super) fn update_movement(
 
     direction = direction.x * player_transform.forward() + direction.z * player_transform.right();
 
-    // TODO:directionを1,-1等で指定したい(sin,cosを使う？)
-    println!("{}", direction);
-
     direction = direction.clamp_length(0.0, 1.0) * player.horizontal_speed;
 
     // 地面に付いて無いときは重力を加える
