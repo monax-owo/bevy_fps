@@ -37,14 +37,14 @@ pub(super) fn update_movement(
     player_query.get_single_mut()
   {
     // Vec3(x,y,z) Vec2(x,z)
-    let mut direction = Vec2::ZERO;
+    let mut direction = Vec3::ZERO;
 
     if key.pressed(KeyCode::KeyW) {
       direction.x += 1.0;
     }
 
     if key.pressed(KeyCode::KeyA) {
-      direction.y += -1.0;
+      direction.z += -1.0;
     }
 
     if key.pressed(KeyCode::KeyS) {
@@ -52,11 +52,10 @@ pub(super) fn update_movement(
     }
 
     if key.pressed(KeyCode::KeyD) {
-      direction.y += 1.0;
+      direction.z += 1.0;
     }
 
-    direction =
-      direction.x * player_transform.forward().xz() + direction.y * player_transform.right().xz();
+    direction = direction.x * player_transform.forward() + direction.z * player_transform.right();
 
     // TODO:directionを1,-1等で指定したい(sin,cosを使う？)
     println!("{}", direction);
@@ -81,8 +80,7 @@ pub(super) fn update_movement(
 
     player.direction.y -= player.vertical_accel * 0.2;
 
-    player.direction =
-      Vec3::from((direction.x, player.direction.y, direction.y)) * time.delta_seconds();
+    player.direction = direction.with_y(player.direction.y) * time.delta_seconds();
 
     controller.translation = Some(player.direction);
   }
