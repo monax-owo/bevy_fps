@@ -57,8 +57,6 @@ pub(super) fn update_movement(
 
     direction = direction.x * player_transform.forward() + direction.z * player_transform.right();
 
-    direction = direction.clamp_length(0.0, 1.0) * player.horizontal_speed;
-
     // 地面に付いて無いときは重力を加える
     if ground_sensor.grounded {
       player.vertical_accel = (player.vertical_accel
@@ -77,7 +75,8 @@ pub(super) fn update_movement(
 
     player.direction.y -= player.vertical_accel * 0.2;
 
-    player.direction = direction.with_y(player.direction.y) * time.delta_seconds();
+    player.direction =
+      (direction * player.horizontal_speed).with_y(player.direction.y) * time.delta_seconds();
 
     controller.translation = Some(player.direction);
   }
