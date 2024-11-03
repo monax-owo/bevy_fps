@@ -8,7 +8,16 @@ use game::plugin::GamePlugin;
 
 fn main() {
   let mut app = App::new();
-  app.add_plugins((DefaultPlugins, GamePlugin));
+  app.add_plugins((
+    DefaultPlugins.set(WindowPlugin {
+      primary_window: Some(Window {
+        title: "bevy_fps".into(),
+        ..default()
+      }),
+      ..default()
+    }),
+    GamePlugin,
+  ));
 
   if env::args().any(|v| &v == "--gui") {
     use bevy_editor_pls::EditorPlugin;
