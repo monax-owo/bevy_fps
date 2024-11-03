@@ -3,7 +3,7 @@ use bevy::prelude::*;
 use super::{
   camera_controller::update_camera_controller,
   core::{init_player, update_player, Body, Player},
-  movement::{update_grounded, update_movement, GroundSensor},
+  movement::{update_grounded, update_input, update_movement, GroundSensor, MovementInput},
 };
 
 pub struct PlayerPlugin;
@@ -11,6 +11,7 @@ pub struct PlayerPlugin;
 impl Plugin for PlayerPlugin {
   fn build(&self, app: &mut App) {
     app
+      .init_resource::<MovementInput>()
       .register_type::<Player>()
       .register_type::<Body>()
       .register_type::<GroundSensor>()
@@ -22,6 +23,7 @@ impl Plugin for PlayerPlugin {
           update_movement,
           update_player,
           update_grounded,
+          update_input,
         ),
       );
   }

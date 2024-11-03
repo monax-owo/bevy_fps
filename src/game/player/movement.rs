@@ -20,8 +20,26 @@ impl Default for GroundSensor {
   }
 }
 
+#[derive(Debug, Default, Resource)]
+pub(super) struct MovementInput {
+  forward: bool,
+  left: bool,
+  back: bool,
+  right: bool,
+  jump: bool,
+}
+
+pub(super) fn update_input(key: Res<ButtonInput<KeyCode>>, mut input: ResMut<MovementInput>) {
+  input.forward = key.pressed(KeyCode::KeyW);
+  input.left = key.pressed(KeyCode::KeyA);
+  input.back = key.pressed(KeyCode::KeyS);
+  input.right = key.pressed(KeyCode::KeyD);
+  input.jump = key.pressed(KeyCode::Space);
+  dbg!(input);
+}
+
 pub(super) fn update_movement(
-  key: Res<ButtonInput<KeyCode>>,
+  key: Res<MovementInput>,
   time: Res<Time>,
   mut player_query: Query<(
     &mut Player,
@@ -39,19 +57,19 @@ pub(super) fn update_movement(
     // Vec3(x,y,z) Vec2(x,z)
     let mut direction = Vec3::ZERO;
 
-    if key.pressed(KeyCode::KeyW) {
+    if key.forward {
       direction.x += 1.0;
     }
 
-    if key.pressed(KeyCode::KeyA) {
+    if key.left {
       direction.z += -1.0;
     }
 
-    if key.pressed(KeyCode::KeyS) {
+    if key.back {
       direction.x += -1.0;
     }
 
-    if key.pressed(KeyCode::KeyD) {
+    if key.right {
       direction.z += 1.0;
     }
 
@@ -64,7 +82,7 @@ pub(super) fn update_movement(
       .clamp(9.8, 20.0);
 
       // jump
-      if key.pressed(KeyCode::Space) {
+      if key.jump {
         player.vertical_accel += JUMP_HEIGHT;
       }
     } else {
