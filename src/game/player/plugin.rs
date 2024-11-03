@@ -22,8 +22,7 @@ impl Plugin for PlayerPlugin {
           update_camera_controller,
           update_movement,
           update_player,
-          update_grounded,
-          update_input,
+          (update_grounded, update_input).before(update_movement),
         ),
       );
   }
