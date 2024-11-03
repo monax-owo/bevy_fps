@@ -40,20 +40,26 @@ pub(super) fn update_movement(
     let mut direction = Vec2::ZERO;
 
     if key.pressed(KeyCode::KeyW) {
-      direction += player_transform.forward().xz();
+      direction.x += 1.0;
     }
 
     if key.pressed(KeyCode::KeyA) {
-      direction += player_transform.left().xz();
+      direction.y += -1.0;
     }
 
     if key.pressed(KeyCode::KeyS) {
-      direction += player_transform.back().xz();
+      direction.x += -1.0;
     }
 
     if key.pressed(KeyCode::KeyD) {
-      direction += player_transform.right().xz();
+      direction.y += 1.0;
     }
+
+    direction =
+      direction.x * player_transform.forward().xz() + direction.y * player_transform.right().xz();
+
+    // TODO:directionを1,-1等で指定したい(sin,cosを使う？)
+    println!("{}", direction);
 
     direction = direction.clamp_length(0.0, 1.0) * player.horizontal_speed;
 
