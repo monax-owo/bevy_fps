@@ -26,7 +26,12 @@ pub(super) struct MovementInput {
   left: bool,
   back: bool,
   right: bool,
+  /// ジャンプ
   jump: bool,
+  /// 走る
+  dash: bool,
+  /// 高速移動
+  blink: bool,
 }
 
 pub(super) fn update_input(key: Res<ButtonInput<KeyCode>>, mut input: ResMut<MovementInput>) {
@@ -34,8 +39,10 @@ pub(super) fn update_input(key: Res<ButtonInput<KeyCode>>, mut input: ResMut<Mov
   input.left = key.pressed(KeyCode::KeyA);
   input.back = key.pressed(KeyCode::KeyS);
   input.right = key.pressed(KeyCode::KeyD);
+
   input.jump = key.pressed(KeyCode::Space);
-  dbg!(input);
+  input.dash = key.pressed(KeyCode::KeyV);
+  input.blink = key.pressed(KeyCode::KeyQ);
 }
 
 pub(super) fn update_movement(
@@ -71,6 +78,11 @@ pub(super) fn update_movement(
 
     if key.right {
       direction.z += 1.0;
+    }
+
+    // TODO:プレイヤーが止まったら歩きの速度にする
+    if key.dash {
+      player.horizontal_speed = 20.0;
     }
 
     direction = direction.x * player_transform.forward() + direction.z * player_transform.right();
