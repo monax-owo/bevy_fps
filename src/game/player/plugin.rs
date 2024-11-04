@@ -1,5 +1,7 @@
 use bevy::prelude::*;
 
+use crate::game::state::core::GameState;
+
 use super::{
   camera_controller::update_camera_controller,
   core::{init_player, update_player, Body, Player},
@@ -23,7 +25,8 @@ impl Plugin for PlayerPlugin {
           update_movement,
           update_player,
           (update_grounded, update_input).before(update_movement),
-        ),
+        )
+          .run_if(in_state(GameState::InGame)),
       );
   }
 }

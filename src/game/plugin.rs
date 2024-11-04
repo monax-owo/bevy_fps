@@ -5,8 +5,8 @@ use bevy_rapier3d::{
 };
 
 use super::{
-  player::plugin::PlayerPlugin, shader::plugin::ShaderPlugin, test::plugin::TestPlugin,
-  ui::plugin::UiPlugin, world::plugin::WorldPlugin,
+  player::plugin::PlayerPlugin, shader::plugin::ShaderPlugin, state::plugin::StatePlugin,
+  test::plugin::TestPlugin, ui::plugin::UiPlugin, world::plugin::WorldPlugin,
 };
 
 pub struct GamePlugin;
@@ -18,6 +18,7 @@ impl Plugin for GamePlugin {
       RapierDebugRenderPlugin::default(),
       PlayerPlugin,
       ShaderPlugin,
+      StatePlugin,
       UiPlugin,
       WorldPlugin,
     ));
