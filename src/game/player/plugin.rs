@@ -1,6 +1,6 @@
 use bevy::prelude::*;
 
-use crate::game::state::core::GameState;
+use crate::game::state::GameState;
 
 use super::{
   camera_controller::update_camera_controller,
