@@ -3,6 +3,7 @@
     "autostep",
     "consts",
     "deband",
+    "despawn",
     "egui",
     "euler",
     "gltf",
