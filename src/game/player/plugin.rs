@@ -4,7 +4,7 @@ use crate::game::state::GameState;
 
 use super::{
   camera_controller::update_camera_controller,
-  core::{init_player, update_player, Body, Player},
+  core::{init_player, on_enter, on_exit, update_player, Body, Player},
   movement::{update_grounded, update_input, update_movement, GroundSensor, MovementInput},
 };
 
@@ -32,6 +32,8 @@ impl Plugin for PlayerPlugin {
           )
             .run_if(in_state(GameState::InGame)),
         ),
-      );
+      )
+      .add_systems(OnEnter(GameState::InGame), on_enter)
+      .add_systems(OnExit(GameState::InGame), on_exit);
   }
 }
