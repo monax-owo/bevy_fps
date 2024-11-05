@@ -21,12 +21,17 @@ impl Plugin for PlayerPlugin {
       .add_systems(
         Update,
         (
-          update_camera_controller,
-          update_movement,
-          update_player,
-          (update_grounded, update_input).before(update_movement),
-        )
-          .run_if(in_state(GameState::InGame)),
+          (
+            update_movement,
+            update_player,
+            (update_grounded).before(update_movement),
+          ),
+          (
+            update_camera_controller,
+            update_input.before(update_movement),
+          )
+            .run_if(in_state(GameState::InGame)),
+        ),
       );
   }
 }
