@@ -10,7 +10,7 @@ use bevy_rapier3d::prelude::*;
 
 use super::{camera_controller::CameraController, movement::GroundSensor};
 
-#[derive(Default, Component, Reflect)]
+#[derive(Component, Reflect, Debug, Default)]
 pub(super) struct Player {
   /// 力が加わる向きと速度(大きさ)
   pub direction: Vec3,
@@ -24,7 +24,7 @@ pub(super) struct Player {
   pub vertical_speed: f32,
 }
 
-#[derive(Default, Component, Reflect)]
+#[derive(Component, Reflect, Debug, Default)]
 pub(super) struct Body;
 
 pub(super) fn on_enter(mut window_query: Query<&mut Window, With<PrimaryWindow>>) {

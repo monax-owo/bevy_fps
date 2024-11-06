@@ -1,6 +1,6 @@
 use bevy::prelude::*;
 
-#[derive(Component)]
+#[derive(Component, Reflect, Debug)]
 pub(super) struct Crosshair {
   /// クロスヘアの色
   pub(super) color: Color,

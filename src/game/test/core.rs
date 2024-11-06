@@ -1,4 +1,4 @@
 use bevy::prelude::*;
 
-#[derive(Debug, Component, Reflect)]
+#[derive(Component, Reflect, Debug)]
 pub(super) struct TestTag(pub String);

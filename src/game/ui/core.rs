@@ -1,6 +1,6 @@
 use bevy::prelude::*;
 
-#[derive(Component, Debug)]
+#[derive(Component, Reflect, Debug)]
 pub(super) struct MainMenu;
 
 // TODO:メインメニューからInGameに移ったらアセットをロードする
