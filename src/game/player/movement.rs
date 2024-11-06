@@ -21,7 +21,7 @@ impl Default for GroundSensor {
 }
 
 #[derive(Debug, Default, Resource)]
-pub(super) struct MovementInput {
+pub struct MovementInput {
   forward: bool,
   left: bool,
   back: bool,
