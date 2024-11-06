@@ -20,18 +20,23 @@ impl Default for GroundSensor {
   }
 }
 
+// TODO:キーボードとマウスの操作を分けるかPlayerInputに変える
 #[derive(Debug, Default, Resource)]
 pub struct MovementInput {
-  forward: bool,
-  left: bool,
-  back: bool,
-  right: bool,
+  // キーボード
+  pub forward: bool,
+  pub left: bool,
+  pub back: bool,
+  pub right: bool,
   /// ジャンプ
-  jump: bool,
+  pub jump: bool,
   /// 走る
-  dash: bool,
+  pub dash: bool,
   /// 高速移動
-  blink: bool,
+  pub blink: bool,
+  // マウス
+  /// 発射
+  pub fire: bool,
 }
 
 pub(super) fn update_input(key: Res<ButtonInput<KeyCode>>, mut input: ResMut<MovementInput>) {
