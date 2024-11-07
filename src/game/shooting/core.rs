@@ -2,9 +2,9 @@ use std::fmt::Debug;
 
 use bevy::prelude::*;
 
-use crate::game::player::MovementInput;
+use crate::game::player::input::PlayerInput;
 
-use super::bullet::{Bullet, BulletAssets};
+// use super::bullet::{Bullet, BulletAssets};
 
 // TODO:銃の機能を実装するトレイトを作る
 pub(super) trait Weapon {
@@ -46,12 +46,12 @@ pub(super) fn init_shooter(mut _commands: Commands) {}
 pub(super) fn update_shooter(
   mut _commands: Commands,
   // assets: Res<BulletAssets>,
-  key: Res<MovementInput>,
+  input: Res<PlayerInput>,
   shooter_query: Query<(Entity, &Shooter)>,
 ) {
-  for (entity, shooter) in shooter_query.iter() {
+  for (_entity, shooter) in shooter_query.iter() {
     // TODO:fireなんてねえよ
-    if key.fire {
+    if input.fire {
       // commands.entity(entity).with_children(|parent| {
       //   parent.spawn((
       //     PbrBundle {

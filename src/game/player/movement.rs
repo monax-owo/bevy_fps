@@ -1,7 +1,7 @@
 use bevy::prelude::*;
 use bevy_rapier3d::prelude::*;
 
-use super::core::Player;
+use super::{core::Player, input::PlayerInput};
 
 #[derive(Component, Reflect)]
 pub(super) struct GroundSensor {
@@ -20,45 +20,8 @@ impl Default for GroundSensor {
   }
 }
 
-// TODO:キーボードとマウスの操作を分けるかPlayerInputに変える
-#[derive(Debug, Default, Resource)]
-pub struct MovementInput {
-  // キーボード
-  pub forward: bool,
-  pub left: bool,
-  pub back: bool,
-  pub right: bool,
-  /// ジャンプ
-  pub jump: bool,
-  /// 走る
-  pub dash: bool,
-  /// 高速移動
-  pub blink: bool,
-  // マウス
-  /// 発射
-  pub fire: bool,
-}
-
-pub(super) fn update_input(
-  key: Res<ButtonInput<KeyCode>>,
-  mouse: Res<ButtonInput<MouseButton>>,
-  mut input: ResMut<MovementInput>,
-) {
-  input.forward = key.pressed(KeyCode::KeyW);
-  input.left = key.pressed(KeyCode::KeyA);
-  input.back = key.pressed(KeyCode::KeyS);
-  input.right = key.pressed(KeyCode::KeyD);
-
-  input.jump = key.pressed(KeyCode::Space);
-  input.dash = key.pressed(KeyCode::KeyV);
-  input.blink = key.pressed(KeyCode::KeyQ);
-
-  // TODO:切り離す
-  input.fire = mouse.pressed(MouseButton::Left);
-}
-
 pub(super) fn update_movement(
-  key: Res<MovementInput>,
+  key: Res<PlayerInput>,
   time: Res<Time>,
   mut player_query: Query<(
     &mut Player,

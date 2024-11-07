@@ -5,7 +5,9 @@ use crate::game::state::GameState;
 use super::{
   camera_controller::update_camera_controller,
   core::{init_player, on_enter, on_exit, update_player, Body, Player},
-  movement::{update_grounded, update_input, update_movement, GroundSensor, MovementInput},
+  input::update_input,
+  movement::{update_grounded, update_movement, GroundSensor},
+  PlayerInput,
 };
 
 pub struct PlayerPlugin;
@@ -13,7 +15,7 @@ pub struct PlayerPlugin;
 impl Plugin for PlayerPlugin {
   fn build(&self, app: &mut App) {
     app
-      .init_resource::<MovementInput>()
+      .init_resource::<PlayerInput>()
       .register_type::<Player>()
       .register_type::<Body>()
       .register_type::<GroundSensor>()
