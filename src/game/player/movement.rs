@@ -39,7 +39,11 @@ pub struct MovementInput {
   pub fire: bool,
 }
 
-pub(super) fn update_input(key: Res<ButtonInput<KeyCode>>, mut input: ResMut<MovementInput>) {
+pub(super) fn update_input(
+  key: Res<ButtonInput<KeyCode>>,
+  mouse: Res<ButtonInput<MouseButton>>,
+  mut input: ResMut<MovementInput>,
+) {
   input.forward = key.pressed(KeyCode::KeyW);
   input.left = key.pressed(KeyCode::KeyA);
   input.back = key.pressed(KeyCode::KeyS);
@@ -48,6 +52,9 @@ pub(super) fn update_input(key: Res<ButtonInput<KeyCode>>, mut input: ResMut<Mov
   input.jump = key.pressed(KeyCode::Space);
   input.dash = key.pressed(KeyCode::KeyV);
   input.blink = key.pressed(KeyCode::KeyQ);
+
+  // TODO:切り離す
+  input.fire = mouse.pressed(MouseButton::Left);
 }
 
 pub(super) fn update_movement(
