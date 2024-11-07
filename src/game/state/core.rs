@@ -3,10 +3,10 @@ use bevy::prelude::*;
 #[derive(States, Default, Debug, Clone, PartialEq, Eq, Hash)]
 pub enum GameState {
   #[default]
-  MainMenu,
+  PauseMenu,
   InGame,
-  // TODO:ポーズ画面
-  // PauseMenu,
+  // TODO:メインメニュー
+  // MainMenu,
 }
 
 pub(super) fn update_menu(
@@ -17,8 +17,8 @@ pub(super) fn update_menu(
   if key.just_released(KeyCode::Escape) {
     println!("released");
     next_state.set(match state.get() {
-      GameState::MainMenu => GameState::InGame,
-      GameState::InGame => GameState::MainMenu,
+      GameState::PauseMenu => GameState::InGame,
+      GameState::InGame => GameState::PauseMenu,
     });
   }
 }

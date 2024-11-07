@@ -13,7 +13,7 @@ impl Plugin for UiPlugin {
   fn build(&self, app: &mut App) {
     app
       .add_systems(Startup, spawn_crosshair.after(init_crosshair))
-      .add_systems(OnEnter(GameState::MainMenu), spawn_ui)
-      .add_systems(OnExit(GameState::MainMenu), despawn_ui);
+      .add_systems(OnEnter(GameState::PauseMenu), spawn_ui)
+      .add_systems(OnExit(GameState::PauseMenu), despawn_ui);
   }
 }
