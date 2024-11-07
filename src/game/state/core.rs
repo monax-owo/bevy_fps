@@ -1,6 +1,5 @@
 use bevy::prelude::*;
 
-// TODO:画面の状態を管理する
 #[derive(States, Default, Debug, Clone, PartialEq, Eq, Hash)]
 pub enum GameState {
   #[default]

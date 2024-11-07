@@ -6,13 +6,13 @@ use crate::game::player::input::PlayerInput;
 
 // use super::bullet::{Bullet, BulletAssets};
 
-// TODO:銃の機能を実装するトレイトを作る
 pub(super) trait Weapon {
   fn left_click(&self);
   fn right_click(&self);
   fn firing_rate(&self) -> f32;
 }
 
+// todo:ReflectとDebugを実装したい
 #[derive(Component)]
 pub struct Shooter {
   weapon: Box<dyn Weapon + Send + Sync>,
@@ -50,7 +50,6 @@ pub(super) fn update_shooter(
   shooter_query: Query<(Entity, &Shooter)>,
 ) {
   for (_entity, shooter) in shooter_query.iter() {
-    // TODO:fireなんてねえよ
     if input.fire {
       // commands.entity(entity).with_children(|parent| {
       //   parent.spawn((

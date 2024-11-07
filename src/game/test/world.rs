@@ -30,7 +30,7 @@ pub(super) fn init_world(
   ));
 }
 
-#[derive(Debug, Deserialize)]
+#[derive(Deserialize, Debug)]
 pub struct SerDeGenerateCollider {
   collider: Option<Value>,
 }

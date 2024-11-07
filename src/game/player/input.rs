@@ -1,6 +1,5 @@
 use bevy::prelude::*;
 
-// TODO:キーボードとマウスの操作を分けるかPlayerInputに変える
 #[derive(Resource, Debug, Default)]
 pub struct PlayerInput {
   // キーボード
