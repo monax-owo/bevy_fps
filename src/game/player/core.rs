@@ -8,6 +8,8 @@ use bevy::{
 };
 use bevy_rapier3d::prelude::*;
 
+use crate::game::shooting::Shooter;
+
 use super::{camera_controller::CameraController, movement::GroundSensor};
 
 #[derive(Component, Reflect, Debug, Default)]
@@ -81,6 +83,7 @@ pub(super) fn init_player(
         ..default()
       },
       GroundSensor::default(),
+      Shooter::default(),
     ))
     .with_children(|parent| {
       parent.spawn((
