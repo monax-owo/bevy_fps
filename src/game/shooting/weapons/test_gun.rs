@@ -2,6 +2,7 @@ use bevy::prelude::*;
 
 use crate::game::shooting::core::Weapon;
 
+#[derive(Component, Reflect, Debug, Default)]
 pub struct TestGun {
   pub cool_time: f32,
 }
@@ -19,3 +20,5 @@ impl Weapon for TestGun {
     let _ = world;
   }
 }
+
+pub(super) fn update() {}

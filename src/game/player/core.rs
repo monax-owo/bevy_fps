@@ -8,7 +8,7 @@ use bevy::{
 };
 use bevy_rapier3d::prelude::*;
 
-use crate::game::shooting::Shooter;
+use crate::game::shooting::{weapons::TestGun, Shooter};
 
 use super::{camera_controller::CameraController, movement::GroundSensor};
 
@@ -60,6 +60,7 @@ pub(super) fn init_player(
   let weapon = commands
     .spawn((
       Name::new("Weapon"),
+      TestGun::default(),
       PbrBundle {
         mesh: meshes.add(Cuboid::new(0.2, 0.4, 0.8)),
         material: materials.add(Color::Srgba(css::DARK_GRAY)),
