@@ -61,9 +61,9 @@ pub(super) fn init_player(
     .spawn((
       Name::new("Weapon"),
       PbrBundle {
-        mesh: meshes.add(Cuboid::new(0.4, 0.8, 2.0)),
+        mesh: meshes.add(Cuboid::new(0.2, 0.4, 0.8)),
         material: materials.add(Color::Srgba(css::DARK_GRAY)),
-        transform: Transform::from_xyz(0.0, 0.0, 0.0),
+        transform: Transform::from_xyz(1.0, -0.4, -1.0),
         ..default()
       },
     ))
@@ -125,12 +125,12 @@ pub(super) fn init_player(
       Name::new("Body"),
       Body,
       PbrBundle {
-        mesh: meshes.add(Cuboid::new(0.4, 0.4, 1.6)),
+        mesh: meshes.add(Cuboid::new(0.4, 0.4, 1.0)),
         material: materials.add(Color::Srgba(css::BEIGE)),
-        transform: Transform::from_xyz(1.0, 0.0, -0.2).with_rotation(Quat::from_euler(
+        transform: Transform::from_xyz(1.0, -0.8, -0.4).with_rotation(Quat::from_euler(
           EulerRot::XYZ,
-          0.3,
-          0.2,
+          0.06,
+          0.0,
           0.0,
         )),
         ..default()
