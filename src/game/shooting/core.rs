@@ -7,9 +7,12 @@ use crate::game::player::input::PlayerInput;
 // use super::bullet::{Bullet, BulletAssets};
 
 pub(super) trait Weapon {
-  fn left_click(&self);
-  fn right_click(&self);
-  fn firing_rate(&self) -> f32;
+  fn left_click(&self) {}
+  fn right_click(&self) {}
+  fn firing_rate(&self) -> f32 {
+    1.0
+  }
+  fn update(&self, world: &mut World) {}
 }
 
 // todo:ReflectとDebugを実装したい
@@ -41,6 +44,28 @@ impl Weapon for Hand {
   }
 }
 
+pub(super) struct Gun {
+  cool_time: f32,
+}
+
+impl Weapon for Gun {
+  fn left_click(&self) {
+    println!("fire");
+  }
+
+  fn right_click(&self) {
+    todo!()
+  }
+
+  fn firing_rate(&self) -> f32 {
+    todo!()
+  }
+
+  fn update(&self, world: &mut World) {
+    world.query::<(Entity, &Transform)>();
+  }
+}
+
 pub(super) fn init_shooter(mut _commands: Commands) {}
 
 pub(super) fn update_shooter(
@@ -48,6 +73,7 @@ pub(super) fn update_shooter(
   // assets: Res<BulletAssets>,
   input: Res<PlayerInput>,
   shooter_query: Query<(Entity, &Shooter)>,
+  world: &mut World,
 ) {
   for (_entity, shooter) in shooter_query.iter() {
     if input.fire {
@@ -63,6 +89,7 @@ pub(super) fn update_shooter(
       // });
       shooter.weapon.left_click();
     }
+    shooter.weapon.update(world);
   }
 }
 
