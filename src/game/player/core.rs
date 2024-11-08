@@ -57,7 +57,16 @@ pub(super) fn init_player(
   mut meshes: ResMut<Assets<Mesh>>,
   mut materials: ResMut<Assets<StandardMaterial>>,
 ) {
-  commands
+  let weapon = commands
+    .spawn(PbrBundle {
+      mesh: meshes.add(Cuboid::new(1.0, 1.0, 4.0)),
+      material: materials.add(Color::Srgba(css::DARK_GRAY)),
+      transform: Transform::from_xyz(0.0, 0.0, 0.0),
+      ..default()
+    })
+    .id();
+
+  let player = commands
     .spawn((
       Player {
         vertical_accel: 1.0,
@@ -83,42 +92,50 @@ pub(super) fn init_player(
         ..default()
       },
       GroundSensor::default(),
-      Shooter::default(),
+      Shooter { weapon },
     ))
-    .with_children(|parent| {
-      parent.spawn((
-        Camera3dBundle {
-          deband_dither: DebandDither::Disabled,
-          camera: Camera {
-            hdr: true,
-            order: 1,
-            ..default()
-          },
-          projection: Projection::Perspective(PerspectiveProjection {
-            fov: 90.0,
-            ..default()
-          }),
-          transform: Transform::from_xyz(0.0, 2.0, 0.0),
-          ..default()
-        },
-        CameraController { sensitivity: 0.001 },
-      ));
+    .id();
 
-      parent.spawn((
-        Body,
-        PbrBundle {
-          mesh: meshes.add(Cuboid::new(0.4, 0.4, 1.6)),
-          material: materials.add(Color::Srgba(css::BEIGE)),
-          transform: Transform::from_xyz(1.0, 1.0, -0.2).with_rotation(Quat::from_euler(
-            EulerRot::XYZ,
-            0.3,
-            0.2,
-            0.0,
-          )),
+  let camera = commands
+    .spawn((
+      Camera3dBundle {
+        deband_dither: DebandDither::Disabled,
+        camera: Camera {
+          hdr: true,
+          order: 1,
           ..default()
         },
-      ));
-    });
+        projection: Projection::Perspective(PerspectiveProjection {
+          fov: 90.0,
+          ..default()
+        }),
+        transform: Transform::from_xyz(0.0, 2.0, 0.0),
+        ..default()
+      },
+      CameraController { sensitivity: 0.001 },
+    ))
+    .id();
+
+  let body = commands
+    .spawn((
+      Body,
+      PbrBundle {
+        mesh: meshes.add(Cuboid::new(0.4, 0.4, 1.6)),
+        material: materials.add(Color::Srgba(css::BEIGE)),
+        transform: Transform::from_xyz(1.0, 1.0, -0.2).with_rotation(Quat::from_euler(
+          EulerRot::XYZ,
+          0.3,
+          0.2,
+          0.0,
+        )),
+        ..default()
+      },
+    ))
+    .id();
+
+  commands
+    .entity(player)
+    .push_children(&[camera, body, weapon]);
 }
 
 pub(super) fn update_player(
