@@ -1,24 +1,20 @@
 use bevy::prelude::*;
 
-use crate::game::shooting::core::Weapon;
-
 #[derive(Component, Reflect, Debug, Default)]
 pub struct TestGun {
   pub cool_time: f32,
 }
 
-impl Weapon for TestGun {
-  fn left_click(&self) {}
-
-  fn right_click(&self) {}
-
-  fn firing_rate(&self) -> f32 {
-    1.0
-  }
-
-  fn update(&self, world: &mut World) {
-    let _ = world;
-  }
-}
-
 pub(super) fn update() {}
+
+// TODO:弾を発射
+// commands.entity(entity).with_children(|parent| {
+//   parent.spawn((
+//     PbrBundle {
+//       mesh: assets.bullet_mesh.clone(),
+//       material: assets.bullet_material.clone(),
+//       ..default()
+//     },
+//     Bullet { lifetime: 10.0 },
+//   ));
+// });
