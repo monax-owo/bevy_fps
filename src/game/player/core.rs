@@ -78,7 +78,6 @@ pub(super) fn init_player(
         vertical_speed: 18.0,
         ..default()
       },
-      Name::new("Player"),
       Collider::capsule_y(1.0, 0.4),
       PbrBundle {
         mesh: meshes.add(Capsule3d::new(0.4, 2.0)),
@@ -128,7 +127,7 @@ pub(super) fn init_player(
       PbrBundle {
         mesh: meshes.add(Cuboid::new(0.4, 0.4, 1.6)),
         material: materials.add(Color::Srgba(css::BEIGE)),
-        transform: Transform::from_xyz(1.0, 1.0, -0.2).with_rotation(Quat::from_euler(
+        transform: Transform::from_xyz(1.0, 0.0, -0.2).with_rotation(Quat::from_euler(
           EulerRot::XYZ,
           0.3,
           0.2,
@@ -139,9 +138,8 @@ pub(super) fn init_player(
     ))
     .id();
 
-  commands
-    .entity(player)
-    .push_children(&[camera, body, weapon]);
+  commands.entity(player).add_child(camera);
+  commands.entity(camera).push_children(&[body, weapon]);
 }
 
 pub(super) fn update_player(
