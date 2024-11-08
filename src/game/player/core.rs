@@ -58,16 +58,20 @@ pub(super) fn init_player(
   mut materials: ResMut<Assets<StandardMaterial>>,
 ) {
   let weapon = commands
-    .spawn(PbrBundle {
-      mesh: meshes.add(Cuboid::new(1.0, 1.0, 4.0)),
-      material: materials.add(Color::Srgba(css::DARK_GRAY)),
-      transform: Transform::from_xyz(0.0, 0.0, 0.0),
-      ..default()
-    })
+    .spawn((
+      Name::new("Weapon"),
+      PbrBundle {
+        mesh: meshes.add(Cuboid::new(0.4, 0.8, 2.0)),
+        material: materials.add(Color::Srgba(css::DARK_GRAY)),
+        transform: Transform::from_xyz(0.0, 0.0, 0.0),
+        ..default()
+      },
+    ))
     .id();
 
   let player = commands
     .spawn((
+      Name::new("Player"),
       Player {
         vertical_accel: 1.0,
         horizontal_speed: 8.0,
@@ -98,6 +102,7 @@ pub(super) fn init_player(
 
   let camera = commands
     .spawn((
+      Name::new("Camera"),
       Camera3dBundle {
         deband_dither: DebandDither::Disabled,
         camera: Camera {
@@ -118,6 +123,7 @@ pub(super) fn init_player(
 
   let body = commands
     .spawn((
+      Name::new("Body"),
       Body,
       PbrBundle {
         mesh: meshes.add(Cuboid::new(0.4, 0.4, 1.6)),
