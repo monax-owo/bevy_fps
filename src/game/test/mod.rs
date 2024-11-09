@@ -2,5 +2,5 @@ pub(super) mod core;
 pub(super) mod plugin;
 pub(super) mod world;
 
-pub use core::*;
+use core::*;
 pub use plugin::*;

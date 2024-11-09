@@ -3,5 +3,5 @@ pub(super) mod crosshair;
 pub(super) mod menu;
 pub(super) mod plugin;
 
-pub use core::*;
+use core::*;
 pub use plugin::*;
