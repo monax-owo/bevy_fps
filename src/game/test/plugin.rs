@@ -1,8 +1,8 @@
 use bevy::prelude::*;
 
 use super::{
-  core::TestTag,
   world::{generate_collider, init_world},
+  TestTag,
 };
 
 pub struct TestPlugin;

@@ -3,8 +3,8 @@ use bevy::prelude::*;
 use crate::game::state::GameState;
 
 use super::{
-  core::{despawn_ui, spawn_ui},
   crosshair::{init_crosshair, spawn_crosshair},
+  {despawn_ui, spawn_ui},
 };
 
 pub struct UiPlugin;

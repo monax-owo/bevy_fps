@@ -4,10 +4,9 @@ use crate::game::state::GameState;
 
 use super::{
   camera_controller::update_camera_controller,
-  core::{init_player, on_enter, on_exit, update_player, Body, Player},
   input::update_input,
   movement::{update_grounded, update_movement, GroundSensor},
-  PlayerInput,
+  PlayerInput, {init_player, on_enter, on_exit, update_player, Body, Player},
 };
 
 pub struct PlayerPlugin;

@@ -1,6 +1,6 @@
 use bevy::prelude::*;
 
-use super::core::{update_menu, GameState};
+use super::{update_menu, GameState};
 
 pub struct StatePlugin;
 

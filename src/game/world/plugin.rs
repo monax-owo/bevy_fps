@@ -1,6 +1,6 @@
 use bevy::prelude::*;
 
-use super::core::init_world;
+use super::init_world;
 
 pub struct WorldPlugin;
 
