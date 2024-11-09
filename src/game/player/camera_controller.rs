@@ -2,7 +2,7 @@ use core::f32;
 
 use bevy::{input::mouse::MouseMotion, prelude::*};
 
-use super::core::Player;
+use super::Player;
 
 #[derive(Component, Reflect, Debug)]
 pub(super) struct CameraController {

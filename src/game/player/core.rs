@@ -10,7 +10,7 @@ use bevy_rapier3d::prelude::*;
 
 use crate::game::shooting::{weapons::TestGun, Shooter};
 
-use super::{camera_controller::CameraController, movement::GroundSensor};
+use super::{CameraController, GroundSensor};
 
 #[derive(Component, Reflect, Debug, Default)]
 pub(super) struct Player {
