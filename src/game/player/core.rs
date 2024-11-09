@@ -1,5 +1,3 @@
-use std::str;
-
 use bevy::{
   color::palettes::css,
   core_pipeline::tonemapping::DebandDither,
@@ -8,12 +6,12 @@ use bevy::{
 };
 use bevy_rapier3d::prelude::*;
 
-use crate::game::shooting::{weapons::TestGun, Shooter};
+use crate::game::shooting::{weapons::test_gun::TestGun, Shooter};
 
-use super::{CameraController, GroundSensor};
+use super::{camera_controller::CameraController, movement::GroundSensor};
 
 #[derive(Component, Reflect, Debug, Default)]
-pub(super) struct Player {
+pub struct Player {
   /// 力が加わる向きと速度(大きさ)
   pub direction: Vec3,
   /// 重力の掛かる方向

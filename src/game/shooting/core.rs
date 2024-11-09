@@ -1,6 +1,6 @@
 use bevy::prelude::*;
 
-use super::super::player::PlayerInput;
+use crate::game::player::input::PlayerInput;
 
 #[derive(Component, Reflect, Debug)]
 pub struct Shooter {

@@ -1,6 +1,6 @@
 use bevy::prelude::*;
 
-use crate::game::shooting::BulletAssets;
+use crate::game::shooting::bullet::BulletAssets;
 
 #[derive(Component, Reflect, Debug, Default)]
 pub struct TestGun {
@@ -8,11 +8,11 @@ pub struct TestGun {
 }
 
 pub(super) fn update(
-  mut commands: Commands,
-  assets: Res<BulletAssets>,
+  mut _commands: Commands,
+  _assets: Res<BulletAssets>,
   gun: Query<(Entity, &TestGun, &Transform)>,
 ) {
-  for (entity, gun, transform) in gun.iter() {
+  for (_entity, _gun, transform) in gun.iter() {
     println!("{}", transform.translation);
     // TODO:弾を発射
     // commands.entity(entity).with_children(|parent| {

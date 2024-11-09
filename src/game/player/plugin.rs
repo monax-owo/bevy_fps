@@ -3,8 +3,11 @@ use bevy::prelude::*;
 use crate::game::state::GameState;
 
 use super::{
-  init_player, on_enter, on_exit, update_camera_controller, update_grounded, update_input,
-  update_movement, update_player, Body, GroundSensor, Player, PlayerInput,
+  camera_controller::update_camera_controller,
+  init_player,
+  input::{update_input, PlayerInput},
+  movement::{update_grounded, update_movement, GroundSensor},
+  on_enter, on_exit, update_player, Body, Player,
 };
 
 pub struct PlayerPlugin;

@@ -1,7 +1,10 @@
 use bevy::prelude::*;
 
 use super::{
-  init_bullet, init_shooter, update_shooter, Bullet, BulletAssets, Shooter, WeaponPlugin,
+  bullet::{init_bullet, Bullet, BulletAssets},
+  init_shooter, update_shooter,
+  weapons::WeaponPlugin,
+  Shooter,
 };
 
 pub struct ShootingPlugin;
