@@ -10,16 +10,16 @@ pub struct TestGun {
   pub cool_time: f32,
 }
 
-const COOL_TIME: f32 = 2.0;
+const COOL_TIME: f32 = 0.4;
 
 pub(super) fn update(
   mut commands: Commands,
   mut fire_event_reader: EventReader<FireEvent>,
   time: Res<Time>,
   assets: Res<BulletAssets>,
-  mut gun: Query<(Entity, &Shooter, &mut TestGun, &Transform)>,
+  mut gun: Query<(&Shooter, &mut TestGun, &GlobalTransform)>,
 ) {
-  for (entity, _shooter, mut gun, transform) in gun.iter_mut() {
+  for (_, mut gun, global_transform) in gun.iter_mut() {
     if gun.cool_time > 0.0 {
       gun.cool_time -= time.delta_seconds();
     }
@@ -28,21 +28,19 @@ pub(super) fn update(
       if gun.cool_time <= 0.0 {
         dbg!("fire");
 
-        // TODO:スポーンする親を変え、初期位置は銃の位置にする
-        commands.entity(entity).with_children(|parent| {
-          parent.spawn((
-            PbrBundle {
-              mesh: assets.bullet_mesh.clone(),
-              material: assets.bullet_material.clone(),
-              ..default()
-            },
-            Bullet {
-              axis: transform.forward().into(),
-              speed: 4.0,
-              lifetime: 6.0,
-            },
-          ));
-        });
+        commands.spawn((
+          PbrBundle {
+            mesh: assets.bullet_mesh.clone(),
+            material: assets.bullet_material.clone(),
+            transform: global_transform.compute_transform(),
+            ..default()
+          },
+          Bullet {
+            axis: global_transform.forward().into(),
+            speed: 100.0,
+            lifetime: 6.0,
+          },
+        ));
 
         gun.cool_time = COOL_TIME;
       }
