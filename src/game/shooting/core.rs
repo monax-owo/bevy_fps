@@ -5,17 +5,19 @@ use crate::game::player::input::PlayerInput;
 #[derive(Component, Reflect, Debug, Default)]
 pub struct Shooter {}
 
+#[derive(Event, Debug)]
+pub struct FireEvent;
+
 pub(super) fn init_shooter(mut _commands: Commands) {}
 
 pub(super) fn update_shooter(
-  mut _commands: Commands,
-  // assets: Res<BulletAssets>,
+  mut fire_event_writer: EventWriter<FireEvent>,
   input: Res<PlayerInput>,
-  shooter_query: Query<(Entity, &Shooter)>,
+  shooter_query: Query<&Shooter>,
 ) {
-  for (_entity, _shooter) in shooter_query.iter() {
+  for _shooter in shooter_query.iter() {
     if input.fire {
-      // TODO:eventを発火
+      fire_event_writer.send(FireEvent);
     }
   }
 }

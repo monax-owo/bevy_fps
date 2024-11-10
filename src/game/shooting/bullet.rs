@@ -2,6 +2,8 @@ use bevy::{color::palettes::css, prelude::*};
 
 #[derive(Component, Reflect, Debug)]
 pub(super) struct Bullet {
+  pub axis: Dir3,
+  pub speed: f32,
   pub lifetime: f32,
 }
 
@@ -22,4 +24,19 @@ pub(super) fn init_bullet(
     bullet_mesh,
     bullet_material,
   });
+}
+
+pub(super) fn update_bullet(
+  mut commands: Commands,
+  time: Res<Time>,
+  mut bullet_query: Query<(Entity, &mut Bullet, &mut Transform)>,
+) {
+  for (entity, mut bullet, mut transform) in bullet_query.iter_mut() {
+    transform.translation += bullet.axis * bullet.speed * time.delta_seconds();
+    bullet.lifetime -= time.delta_seconds();
+
+    if bullet.lifetime <= 0.0 {
+      commands.entity(entity).despawn();
+    }
+  }
 }
