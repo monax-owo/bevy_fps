@@ -141,7 +141,7 @@ pub(super) fn init_player(
   commands.entity(camera).push_children(&[body, weapon]);
 }
 
-pub(super) fn update_player(
+pub(super) fn update_grounded_color(
   mut materials: ResMut<Assets<StandardMaterial>>,
   mut player_query: Query<(&GroundSensor, &Handle<StandardMaterial>)>,
 ) {

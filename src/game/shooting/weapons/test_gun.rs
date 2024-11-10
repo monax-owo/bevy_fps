@@ -26,8 +26,6 @@ pub(super) fn update(
 
     for _ in fire_event_reader.read() {
       if gun.cool_time <= 0.0 {
-        dbg!("fire");
-
         commands.spawn((
           PbrBundle {
             mesh: assets.bullet_mesh.clone(),

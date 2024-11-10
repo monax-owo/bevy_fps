@@ -36,7 +36,6 @@ pub(super) fn update_movement(
   if let Ok((mut player, player_transform, mut controller, ground_sensor)) =
     player_query.get_single_mut()
   {
-    // Vec3(x,y,z) Vec2(x,z)
     let mut direction = Vec3::ZERO;
 
     if key.forward {

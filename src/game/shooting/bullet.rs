@@ -18,11 +18,11 @@ pub(super) fn init_bullet(
   mut meshes: ResMut<Assets<Mesh>>,
   mut materials: ResMut<Assets<StandardMaterial>>,
 ) {
-  let bullet_mesh = meshes.add(Sphere::new(0.4));
-  let bullet_material = materials.add(Color::Srgba(css::BROWN));
+  let mesh = meshes.add(Sphere::new(0.4));
+  let material = materials.add(Color::Srgba(css::BROWN));
   commands.insert_resource(BulletAssets {
-    bullet_mesh,
-    bullet_material,
+    bullet_mesh: mesh,
+    bullet_material: material,
   });
 }
 

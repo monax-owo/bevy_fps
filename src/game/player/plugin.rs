@@ -7,7 +7,7 @@ use super::{
   init_player,
   input::{update_input, PlayerInput},
   movement::{update_grounded, update_movement, GroundSensor},
-  on_enter, on_exit, update_player, Body, Player,
+  on_enter, on_exit, update_grounded_color, Body, Player,
 };
 
 pub struct PlayerPlugin;
@@ -25,7 +25,7 @@ impl Plugin for PlayerPlugin {
         (
           (
             update_movement,
-            update_player,
+            update_grounded_color,
             (update_grounded).before(update_movement),
           ),
           (
