@@ -55,19 +55,6 @@ pub(super) fn init_player(
   mut meshes: ResMut<Assets<Mesh>>,
   mut materials: ResMut<Assets<StandardMaterial>>,
 ) {
-  let weapon = commands
-    .spawn((
-      Name::new("Weapon"),
-      TestGun::default(),
-      PbrBundle {
-        mesh: meshes.add(Cuboid::new(0.2, 0.4, 0.8)),
-        material: materials.add(Color::Srgba(css::DARK_GRAY)),
-        transform: Transform::from_xyz(1.0, -0.4, -1.0),
-        ..default()
-      },
-    ))
-    .id();
-
   let player = commands
     .spawn((
       Name::new("Player"),
@@ -94,7 +81,6 @@ pub(super) fn init_player(
         ..default()
       },
       GroundSensor::default(),
-      Shooter { weapon },
     ))
     .id();
 
@@ -132,6 +118,20 @@ pub(super) fn init_player(
           0.0,
           0.0,
         )),
+        ..default()
+      },
+    ))
+    .id();
+
+  let weapon = commands
+    .spawn((
+      Name::new("Weapon"),
+      Shooter::default(),
+      TestGun::default(),
+      PbrBundle {
+        mesh: meshes.add(Cuboid::new(0.2, 0.4, 0.8)),
+        material: materials.add(Color::Srgba(css::DARK_GRAY)),
+        transform: Transform::from_xyz(1.0, -0.4, -1.0),
         ..default()
       },
     ))

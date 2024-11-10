@@ -13,7 +13,7 @@ pub(super) fn update(
   gun: Query<(Entity, &TestGun, &Transform)>,
 ) {
   for (_entity, _gun, transform) in gun.iter() {
-    println!("{}", transform.translation);
+    // println!("{}", transform.translation);
     // TODO:弾を発射
     // commands.entity(entity).with_children(|parent| {
     //   parent.spawn((

@@ -2,10 +2,8 @@ use bevy::prelude::*;
 
 use crate::game::player::input::PlayerInput;
 
-#[derive(Component, Reflect, Debug)]
-pub struct Shooter {
-  pub weapon: Entity,
-}
+#[derive(Component, Reflect, Debug, Default)]
+pub struct Shooter {}
 
 pub(super) fn init_shooter(mut _commands: Commands) {}
 
