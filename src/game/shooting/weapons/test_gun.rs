@@ -34,7 +34,7 @@ pub(super) fn update(
             ..default()
           },
           Bullet {
-            axis: global_transform.forward().into(),
+            axis: global_transform.forward(),
             speed: 100.0,
             lifetime: 6.0,
           },
