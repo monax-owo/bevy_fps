@@ -1,7 +1,7 @@
 use bevy::prelude::*;
 
 use crate::game::shooting::{
-  bullet::{Bullet, BulletAssets},
+  bullet::projectile::{ProjectileBullet, ProjectileBulletAssets},
   FireEvent, Shooter,
 };
 
@@ -16,7 +16,7 @@ pub(super) fn update(
   mut commands: Commands,
   mut fire_event_reader: EventReader<FireEvent>,
   time: Res<Time>,
-  assets: Res<BulletAssets>,
+  assets: Res<ProjectileBulletAssets>,
   mut gun: Query<(&Shooter, &mut TestGun, &GlobalTransform)>,
 ) {
   for (_, mut gun, global_transform) in gun.iter_mut() {
@@ -33,7 +33,7 @@ pub(super) fn update(
             transform: global_transform.compute_transform(),
             ..default()
           },
-          Bullet {
+          ProjectileBullet {
             axis: global_transform.forward(),
             speed: 100.0,
             lifetime: 6.0,
