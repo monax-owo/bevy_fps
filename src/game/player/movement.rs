@@ -7,6 +7,7 @@ use super::{input::PlayerInput, Player};
 pub(super) struct GroundSensor {
   /// 接地しているか
   pub grounded: bool,
+  /// time-of-impact
   pub toi: f32,
 }
 

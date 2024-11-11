@@ -7,6 +7,7 @@ use crate::game::shooting::{
 
 #[derive(Component, Reflect, Debug, Default)]
 pub struct TestGun {
+  /// sec
   pub cool_time: f32,
 }
 

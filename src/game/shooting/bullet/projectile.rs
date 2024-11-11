@@ -4,7 +4,9 @@ use bevy::{color::palettes::css, prelude::*};
 #[derive(Component, Reflect, Debug)]
 pub struct ProjectileBullet {
   pub axis: Dir3,
+  /// m/sec
   pub speed: f32,
+  /// sec
   pub lifetime: f32,
 }
 
