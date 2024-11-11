@@ -3,7 +3,7 @@ use bevy::prelude::*;
 use crate::game::state::GameState;
 
 use super::{
-  crosshair::{init_crosshair, spawn_crosshair},
+  crosshair::{init_crosshair, spawn_crosshair, Crosshair},
   despawn_ui, spawn_ui, PauseMenu,
 };
 
@@ -16,6 +16,7 @@ impl Plugin for UiPlugin {
       .add_systems(OnEnter(GameState::PauseMenu), spawn_ui)
       .add_systems(OnExit(GameState::PauseMenu), despawn_ui)
       .add_systems(Startup, spawn_crosshair.after(init_crosshair))
+      .register_type::<Crosshair>()
       .register_type::<PauseMenu>();
   }
 }
