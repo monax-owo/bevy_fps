@@ -27,6 +27,7 @@ pub struct Player {
 #[derive(Component, Reflect, Debug, Default)]
 pub(super) struct Body;
 
+// TODO:state側で管理する？
 pub(super) fn on_enter(mut window_query: Query<&mut Window, With<PrimaryWindow>>) {
   if let Ok(window) = window_query.get_single_mut() {
     println!("enter");
