@@ -10,7 +10,7 @@ pub struct PostProcessMaterial {
   pub color_texture: Option<Handle<Image>>,
 }
 
-// TODO:<https://bevyengine.org/examples/2d-rendering/pixel-grid-snap/>これでよくない？試します
+// todo:<https://bevyengine.org/examples/2d-rendering/pixel-grid-snap/>これでよくない？試します
 impl Material for PostProcessMaterial {
   fn fragment_shader() -> ShaderRef {
     "shaders/test_shader.wgsl".into()

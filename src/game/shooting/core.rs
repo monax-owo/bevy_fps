@@ -23,6 +23,3 @@ pub(super) fn update_shooter(
     }
   }
 }
-
-// TODO:ヒットスキャン
-pub(super) fn _update_hit_scan() {}

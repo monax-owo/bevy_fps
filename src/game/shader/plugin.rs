@@ -10,7 +10,7 @@ impl Plugin for ShaderPlugin {
   }
 }
 
-// TODO:よくわからん
+// todo:よくわからん
 fn _init_camera(mut _images: ResMut<Assets<Image>>) {
   // カスタムのレンダーターゲット（テクスチャ）を作成
   // let render_texture = Image::new_fill(

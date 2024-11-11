@@ -7,7 +7,6 @@ use super::{input::PlayerInput, Player};
 pub(super) struct GroundSensor {
   /// 接地しているか
   pub grounded: bool,
-  /// TODO:テスト
   pub toi: f32,
 }
 
@@ -15,6 +14,7 @@ impl Default for GroundSensor {
   fn default() -> Self {
     Self {
       grounded: Default::default(),
+      // TODO:調整する
       toi: 0.06,
     }
   }

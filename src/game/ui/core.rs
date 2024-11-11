@@ -1,13 +1,13 @@
 use bevy::prelude::*;
 
 #[derive(Component, Reflect, Debug)]
-pub(super) struct MainMenu;
+pub(super) struct PauseMenu;
 
 // TODO:メインメニューからInGameに移ったらアセットをロードする
 pub(super) fn spawn_ui(mut commands: Commands) {
   commands
     .spawn((
-      Name::new("MainMenu"),
+      Name::new("PauseMenu"),
       NodeBundle {
         style: Style {
           width: Val::Percent(100.0),
@@ -17,7 +17,7 @@ pub(super) fn spawn_ui(mut commands: Commands) {
         background_color: BackgroundColor(Color::srgba(1.0, 1.0, 1.0, 0.4)),
         ..default()
       },
-      MainMenu,
+      PauseMenu,
     ))
     .with_children(|parent| {
       parent.spawn(TextBundle::from_section(
@@ -30,7 +30,7 @@ pub(super) fn spawn_ui(mut commands: Commands) {
     });
 }
 
-pub(super) fn despawn_ui(mut commands: Commands, ui_query: Query<(Entity, &MainMenu)>) {
+pub(super) fn despawn_ui(mut commands: Commands, ui_query: Query<(Entity, &PauseMenu)>) {
   if let Ok((entity, _)) = ui_query.get_single() {
     commands.entity(entity).despawn_recursive();
   }

@@ -8,7 +8,7 @@ pub struct ProjectileBullet {
   pub lifetime: f32,
 }
 
-// TODO:Bundle化して公開範囲を狭める
+// TODO:公開範囲を狭める
 #[derive(Resource, Debug, Default)]
 pub struct ProjectileBulletAssets {
   pub bullet_mesh: Handle<Mesh>,
@@ -28,6 +28,7 @@ pub(super) fn init_projectile_bullet(
   });
 }
 
+// TODO:ヒットスキャン
 pub(super) fn update_projectile_bullet(
   mut commands: Commands,
   time: Res<Time>,
