@@ -1,7 +1,10 @@
 use bevy::prelude::*;
 
-use super::projectile::{
-  init_projectile_bullet, update_projectile_bullet, ProjectileBullet, ProjectileBulletAssets,
+use super::{
+  projectile::{
+    init_projectile_bullet, update_projectile_bullet, ProjectileBullet, ProjectileBulletAssets,
+  },
+  raycast::{RaycastBullet, RaycastBulletAssets},
 };
 
 pub struct BulletPlugin;
@@ -12,6 +15,8 @@ impl Plugin for BulletPlugin {
       .add_systems(Startup, init_projectile_bullet)
       .add_systems(Update, update_projectile_bullet)
       .init_resource::<ProjectileBulletAssets>()
-      .register_type::<ProjectileBullet>();
+      .init_resource::<RaycastBulletAssets>()
+      .register_type::<ProjectileBullet>()
+      .register_type::<RaycastBullet>();
   }
 }
