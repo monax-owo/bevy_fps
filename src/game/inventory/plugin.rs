@@ -1,6 +1,6 @@
 use bevy::prelude::*;
 
-use super::core::update_model;
+use super::update_model;
 
 pub struct InventoryPlugin;
 

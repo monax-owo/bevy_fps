@@ -8,7 +8,7 @@ use bevy_rapier3d::prelude::*;
 use inventory::Inventory;
 
 use crate::game::{
-  inventory::core::PlayerInventory,
+  inventory::PlayerInventory,
   shooting::{weapons::test_gun::TestGun, Shooter},
 };
 

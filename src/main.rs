@@ -3,7 +3,7 @@ pub mod game;
 use std::env;
 
 use bevy::prelude::*;
-use game::plugin::GamePlugin;
+use game::GamePlugin;
 
 fn main() {
   let mut app = App::new();
