@@ -17,7 +17,7 @@ pub struct RaycastBulletAssets {
   pub bullet_material: Handle<StandardMaterial>,
 }
 
-pub(super) fn init_raycast_bullet(
+pub(super) fn init_raycast(
   mut commands: Commands,
   mut meshes: ResMut<Assets<Mesh>>,
   mut materials: ResMut<Assets<StandardMaterial>>,
@@ -31,7 +31,7 @@ pub(super) fn init_raycast_bullet(
 }
 
 // TODO:ヒットスキャン
-pub(super) fn update_raycast_bullet(
+pub(super) fn update_raycast(
   mut commands: Commands,
   time: Res<Time>,
   mut bullet_query: Query<(Entity, &mut RaycastBullet, &mut Transform)>,
