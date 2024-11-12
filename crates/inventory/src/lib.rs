@@ -28,7 +28,7 @@ impl Default for Inventory {
 impl Inventory {
   pub fn new(items: Vec<Item>, max_count: usize) -> Self {
     Self {
-      items: items.into_iter().map(|v| Some(v)).collect(),
+      items: items.into_iter().map(Some).collect(),
       current_item: Default::default(),
       max_count,
     }
@@ -46,9 +46,9 @@ impl Inventory {
   }
 
   //
-  pub fn equip(&mut self, item: Item) -> Result<Item, InventoryError> {
+  pub fn equip(&mut self, _item: Item) -> Result<Item, InventoryError> {
     todo!();
-    Ok(item)
+    // Ok(item)
   }
 
   pub fn max_count(&self) -> usize {

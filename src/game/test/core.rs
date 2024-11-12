@@ -8,12 +8,7 @@ use crate::game::shooting::weapons::test_gun::TestGun;
 pub(super) struct TestTag(pub String);
 
 // 使い終わったら消す
-pub(super) fn init_tester(
-  mut commands: Commands,
-  asset_server: Res<AssetServer>,
-  q: Query<(Entity, &TestGun), Added<TestGun>>,
-) {
-}
+pub(super) fn init_tester() {}
 
 pub(super) fn update_2(
   mut commands: Commands,
