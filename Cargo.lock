@@ -751,6 +751,7 @@ dependencies = [
  "bevy-inspector-egui 0.27.0",
  "bevy_editor_pls",
  "bevy_rapier3d",
+ "inventory",
  "serde",
  "serde_json",
 ]
@@ -2714,6 +2715,13 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "e05c02b5e89bff3b946cedeca278abc628fe811e604f027c45a8aa3cf793d0eb"
 dependencies = [
  "libc",
+]
+
+[[package]]
+name = "inventory"
+version = "0.1.0"
+dependencies = [
+ "bevy",
 ]
 
 [[package]]

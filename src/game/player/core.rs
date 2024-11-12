@@ -5,9 +5,10 @@ use bevy::{
   window::{CursorGrabMode, PrimaryWindow},
 };
 use bevy_rapier3d::prelude::*;
+use inventory::Inventory;
 
 use crate::game::{
-  inventory::core::{Inventory, PlayerInventory},
+  inventory::core::PlayerInventory,
   shooting::{weapons::test_gun::TestGun, Shooter},
 };
 
