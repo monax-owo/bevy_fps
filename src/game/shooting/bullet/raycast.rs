@@ -41,6 +41,8 @@ pub(super) fn update_raycast(
     todo!();
   }
 
+  // TODO:判定を通り抜けないように進行方向の軸に対してrayを伸ばす
+  // もしくは毎フレーム進む距離だけRaycastする
   // TODO:↓これはプロジェクタイルのやつ
   //   transform.translation += bullet.axis * bullet.speed * time.delta_seconds();
   //   bullet.lifetime -= time.delta_seconds();
