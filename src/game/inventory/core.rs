@@ -41,7 +41,7 @@ pub struct Inventory {
 
 // TODO
 impl Inventory {
-  fn new(items: Vec<Item>, max_count: usize) -> Self {
+  pub fn new(items: Vec<Item>, max_count: usize) -> Self {
     Self {
       items: items.into_iter().map(|v| Some(v)).collect(),
       current_item: Default::default(),
@@ -52,7 +52,7 @@ impl Inventory {
   /// itemをインベントリに追加する
   /// # Errors
   /// itemsの長さがmax_count以上の場合に`InventoryError::Overflow`を返す
-  fn add(&mut self, item: Item) -> Result<(), InventoryError> {
+  pub fn add(&mut self, item: Item) -> Result<(), InventoryError> {
     if self.items.len() >= self.max_count {
       return Err(InventoryError::Overflow);
     }
@@ -61,18 +61,18 @@ impl Inventory {
   }
 
   //
-  fn equip(&mut self, item: Item) -> Result<Item, InventoryError> {
+  pub fn equip(&mut self, item: Item) -> Result<Item, InventoryError> {
     todo!();
     Ok(item)
   }
 
-  fn max_count(&self) -> usize {
+  pub fn max_count(&self) -> usize {
     self.max_count
   }
 
   /// max_countとitemsを指定の長さにし、
   /// 切り詰められた`Option<Item>`を返す
-  fn set_max_count(&mut self, value: usize) {
+  pub fn set_max_count(&mut self, value: usize) {
     if self.max_count > value {
       // Err?
       todo!();
