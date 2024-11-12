@@ -41,11 +41,11 @@ pub(super) fn init_raycast(
 
 // TODO:ヒットスキャン
 pub(super) fn update_raycast(
-  mut commands: Commands,
-  time: Res<Time>,
+  mut _commands: Commands,
+  _time: Res<Time>,
   mut bullet_query: Query<(Entity, &mut RaycastBullet, &mut Transform)>,
 ) {
-  for (entity, mut bullet, mut transform) in bullet_query.iter_mut() {
+  for (_entity, mut _bullet, mut _transform) in bullet_query.iter_mut() {
     // TODO:raycast
     todo!();
   }
