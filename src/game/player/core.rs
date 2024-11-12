@@ -6,7 +6,10 @@ use bevy::{
 };
 use bevy_rapier3d::prelude::*;
 
-use crate::game::shooting::{weapons::test_gun::TestGun, Shooter};
+use crate::game::{
+  inventory::core::{Inventory, PlayerInventory},
+  shooting::{weapons::test_gun::TestGun, Shooter},
+};
 
 use super::{camera_controller::CameraController, movement::GroundSensor};
 
@@ -56,6 +59,20 @@ pub(super) fn init_player(
   mut meshes: ResMut<Assets<Mesh>>,
   mut materials: ResMut<Assets<StandardMaterial>>,
 ) {
+  let weapon = commands
+    .spawn((
+      Name::new("Weapon"),
+      Shooter::default(),
+      TestGun::default(),
+      PbrBundle {
+        mesh: meshes.add(Cuboid::new(0.2, 0.4, 0.8)),
+        material: materials.add(Color::Srgba(css::DARK_GRAY)),
+        transform: Transform::from_xyz(1.0, -0.4, -1.0),
+        ..default()
+      },
+    ))
+    .id();
+
   let player = commands
     .spawn((
       Name::new("Player"),
@@ -65,6 +82,7 @@ pub(super) fn init_player(
         vertical_speed: 18.0,
         ..default()
       },
+      PlayerInventory::new(weapon),
       Collider::capsule_y(1.0, 0.4),
       PbrBundle {
         mesh: meshes.add(Capsule3d::new(0.4, 2.0)),
@@ -119,20 +137,6 @@ pub(super) fn init_player(
           0.0,
           0.0,
         )),
-        ..default()
-      },
-    ))
-    .id();
-
-  let weapon = commands
-    .spawn((
-      Name::new("Weapon"),
-      Shooter::default(),
-      TestGun::default(),
-      PbrBundle {
-        mesh: meshes.add(Cuboid::new(0.2, 0.4, 0.8)),
-        material: materials.add(Color::Srgba(css::DARK_GRAY)),
-        transform: Transform::from_xyz(1.0, -0.4, -1.0),
         ..default()
       },
     ))

@@ -4,7 +4,23 @@ pub enum InventoryError {
   Overflow,
 }
 
-#[derive(Component, Reflect, Debug)]
+#[derive(Component, Reflect, Debug, Default)]
+pub struct PlayerInventory {
+  pub inventory: Inventory,
+  /// `None`の場合はこのコンポーネントを持っているエンティティを指す
+  pub model_applier: Option<Entity>,
+}
+
+impl PlayerInventory {
+  pub fn new(model_applier: Entity) -> Self {
+    Self {
+      inventory: Default::default(),
+      model_applier: Some(model_applier),
+    }
+  }
+}
+
+#[derive(Reflect, Debug)]
 pub struct Inventory {
   pub items: Vec<Option<Item>>,
   pub current: usize,
