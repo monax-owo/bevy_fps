@@ -20,6 +20,7 @@ pub(super) fn update_2(
   asset_server: Res<AssetServer>,
   q: Query<(Entity, &TestGun), Added<TestGun>>,
 ) {
+  // TODO:_で捨てられているQueryをWithに置き換える
   for (entity, _) in &q {
     let scene = asset_server.load("models/test_gun2.glb#Scene0");
 
@@ -37,7 +38,6 @@ pub(super) fn update_2(
   }
 }
 
-// TODO:Animation Graphってのがいる？わからないので寝る。
 pub(super) fn update_tester(
   mut commands: Commands,
   asset_server: Res<AssetServer>,
