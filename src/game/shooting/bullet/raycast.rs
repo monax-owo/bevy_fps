@@ -17,6 +17,9 @@ pub struct RaycastBulletAssets {
   pub bullet_material: Handle<StandardMaterial>,
 }
 
+#[derive(Resource, Debug)]
+pub struct RaycastBulletGroup(pub Entity);
+
 pub(super) fn init_raycast(
   mut commands: Commands,
   mut meshes: ResMut<Assets<Mesh>>,
@@ -28,6 +31,12 @@ pub(super) fn init_raycast(
     bullet_mesh: mesh,
     bullet_material: material,
   });
+
+  let group = commands
+    .spawn((Name::new("RaycastBulletGroup"), SpatialBundle::default()))
+    .id();
+
+  commands.insert_resource(RaycastBulletGroup(group));
 }
 
 // TODO:ヒットスキャン

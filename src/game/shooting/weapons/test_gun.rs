@@ -1,7 +1,7 @@
 use bevy::prelude::*;
 
 use crate::game::shooting::{
-  bullet::projectile::{ProjectileBullet, ProjectileBulletAssets},
+  bullet::projectile::{ProjectileBullet, ProjectileBulletAssets, ProjectileBulletGroup},
   FireEvent, Shooter,
 };
 
@@ -18,6 +18,7 @@ pub(super) fn update(
   mut commands: Commands,
   mut fire_event_reader: EventReader<FireEvent>,
   time: Res<Time>,
+  group: Res<ProjectileBulletGroup>,
   assets: Res<ProjectileBulletAssets>,
   mut gun: Query<(&Shooter, &mut TestGun, &GlobalTransform)>,
 ) {
@@ -28,19 +29,22 @@ pub(super) fn update(
 
     for _ in fire_event_reader.read() {
       if gun.cool_time <= 0.0 {
-        commands.spawn((
-          PbrBundle {
-            mesh: assets.bullet_mesh.clone(),
-            material: assets.bullet_material.clone(),
-            transform: global_transform.compute_transform(),
-            ..default()
-          },
-          ProjectileBullet {
-            axis: global_transform.forward(),
-            speed: gun.bullet_speed,
-            lifetime: 6.0,
-          },
-        ));
+        // TODO:弾の発射処理はbulletの実装に移し、イベントで発火させる
+        commands.entity(group.0).with_children(|parent| {
+          parent.spawn((
+            PbrBundle {
+              mesh: assets.bullet_mesh.clone(),
+              material: assets.bullet_material.clone(),
+              transform: global_transform.compute_transform(),
+              ..default()
+            },
+            ProjectileBullet {
+              axis: global_transform.forward(),
+              speed: gun.bullet_speed,
+              lifetime: 6.0,
+            },
+          ));
+        });
 
         gun.cool_time = COOL_TIME;
       }

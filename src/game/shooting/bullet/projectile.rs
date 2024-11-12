@@ -17,6 +17,9 @@ pub struct ProjectileBulletAssets {
   pub bullet_material: Handle<StandardMaterial>,
 }
 
+#[derive(Resource, Debug)]
+pub struct ProjectileBulletGroup(pub Entity);
+
 pub(super) fn init_projectile(
   mut commands: Commands,
   mut meshes: ResMut<Assets<Mesh>>,
@@ -28,6 +31,12 @@ pub(super) fn init_projectile(
     bullet_mesh: mesh,
     bullet_material: material,
   });
+
+  let group = commands
+    .spawn((Name::new("ProjectileBulletGroup"), SpatialBundle::default()))
+    .id();
+
+  commands.insert_resource(ProjectileBulletGroup(group));
 }
 
 // TODO:ヒットスキャン
