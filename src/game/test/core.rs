@@ -2,21 +2,39 @@ use std::time::Duration;
 
 use bevy::prelude::*;
 
+use crate::game::shooting::weapons::test_gun::TestGun;
+
 #[derive(Component, Reflect, Debug)]
 pub(super) struct TestTag(pub String);
 
 // 使い終わったら消す
-pub(super) fn init_tester(mut commands: Commands, asset_server: Res<AssetServer>) {
-  let scene = asset_server.load("models/test_gun2.glb#Scene0");
+pub(super) fn init_tester(
+  mut commands: Commands,
+  asset_server: Res<AssetServer>,
+  q: Query<(Entity, &TestGun), Added<TestGun>>,
+) {
+}
 
-  commands.spawn((
-    SceneBundle {
-      scene,
-      transform: Transform::from_scale(Vec3::splat(4.0)),
-      ..default()
-    },
-    AnimationPlayer::default(),
-  ));
+pub(super) fn update_2(
+  mut commands: Commands,
+  asset_server: Res<AssetServer>,
+  q: Query<(Entity, &TestGun), Added<TestGun>>,
+) {
+  for (entity, _) in &q {
+    let scene = asset_server.load("models/test_gun2.glb#Scene0");
+
+    println!("spawn");
+    commands.entity(entity).with_children(|parent| {
+      parent.spawn((
+        SceneBundle {
+          scene,
+          transform: Transform::from_scale(Vec3::splat(4.0)),
+          ..default()
+        },
+        AnimationPlayer::default(),
+      ));
+    });
+  }
 }
 
 // TODO:Animation Graphってのがいる？わからないので寝る。

@@ -23,3 +23,8 @@ pub(super) fn update_shooter(
     }
   }
 }
+
+// TODO:
+// pub(super) fn update_gun_model(last: Local<Item>, mut gun_query: Query<(Entity, &Shooter)>) {
+//   for (entity, shooter) in &gun_query {}
+// }
