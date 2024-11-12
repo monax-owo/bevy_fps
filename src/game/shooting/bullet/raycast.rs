@@ -36,8 +36,12 @@ pub(super) fn update_raycast(
   time: Res<Time>,
   mut bullet_query: Query<(Entity, &mut RaycastBullet, &mut Transform)>,
 ) {
+  for (entity, mut bullet, mut transform) in bullet_query.iter_mut() {
+    // TODO:raycast
+    todo!();
+  }
+
   // TODO:↓これはプロジェクタイルのやつ
-  for (entity, mut bullet, mut transform) in bullet_query.iter_mut() {}
   //   transform.translation += bullet.axis * bullet.speed * time.delta_seconds();
   //   bullet.lifetime -= time.delta_seconds();
 
