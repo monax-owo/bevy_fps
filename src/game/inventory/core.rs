@@ -7,6 +7,7 @@ pub enum InventoryError {
 #[derive(Component, Reflect, Debug, Default)]
 pub struct PlayerInventory {
   pub inventory: Inventory,
+  /// current_itemのメッシュを表示させるエンティティ
   /// `None`の場合はこのコンポーネントを持っているエンティティを指す
   pub model_applier: Option<Entity>,
 }
@@ -23,7 +24,7 @@ impl PlayerInventory {
 #[derive(Reflect, Debug)]
 pub struct Inventory {
   pub items: Vec<Option<Item>>,
-  pub current: usize,
+  pub current_item: usize,
   max_count: usize,
 }
 
@@ -32,7 +33,7 @@ impl Inventory {
   fn new(items: Vec<Item>, max_count: usize) -> Self {
     Self {
       items: items.into_iter().map(|v| Some(v)).collect(),
-      current: Default::default(),
+      current_item: Default::default(),
       max_count,
     }
   }
@@ -73,7 +74,7 @@ impl Default for Inventory {
   fn default() -> Self {
     Self {
       items: Default::default(),
-      current: Default::default(),
+      current_item: Default::default(),
       max_count: 1,
     }
   }
