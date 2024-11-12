@@ -1,4 +1,5 @@
 pub(super) mod plugin;
-pub mod test_gun;
+pub(super) mod test_gun;
 
 pub use plugin::*;
+pub use test_gun::TestGun;

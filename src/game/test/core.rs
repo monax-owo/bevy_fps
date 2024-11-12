@@ -2,7 +2,7 @@ use std::time::Duration;
 
 use bevy::prelude::*;
 
-use crate::game::shooting::weapons::test_gun::TestGun;
+use crate::game::shooting::weapons::TestGun;
 
 #[derive(Component, Reflect, Debug)]
 pub(super) struct TestTag(pub String);

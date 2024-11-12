@@ -9,7 +9,7 @@ use inventory::Inventory;
 
 use crate::game::{
   inventory::PlayerInventory,
-  shooting::{weapons::test_gun::TestGun, Shooter},
+  shooting::{weapons::TestGun, Shooter},
 };
 
 use super::{camera_controller::CameraController, movement::GroundSensor};
