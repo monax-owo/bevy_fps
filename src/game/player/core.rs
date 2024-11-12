@@ -68,7 +68,10 @@ pub(super) fn init_player(
         ..default()
       },
       Shooter::default(),
-      TestGun::default(),
+      TestGun {
+        bullet_speed: 140.0,
+        ..default()
+      },
     ))
     .id();
 

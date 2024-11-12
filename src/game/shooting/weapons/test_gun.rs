@@ -9,6 +9,7 @@ use crate::game::shooting::{
 pub struct TestGun {
   /// sec
   pub cool_time: f32,
+  pub bullet_speed: f32,
 }
 
 const COOL_TIME: f32 = 0.4;
@@ -34,11 +35,9 @@ pub(super) fn update(
             transform: global_transform.compute_transform(),
             ..default()
           },
-          // TODO:TestGunに発射する弾の値を持たせる
-          // ->発射速度上昇等やりやすくなる
           ProjectileBullet {
             axis: global_transform.forward(),
-            speed: 100.0,
+            speed: gun.bullet_speed,
             lifetime: 6.0,
           },
         ));
