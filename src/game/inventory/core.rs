@@ -7,7 +7,7 @@ pub enum InventoryError {
 #[derive(Component, Reflect, Debug, Default)]
 pub struct PlayerInventory {
   pub inventory: Inventory,
-  /// current_itemのメッシュを表示させるエンティティ
+  /// current_itemのモデルを表示させるエンティティ
   /// `None`の場合はこのコンポーネントを持っているエンティティを指す
   pub model_applier: Option<Entity>,
 }
@@ -19,6 +19,17 @@ impl PlayerInventory {
       model_applier: Some(model_applier),
     }
   }
+}
+
+pub(super) fn update_model() {
+  todo!();
+  // TODO: current_itemのモデルを表示させる
+  //   PbrBundle {
+  //   mesh: meshes.add(Cuboid::new(0.2, 0.4, 0.8)),
+  //   material: materials.add(Color::Srgba(css::DARK_GRAY)),
+  //   transform: Transform::from_xyz(1.0, -0.4, -1.0),
+  //   ..default()
+  // },
 }
 
 #[derive(Reflect, Debug)]

@@ -60,17 +60,7 @@ pub(super) fn init_player(
   mut materials: ResMut<Assets<StandardMaterial>>,
 ) {
   let weapon = commands
-    .spawn((
-      Name::new("Weapon"),
-      Shooter::default(),
-      TestGun::default(),
-      PbrBundle {
-        mesh: meshes.add(Cuboid::new(0.2, 0.4, 0.8)),
-        material: materials.add(Color::Srgba(css::DARK_GRAY)),
-        transform: Transform::from_xyz(1.0, -0.4, -1.0),
-        ..default()
-      },
-    ))
+    .spawn((Name::new("Weapon"), Shooter::default(), TestGun::default()))
     .id();
 
   let player = commands
