@@ -11,6 +11,7 @@ pub struct Inventory {
   max_count: usize,
 }
 
+// TODO
 impl Inventory {
   fn new(items: Vec<Item>, max_count: usize) -> Self {
     Self {
@@ -33,6 +34,7 @@ impl Inventory {
 
   //
   fn equip(&mut self, item: Item) -> Result<Item, InventoryError> {
+    todo!();
     Ok(item)
   }
 
@@ -40,9 +42,12 @@ impl Inventory {
     self.max_count
   }
 
+  /// max_countとitemsを指定の長さにし、
+  /// 切り詰められた`Option<Item>`を返す
   fn set_max_count(&mut self, value: usize) {
     if self.max_count > value {
       // Err?
+      todo!();
     }
     self.max_count = value;
   }
@@ -59,6 +64,4 @@ impl Default for Inventory {
 }
 
 #[derive(Reflect, Debug)]
-pub struct Item {
-  entity: Entity,
-}
+pub struct Item(Entity);
