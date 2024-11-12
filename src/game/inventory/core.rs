@@ -33,8 +33,12 @@ pub(super) fn update_model() {
 
 #[derive(Reflect, Debug)]
 pub struct Inventory {
+  /// インベントリが保持しているアイテム
+  /// Noneは空のスロットを指す
   pub items: Vec<Option<Item>>,
+  /// itemsのindex
   pub current_item: usize,
+  /// itemsの最大の長さ
   max_count: usize,
 }
 
