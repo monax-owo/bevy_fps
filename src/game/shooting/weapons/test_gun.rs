@@ -1,7 +1,7 @@
 use bevy::prelude::*;
 
 use crate::game::shooting::{
-  bullet::projectile::{ProjectileBullet, ProjectileBulletAssets, ProjectileBulletGroup},
+  bullet::{ProjectileBullet, ProjectileBulletAssets, ProjectileBulletGroup},
   FireEvent, Shooter,
 };
 
