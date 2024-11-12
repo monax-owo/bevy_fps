@@ -7,7 +7,7 @@ use bevy::{
 use bevy_rapier3d::prelude::*;
 
 use crate::game::{
-  inventory::core::{Inventory, PlayerInventory},
+  inventory::core::PlayerInventory,
   shooting::{weapons::test_gun::TestGun, Shooter},
 };
 
@@ -60,7 +60,15 @@ pub(super) fn init_player(
   mut materials: ResMut<Assets<StandardMaterial>>,
 ) {
   let weapon = commands
-    .spawn((Name::new("Weapon"), Shooter::default(), TestGun::default()))
+    .spawn((
+      Name::new("Weapon"),
+      TransformBundle {
+        local: Transform::from_xyz(1.0, -0.8, -1.0),
+        ..default()
+      },
+      Shooter::default(),
+      TestGun::default(),
+    ))
     .id();
 
   let player = commands

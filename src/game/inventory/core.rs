@@ -27,7 +27,6 @@ pub(super) fn update_model() {
   //   PbrBundle {
   //   mesh: meshes.add(Cuboid::new(0.2, 0.4, 0.8)),
   //   material: materials.add(Color::Srgba(css::DARK_GRAY)),
-  //   transform: Transform::from_xyz(1.0, -0.4, -1.0),
   //   ..default()
   // },
 }
