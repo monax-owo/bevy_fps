@@ -9,6 +9,13 @@
       "args": ["-x", "run -- --gui"],
       "problemMatcher": ["$rustc"],
       "label": "rust: hot reload with gui"
+    },
+    {
+      "type": "cargo",
+      "command": "sweep",
+      "args": ["--time", "1"],
+      "problemMatcher": ["$rustc"],
+      "label": "rust: sweep (1 DAY)"
     }
   ]
 }
