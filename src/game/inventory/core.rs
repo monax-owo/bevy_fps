@@ -13,9 +13,9 @@ pub struct PlayerInventory {
 }
 
 impl PlayerInventory {
-  pub fn new(model_applier: Entity) -> Self {
+  pub fn new(inventory: Inventory, model_applier: Entity) -> Self {
     Self {
-      inventory: Default::default(),
+      inventory,
       model_applier: Some(model_applier),
     }
   }
@@ -42,6 +42,16 @@ pub struct Inventory {
   max_count: usize,
 }
 
+impl Default for Inventory {
+  fn default() -> Self {
+    Self {
+      items: Default::default(),
+      current_item: Default::default(),
+      max_count: 1,
+    }
+  }
+}
+
 // TODO
 impl Inventory {
   pub fn new(items: Vec<Item>, max_count: usize) -> Self {
@@ -55,7 +65,7 @@ impl Inventory {
   /// itemをインベントリに追加する
   /// # Errors
   /// itemsの長さがmax_count以上の場合に`InventoryError::Overflow`を返す
-  pub fn add(&mut self, item: Item) -> Result<(), InventoryError> {
+  pub fn push(&mut self, item: Item) -> Result<(), InventoryError> {
     if self.items.len() >= self.max_count {
       return Err(InventoryError::Overflow);
     }
@@ -81,16 +91,6 @@ impl Inventory {
       todo!();
     }
     self.max_count = value;
-  }
-}
-
-impl Default for Inventory {
-  fn default() -> Self {
-    Self {
-      items: Default::default(),
-      current_item: Default::default(),
-      max_count: 1,
-    }
   }
 }
 
