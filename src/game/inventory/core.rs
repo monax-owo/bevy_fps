@@ -1,3 +1,5 @@
+use std::ops::{Deref, DerefMut};
+
 use bevy::prelude::*;
 use inventory::Inventory;
 
@@ -15,6 +17,20 @@ impl PlayerInventory {
       inventory,
       model_applier: Some(model_applier),
     }
+  }
+}
+
+impl Deref for PlayerInventory {
+  type Target = Inventory;
+
+  fn deref(&self) -> &Self::Target {
+    &self.inventory
+  }
+}
+
+impl DerefMut for PlayerInventory {
+  fn deref_mut(&mut self) -> &mut Self::Target {
+    &mut self.inventory
   }
 }
 
