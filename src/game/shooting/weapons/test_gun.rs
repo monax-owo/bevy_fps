@@ -39,7 +39,6 @@ pub(super) fn update(
               ..default()
             },
             ProjectileBullet {
-              axis: global_transform.forward(),
               speed: gun.bullet_speed,
               lifetime: 6.0,
             },
