@@ -4,17 +4,17 @@ pub enum InventoryError {
 }
 
 #[derive(Reflect, Debug)]
-pub struct Inventory {
+pub struct Inventory<T> {
   /// インベントリが保持しているアイテム
   /// Noneは空のスロットを指す
-  pub items: Vec<Option<Item>>,
+  pub items: Vec<Option<T>>,
   /// itemsのindex
   pub current_item: usize,
   /// itemsの最大の長さ
   max_count: usize,
 }
 
-impl Default for Inventory {
+impl<T> Default for Inventory<T> {
   fn default() -> Self {
     Self {
       items: Default::default(),
@@ -25,8 +25,8 @@ impl Default for Inventory {
 }
 
 // TODO
-impl Inventory {
-  pub fn new(items: Vec<Item>, max_count: usize) -> Self {
+impl<T> Inventory<T> {
+  pub fn new(items: Vec<T>, max_count: usize) -> Self {
     Self {
       items: items.into_iter().map(Some).collect(),
       current_item: Default::default(),
@@ -37,7 +37,7 @@ impl Inventory {
   /// itemをインベントリに追加する
   /// # Errors
   /// itemsの長さがmax_count以上の場合に`InventoryError::Overflow`を返す
-  pub fn push(&mut self, item: Item) -> Result<(), InventoryError> {
+  pub fn push(&mut self, item: T) -> Result<(), InventoryError> {
     if self.items.len() >= self.max_count {
       return Err(InventoryError::Overflow);
     }
@@ -46,7 +46,7 @@ impl Inventory {
   }
 
   //
-  pub fn equip(&mut self, _item: Item) -> Result<Item, InventoryError> {
+  pub fn equip(&mut self, _item: T) -> Result<T, InventoryError> {
     todo!();
     // Ok(item)
   }
