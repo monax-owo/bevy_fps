@@ -9,6 +9,28 @@ pub struct ProjectileBullet {
   pub lifetime: f32,
 }
 
+#[derive(Bundle)]
+pub struct ProjectileBulletBundle {
+  #[bundle()]
+  pbr_bundle: PbrBundle,
+  projectile_bullet: ProjectileBullet,
+}
+
+// TODO:バンドル化+弾の向き修正(x軸90deg?)
+// impl ProjectileBulletBundle {
+//   fn new(transform: Transform, mesh: Handle<Mesh>, material: Handle<StandardMaterial>) -> Self {
+//     Self {
+//       pbr_bundle: PbrBundle {
+//         mesh,
+//         material,
+//         transform,
+//         ..default()
+//       },
+//       projectile_bullet: ProjectileBullet {},
+//     }
+//   }
+// }
+
 // TODO:公開範囲を狭める
 #[derive(Resource, Debug, Default)]
 pub struct ProjectileBulletAssets {
@@ -24,7 +46,7 @@ pub(super) fn init_projectile(
   mut meshes: ResMut<Assets<Mesh>>,
   mut materials: ResMut<Assets<StandardMaterial>>,
 ) {
-  let mesh = meshes.add(Sphere::new(0.4));
+  let mesh = meshes.add(Capsule3d::new(0.2, 0.6));
   let material = materials.add(Color::Srgba(css::BROWN));
   commands.insert_resource(ProjectileBulletAssets {
     bullet_mesh: mesh,
