@@ -19,7 +19,7 @@ impl PlayerInventory {
 }
 
 pub(super) fn update_model() {
-  todo!();
+  // todo!();
   // TODO: current_itemのモデルを表示させる
   //   PbrBundle {
   //   mesh: meshes.add(Cuboid::new(0.2, 0.4, 0.8)),

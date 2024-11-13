@@ -5,7 +5,7 @@ use bevy::{
   window::{CursorGrabMode, PrimaryWindow},
 };
 use bevy_rapier3d::prelude::*;
-use inventory::Inventory;
+use inventory::{Inventory, Item};
 
 use crate::game::{
   inventory::PlayerInventory,
@@ -84,7 +84,7 @@ pub(super) fn init_player(
         vertical_speed: 18.0,
         ..default()
       },
-      PlayerInventory::new(Inventory::new(default(), 2), weapon),
+      PlayerInventory::new(Inventory::new(vec![Item(weapon)], 2), weapon),
       Collider::capsule_y(1.0, 0.4),
       PbrBundle {
         mesh: meshes.add(Capsule3d::new(0.4, 2.0)),

@@ -67,4 +67,4 @@ impl Inventory {
 }
 
 #[derive(Reflect, Debug)]
-pub struct Item(Entity);
+pub struct Item(pub Entity);
