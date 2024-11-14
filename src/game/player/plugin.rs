@@ -7,7 +7,7 @@ use super::{
   init_player,
   input::{update_input, PlayerInput},
   movement::{update_grounded, update_movement, GroundSensor},
-  on_enter, on_exit, update_grounded_color, Body, Player,
+  update_grounded_color, Body, Player,
 };
 
 pub struct PlayerPlugin;
@@ -15,8 +15,6 @@ pub struct PlayerPlugin;
 impl Plugin for PlayerPlugin {
   fn build(&self, app: &mut App) {
     app
-      .add_systems(OnEnter(GameState::InGame), on_enter)
-      .add_systems(OnExit(GameState::InGame), on_exit)
       .add_systems(Startup, init_player)
       .add_systems(
         Update,
