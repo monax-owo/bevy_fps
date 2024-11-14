@@ -7,7 +7,7 @@ use bevy::prelude::*;
 pub struct PlayerInventory {
   /// current_itemのモデルを表示させるエンティティ
   /// `None`の場合はこのコンポーネントを持っているエンティティを指す
-  pub model_applier: Option<Entity>,
+  pub item_user: Option<Entity>,
   #[reflect(ignore)]
   pub current_item_type: Box<dyn Any + Send + Sync + 'static>,
 }
@@ -15,7 +15,7 @@ pub struct PlayerInventory {
 impl Default for PlayerInventory {
   fn default() -> Self {
     Self {
-      model_applier: Default::default(),
+      item_user: Default::default(),
       current_item_type: Box::new(()),
     }
   }
@@ -24,7 +24,7 @@ impl Default for PlayerInventory {
 impl PlayerInventory {
   pub fn new(model_applier: Entity) -> Self {
     Self {
-      model_applier: Some(model_applier),
+      item_user: Some(model_applier),
       current_item_type: Box::new(()),
     }
   }
