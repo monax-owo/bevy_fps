@@ -1,9 +1,4 @@
-use bevy::{
-  color::palettes::css,
-  core_pipeline::tonemapping::DebandDither,
-  prelude::*,
-  window::{CursorGrabMode, PrimaryWindow},
-};
+use bevy::{color::palettes::css, core_pipeline::tonemapping::DebandDither, prelude::*};
 use bevy_rapier3d::prelude::*;
 use inventory::{Inventory, Item};
 
