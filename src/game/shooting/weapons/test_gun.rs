@@ -2,7 +2,7 @@ use bevy::prelude::*;
 
 use crate::game::shooting::{
   bullet::{ProjectileBulletAssets, ProjectileBulletBundle, ProjectileBulletGroup},
-  FireEvent, Shooter,
+  FireEvent,
 };
 
 #[derive(Component, Reflect, Debug)]
@@ -23,9 +23,9 @@ pub(super) fn update(
   time: Res<Time>,
   group: Res<ProjectileBulletGroup>,
   assets: Res<ProjectileBulletAssets>,
-  mut gun: Query<(&Shooter, &mut TestGun, &GlobalTransform)>,
+  mut gun: Query<(&mut TestGun, &GlobalTransform)>,
 ) {
-  for (_, mut gun, global_transform) in gun.iter_mut() {
+  for (mut gun, global_transform) in gun.iter_mut() {
     if gun.cool_time > 0.0 {
       gun.cool_time -= time.delta_seconds();
     }

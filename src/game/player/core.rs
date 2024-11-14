@@ -57,7 +57,7 @@ pub(super) fn init_player(
         vertical_speed: 18.0,
         ..default()
       },
-      Inventory::new(vec![Item(weapon), Item(weapon)], 2),
+      Inventory::new(vec![weapon, weapon].into_iter().map(Item).collect(), 2),
       PlayerInventory::new(weapon),
       Collider::capsule_y(1.0, 0.4),
       PbrBundle {

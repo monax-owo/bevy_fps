@@ -15,7 +15,7 @@ pub(super) fn update_shooter(
   input: Res<PlayerInput>,
   shooter_query: Query<&Shooter>,
 ) {
-  for _shooter in shooter_query.iter() {
+  for _ in shooter_query.iter() {
     if input.fire {
       // TODO:EventじゃなくてPlayerInputで良さそう？
       // でも状況によって銃を撃てないようにできたほうがいい…？
