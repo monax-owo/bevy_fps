@@ -30,6 +30,9 @@ impl PlayerInventory {
   }
 }
 
+// TODO:子要素が増えたらitemsに追加する
+pub(super) fn update_children() {}
+
 pub(super) fn update_model() {
   // TODO: current_itemのモデルを表示させる
   //   PbrBundle {
