@@ -1,7 +1,9 @@
 use bevy::prelude::*;
 
 use crate::game::shooting::{
-  bullet::{ProjectileBullet, ProjectileBulletAssets, ProjectileBulletGroup},
+  bullet::{
+    ProjectileBullet, ProjectileBulletAssets, ProjectileBulletBundle, ProjectileBulletGroup,
+  },
   FireEvent, Shooter,
 };
 
@@ -31,17 +33,12 @@ pub(super) fn update(
       if gun.cool_time <= 0.0 {
         // TODO:弾の発射処理はbulletの実装に移し、イベントで発火させる
         commands.entity(group.0).with_children(|parent| {
-          parent.spawn((
-            PbrBundle {
-              mesh: assets.bullet_mesh.clone(),
-              material: assets.bullet_material.clone(),
-              transform: global_transform.compute_transform(),
-              ..default()
-            },
-            ProjectileBullet {
-              speed: gun.bullet_speed,
-              lifetime: 6.0,
-            },
+          parent.spawn(ProjectileBulletBundle::new(
+            assets.bullet_mesh.clone(),
+            assets.bullet_material.clone(),
+            global_transform.compute_transform(),
+            gun.bullet_speed,
+            6.0,
           ));
         });
 

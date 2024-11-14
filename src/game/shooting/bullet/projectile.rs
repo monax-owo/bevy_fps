@@ -17,19 +17,25 @@ pub struct ProjectileBulletBundle {
 }
 
 // TODO:バンドル化+弾の向き修正(x軸90deg?)
-// impl ProjectileBulletBundle {
-//   fn new(transform: Transform, mesh: Handle<Mesh>, material: Handle<StandardMaterial>) -> Self {
-//     Self {
-//       pbr_bundle: PbrBundle {
-//         mesh,
-//         material,
-//         transform,
-//         ..default()
-//       },
-//       projectile_bullet: ProjectileBullet {},
-//     }
-//   }
-// }
+impl ProjectileBulletBundle {
+  pub fn new(
+    mesh: Handle<Mesh>,
+    material: Handle<StandardMaterial>,
+    transform: Transform,
+    speed: f32,
+    lifetime: f32,
+  ) -> Self {
+    Self {
+      pbr_bundle: PbrBundle {
+        mesh,
+        material,
+        transform,
+        ..default()
+      },
+      projectile_bullet: ProjectileBullet { speed, lifetime },
+    }
+  }
+}
 
 // TODO:公開範囲を狭める
 #[derive(Resource, Debug, Default)]
