@@ -1,5 +1,3 @@
-use std::f32::consts::FRAC_PI_2;
-
 use bevy::{color::palettes::css, prelude::*};
 
 // TODO:Bundle化して公開範囲を狭める
@@ -54,7 +52,7 @@ pub(super) fn init_projectile(
   mut meshes: ResMut<Assets<Mesh>>,
   mut materials: ResMut<Assets<StandardMaterial>>,
 ) {
-  let mesh = meshes.add(Capsule3d::new(0.2, 0.6));
+  let mesh = meshes.add(Sphere::new(0.4));
   let material = materials.add(Color::Srgba(css::BROWN));
   commands.insert_resource(ProjectileBulletAssets {
     bullet_mesh: mesh,
@@ -76,7 +74,7 @@ pub(super) fn update_projectile(
 ) {
   for (entity, mut bullet, mut transform) in bullet_query.iter_mut() {
     if bullet.lifetime <= 0.0 {
-      commands.entity(entity).despawn();
+      commands.entity(entity).despawn_recursive();
     } else {
       let translation = -transform.local_z() * bullet.speed * time.delta_seconds();
       transform.translation += translation;
