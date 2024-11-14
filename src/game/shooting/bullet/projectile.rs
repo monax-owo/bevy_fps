@@ -1,6 +1,5 @@
 use bevy::{color::palettes::css, prelude::*};
 
-// TODO:Bundle化して公開範囲を狭める
 #[derive(Component, Reflect, Debug)]
 pub struct ProjectileBullet {
   /// m/sec
@@ -16,7 +15,6 @@ pub struct ProjectileBulletBundle {
   projectile_bullet: ProjectileBullet,
 }
 
-// TODO:バンドル化+弾の向き修正(x軸90deg?)
 impl ProjectileBulletBundle {
   pub fn new(
     mesh: Handle<Mesh>,
@@ -37,7 +35,6 @@ impl ProjectileBulletBundle {
   }
 }
 
-// TODO:公開範囲を狭める
 #[derive(Resource, Debug, Default)]
 pub struct ProjectileBulletAssets {
   pub bullet_mesh: Handle<Mesh>,
