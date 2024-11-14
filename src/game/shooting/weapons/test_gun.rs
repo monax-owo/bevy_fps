@@ -13,7 +13,9 @@ pub struct TestGun {
   pub bullet_lifetime: f32,
 }
 
-const COOL_TIME: f32 = 0.4;
+impl TestGun {
+  const COOL_TIME: f32 = 0.4;
+}
 
 pub(super) fn update(
   mut commands: Commands,
@@ -41,7 +43,7 @@ pub(super) fn update(
           ));
         });
 
-        gun.cool_time = COOL_TIME;
+        gun.cool_time = TestGun::COOL_TIME;
       }
     }
   }
