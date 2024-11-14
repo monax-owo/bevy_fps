@@ -24,16 +24,17 @@ impl<T> Default for Inventory<T> {
   }
 }
 
-// TODO
-impl<T> Inventory<T> {
-  pub fn new(items: Vec<T>, max_count: usize) -> Self {
+impl Inventory<Item> {
+  pub fn new(max_count: usize) -> Self {
     Self {
-      items: items.into_iter().map(Some).collect(),
-      current_item: Default::default(),
       max_count,
+      ..default()
     }
   }
+}
 
+// TODO
+impl<T> Inventory<T> {
   /// itemをインベントリに追加する
   /// # Errors
   /// itemsの長さがmax_count以上の場合に`InventoryError::Overflow`を返す

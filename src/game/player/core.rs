@@ -1,6 +1,6 @@
 use bevy::{color::palettes::css, core_pipeline::tonemapping::DebandDither, prelude::*};
 use bevy_rapier3d::prelude::*;
-use inventory::{Inventory, Item};
+use inventory::Inventory;
 
 use crate::game::{
   inventory::PlayerInventory,
@@ -63,10 +63,7 @@ pub(super) fn init_player(
         vertical_speed: 18.0,
         ..default()
       },
-      Inventory::new(
-        vec![item_user, item_user].into_iter().map(Item).collect(),
-        2,
-      ),
+      Inventory::new(2),
       PlayerInventory::new(item_user),
       Collider::capsule_y(1.0, 0.4),
       PbrBundle {
