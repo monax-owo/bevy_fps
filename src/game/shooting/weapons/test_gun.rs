@@ -1,17 +1,16 @@
 use bevy::prelude::*;
 
 use crate::game::shooting::{
-  bullet::{
-    ProjectileBullet, ProjectileBulletAssets, ProjectileBulletBundle, ProjectileBulletGroup,
-  },
+  bullet::{ProjectileBulletAssets, ProjectileBulletBundle, ProjectileBulletGroup},
   FireEvent, Shooter,
 };
 
-#[derive(Component, Reflect, Debug, Default)]
+#[derive(Component, Reflect, Debug)]
 pub struct TestGun {
   /// sec
   pub cool_time: f32,
   pub bullet_speed: f32,
+  pub bullet_lifetime: f32,
 }
 
 const COOL_TIME: f32 = 0.4;
@@ -38,7 +37,7 @@ pub(super) fn update(
             assets.bullet_material.clone(),
             global_transform.compute_transform(),
             gun.bullet_speed,
-            6.0,
+            gun.bullet_lifetime,
           ));
         });
 

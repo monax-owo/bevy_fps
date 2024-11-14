@@ -69,8 +69,9 @@ pub(super) fn init_player(
       },
       Shooter::default(),
       TestGun {
+        cool_time: 1.0,
         bullet_speed: 140.0,
-        ..default()
+        bullet_lifetime: 10.0,
       },
     ))
     .id();
