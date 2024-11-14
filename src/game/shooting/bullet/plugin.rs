@@ -10,8 +10,8 @@ pub struct BulletPlugin;
 impl Plugin for BulletPlugin {
   fn build(&self, app: &mut App) {
     app
-      .add_systems(Startup, (init_projectile, init_raycast))
-      .add_systems(Update, (update_projectile, update_raycast))
+      .add_systems(Startup, (init_raycast, init_projectile))
+      .add_systems(Update, (update_raycast, update_projectile))
       .init_resource::<ProjectileBulletAssets>()
       .init_resource::<RaycastBulletAssets>()
       .register_type::<ProjectileBullet>()

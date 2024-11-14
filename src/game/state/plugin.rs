@@ -9,7 +9,7 @@ impl Plugin for StatePlugin {
     app
       .add_systems(OnEnter(GameState::InGame), on_enter)
       .add_systems(OnExit(GameState::InGame), on_exit)
-      .add_systems(Update, (update_menu,))
+      .add_systems(Update, update_menu)
       .init_state::<GameState>();
   }
 }

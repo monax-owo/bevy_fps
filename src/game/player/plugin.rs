@@ -22,7 +22,7 @@ impl Plugin for PlayerPlugin {
           (
             update_movement,
             update_grounded_color,
-            (update_grounded).before(update_movement),
+            update_grounded.before(update_movement),
           ),
           (
             update_camera_controller,

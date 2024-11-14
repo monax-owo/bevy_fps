@@ -11,8 +11,8 @@ pub struct TestPlugin;
 impl Plugin for TestPlugin {
   fn build(&self, app: &mut App) {
     app
-      .add_systems(Startup, (init_world, init_tester))
-      .add_systems(Update, (generate_collider, update_tester, update_2))
+      .add_systems(Startup, (init_tester, init_world))
+      .add_systems(Update, (update_2, update_tester, generate_collider))
       .register_type::<TestTag>();
   }
 }
