@@ -28,7 +28,7 @@ impl ProjectileBulletBundle {
         mesh,
         material,
         transform,
-        ..default()
+        ..Default::default()
       },
       projectile_bullet: ProjectileBullet { speed, lifetime },
     }

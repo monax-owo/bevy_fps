@@ -25,7 +25,7 @@ impl PlayerInventory {
   pub fn new(item_user: Entity) -> Self {
     Self {
       item_user: Some(item_user),
-      current_item_type: Box::new(()),
+      ..Default::default()
     }
   }
 }

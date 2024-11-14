@@ -28,7 +28,7 @@ impl Inventory<Item> {
   pub fn new(max_count: usize) -> Self {
     Self {
       max_count,
-      ..default()
+      ..Default::default()
     }
   }
 }

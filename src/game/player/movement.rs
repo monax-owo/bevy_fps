@@ -97,22 +97,6 @@ pub(super) fn update_grounded(
   // ray castでも良さそう？->ray castにした
   // todo:おかしかったらshape castに戻す
   for (mut ground_sensor, transform) in ground_sensor_query.iter_mut() {
-    // ground_sensor.grounded = rapier_context
-    //   .cast_shape(
-    //     transform
-    //       .translation
-    //       .with_y(transform.translation.y - 1.4 + HALF_HEIGHT),
-    //     Quat::default(),
-    //     -Vec3::Y,
-    //     &Collider::cylinder(HALF_HEIGHT, RADIUS),
-    //     ShapeCastOptions {
-    //       max_time_of_impact: 0.06,
-    //       ..default()
-    //     },
-    //     QueryFilter::exclude_kinematic(),
-    //   )
-    //   .is_some();
-
     ground_sensor.grounded = rapier_context
       .cast_ray(
         transform.translation.with_y(transform.translation.y - 1.4),
