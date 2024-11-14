@@ -2,7 +2,7 @@ use std::time::Duration;
 
 use bevy::prelude::*;
 
-use crate::game::shooting::weapons::TestGun;
+use crate::game::shooting::weapons::ExampleGun;
 
 #[derive(Component, Reflect, Debug)]
 pub(super) struct TestTag(pub String);
@@ -13,7 +13,7 @@ pub(super) fn init_tester() {}
 pub(super) fn update_2(
   mut commands: Commands,
   asset_server: Res<AssetServer>,
-  q: Query<(Entity, &TestGun), Added<TestGun>>,
+  q: Query<(Entity, &ExampleGun), Added<ExampleGun>>,
 ) {
   // TODO:_で捨てられているQueryをWithに置き換える
   for (entity, _) in &q {

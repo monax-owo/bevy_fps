@@ -6,14 +6,14 @@ use crate::game::shooting::{
 };
 
 #[derive(Component, Reflect, Debug)]
-pub struct TestGun {
+pub struct ExampleGun {
   /// sec
   pub cool_time: f32,
   pub bullet_speed: f32,
   pub bullet_lifetime: f32,
 }
 
-impl TestGun {
+impl ExampleGun {
   const COOL_TIME: f32 = 0.4;
 }
 
@@ -23,7 +23,7 @@ pub(super) fn update(
   time: Res<Time>,
   group: Res<ProjectileBulletGroup>,
   assets: Res<ProjectileBulletAssets>,
-  mut gun: Query<(&mut TestGun, &GlobalTransform)>,
+  mut gun: Query<(&mut ExampleGun, &GlobalTransform)>,
 ) {
   for (mut gun, global_transform) in gun.iter_mut() {
     if gun.cool_time > 0.0 {
@@ -43,7 +43,7 @@ pub(super) fn update(
           ));
         });
 
-        gun.cool_time = TestGun::COOL_TIME;
+        gun.cool_time = ExampleGun::COOL_TIME;
       }
     }
   }

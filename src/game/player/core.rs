@@ -4,7 +4,7 @@ use inventory::{Inventory, Item};
 
 use crate::game::{
   inventory::PlayerInventory,
-  shooting::{weapons::TestGun, Shooter},
+  shooting::{weapons::ExampleGun, Shooter},
 };
 
 use super::{camera_controller::CameraController, movement::GroundSensor};
@@ -45,7 +45,7 @@ pub(super) fn init_player(
       parent.spawn((
         Name::new("TestGun"),
         SpatialBundle::default(),
-        TestGun {
+        ExampleGun {
           cool_time: 1.0,
           bullet_speed: 140.0,
           bullet_lifetime: 10.0,
