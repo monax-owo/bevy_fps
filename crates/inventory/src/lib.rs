@@ -3,7 +3,7 @@ pub enum InventoryError {
   Overflow,
 }
 
-#[derive(Reflect, Debug)]
+#[derive(Component, Reflect, Debug)]
 pub struct Inventory<T> {
   /// インベントリが保持しているアイテム
   /// Noneは空のスロットを指す
