@@ -1,16 +1,31 @@
+use std::any::Any;
+
 use bevy::prelude::*;
 
-#[derive(Component, Reflect, Debug, Default)]
+#[derive(Component, Reflect)]
+#[reflect(Default)]
 pub struct PlayerInventory {
   /// current_itemのモデルを表示させるエンティティ
   /// `None`の場合はこのコンポーネントを持っているエンティティを指す
   pub model_applier: Option<Entity>,
+  #[reflect(ignore)]
+  pub current_item_type: Box<dyn Any + Send + Sync + 'static>,
+}
+
+impl Default for PlayerInventory {
+  fn default() -> Self {
+    Self {
+      model_applier: Default::default(),
+      current_item_type: Box::new(()),
+    }
+  }
 }
 
 impl PlayerInventory {
   pub fn new(model_applier: Entity) -> Self {
     Self {
       model_applier: Some(model_applier),
+      current_item_type: Box::new(()),
     }
   }
 }
