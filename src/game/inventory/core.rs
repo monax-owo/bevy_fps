@@ -22,16 +22,15 @@ impl Default for PlayerInventory {
 }
 
 impl PlayerInventory {
-  pub fn new(model_applier: Entity) -> Self {
+  pub fn new(item_user: Entity) -> Self {
     Self {
-      item_user: Some(model_applier),
+      item_user: Some(item_user),
       current_item_type: Box::new(()),
     }
   }
 }
 
 pub(super) fn update_model() {
-  // todo!();
   // TODO: current_itemのモデルを表示させる
   //   PbrBundle {
   //   mesh: meshes.add(Cuboid::new(0.2, 0.4, 0.8)),
