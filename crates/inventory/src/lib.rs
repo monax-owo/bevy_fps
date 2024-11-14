@@ -4,7 +4,7 @@ pub enum InventoryError {
 }
 
 #[derive(Component, Reflect, Debug)]
-pub struct Inventory<T> {
+pub struct Inventory<T = Item> {
   /// インベントリが保持しているアイテム
   /// Noneは空のスロットを指す
   pub items: Vec<Option<T>>,

@@ -1,7 +1,4 @@
 use bevy::prelude::*;
-use inventory::{Inventory, Item};
-
-pub type ItemInventory = Inventory<Item>;
 
 #[derive(Component, Reflect, Debug, Default)]
 pub struct PlayerInventory {
