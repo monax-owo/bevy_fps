@@ -75,12 +75,12 @@ pub(super) fn update_projectile(
   mut bullet_query: Query<(Entity, &mut ProjectileBullet, &mut Transform)>,
 ) {
   for (entity, mut bullet, mut transform) in bullet_query.iter_mut() {
-    let translation = -transform.local_z() * bullet.speed * time.delta_seconds();
-    transform.translation += translation;
-    bullet.lifetime -= time.delta_seconds();
-
     if bullet.lifetime <= 0.0 {
       commands.entity(entity).despawn();
+    } else {
+      let translation = -transform.local_z() * bullet.speed * time.delta_seconds();
+      transform.translation += translation;
+      bullet.lifetime -= time.delta_seconds();
     }
   }
 }
