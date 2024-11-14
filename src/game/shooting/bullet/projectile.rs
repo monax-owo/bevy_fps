@@ -1,3 +1,5 @@
+use std::f32::consts::FRAC_PI_2;
+
 use bevy::{color::palettes::css, prelude::*};
 
 // TODO:Bundle化して公開範囲を狭める
@@ -73,8 +75,8 @@ pub(super) fn update_projectile(
   mut bullet_query: Query<(Entity, &mut ProjectileBullet, &mut Transform)>,
 ) {
   for (entity, mut bullet, mut transform) in bullet_query.iter_mut() {
-    transform.translation =
-      transform.translation + transform.forward() * bullet.speed * time.delta_seconds();
+    let translation = -transform.local_z() * bullet.speed * time.delta_seconds();
+    transform.translation += translation;
     bullet.lifetime -= time.delta_seconds();
 
     if bullet.lifetime <= 0.0 {
