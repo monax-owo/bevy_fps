@@ -32,20 +32,26 @@ pub(super) fn init_player(
   mut meshes: ResMut<Assets<Mesh>>,
   mut materials: ResMut<Assets<StandardMaterial>>,
 ) {
-  let weapon = commands
+  let item_user = commands
     .spawn((
-      Name::new("Weapon"),
+      Name::new("Item user"),
       TransformBundle {
         local: Transform::from_xyz(1.0, -0.8, -1.0),
         ..default()
       },
       Shooter::default(),
-      TestGun {
-        cool_time: 1.0,
-        bullet_speed: 140.0,
-        bullet_lifetime: 10.0,
-      },
     ))
+    .with_children(|parent| {
+      parent.spawn((
+        Name::new("TestGun"),
+        SpatialBundle::default(),
+        TestGun {
+          cool_time: 1.0,
+          bullet_speed: 140.0,
+          bullet_lifetime: 10.0,
+        },
+      ));
+    })
     .id();
 
   let player = commands
@@ -57,8 +63,11 @@ pub(super) fn init_player(
         vertical_speed: 18.0,
         ..default()
       },
-      Inventory::new(vec![weapon, weapon].into_iter().map(Item).collect(), 2),
-      PlayerInventory::new(weapon),
+      Inventory::new(
+        vec![item_user, item_user].into_iter().map(Item).collect(),
+        2,
+      ),
+      PlayerInventory::new(item_user),
       Collider::capsule_y(1.0, 0.4),
       PbrBundle {
         mesh: meshes.add(Capsule3d::new(0.4, 2.0)),
@@ -119,7 +128,7 @@ pub(super) fn init_player(
     .id();
 
   commands.entity(player).add_child(camera);
-  commands.entity(camera).push_children(&[body, weapon]);
+  commands.entity(camera).push_children(&[body, item_user]);
 }
 
 pub(super) fn update_grounded_color(
