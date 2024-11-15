@@ -2,10 +2,7 @@ use bevy::{color::palettes::css, core_pipeline::tonemapping::DebandDither, prelu
 use bevy_rapier3d::prelude::*;
 use inventory::Inventory;
 
-use crate::game::{
-  inventory::PlayerInventory,
-  shooting::{weapons::ExampleGun, Shooter},
-};
+use crate::game::shooting::{weapons::ExampleGun, Shooter};
 
 use super::{camera_controller::CameraController, movement::GroundSensor};
 
@@ -32,6 +29,11 @@ pub(super) fn init_player(
   mut meshes: ResMut<Assets<Mesh>>,
   mut materials: ResMut<Assets<StandardMaterial>>,
 ) {
+  // (`Player`,`Inventory`,`PlayerInventory`)
+  //                               \/
+  // (`Shooter`,`Children`)
+  //                 +
+  // [(`ExampleGun`,`Parent`)]
   let item_user = commands
     .spawn((
       Name::new("Item user"),
@@ -39,6 +41,7 @@ pub(super) fn init_player(
         local: Transform::from_xyz(1.0, -0.8, -1.0),
         ..default()
       },
+      Inventory::new(2),
       Shooter::default(),
     ))
     .with_children(|parent| {
@@ -63,8 +66,6 @@ pub(super) fn init_player(
         vertical_speed: 18.0,
         ..default()
       },
-      Inventory::new(2),
-      PlayerInventory::new(item_user),
       Collider::capsule_y(1.0, 0.4),
       PbrBundle {
         mesh: meshes.add(Capsule3d::new(0.4, 2.0)),
