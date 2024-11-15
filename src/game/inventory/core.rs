@@ -46,22 +46,26 @@ pub(super) fn update_item(
       .filter(|v| current_item_query.get(**v).is_ok())
       .collect();
 
-    match find.len() {
-      1 => (),
+    // TODO: CurrentWeaponを変えれるようにする
+    let current_weapon = match find.len() {
+      1 => *find[0],
       0 => {
         dbg!("0");
         // childrenの最初のエンティティに付与
-        commands.entity(children[0]).insert(CurrentWeapon);
+        commands.entity(children[0]).insert(CurrentWeapon).id()
       }
       _ => {
         dbg!("_");
         // findの最初以外のエンティティから削除
-        for (i, v) in find.into_iter().enumerate() {
+        let mut iter = find.into_iter();
+        let next = iter.next();
+        iter.enumerate().for_each(|(i, e)| {
           if i != 0 {
-            commands.entity(*v).remove::<CurrentWeapon>();
+            commands.entity(*e).remove::<CurrentWeapon>();
           }
-        }
+        });
+        *next.unwrap_or(&children[0])
       }
-    }
+    };
   }
 }

@@ -8,6 +8,7 @@ pub struct Inventory<T = Item> {
   /// インベントリが保持しているアイテム
   /// Noneは空のスロットを指す
   pub items: Vec<Option<T>>,
+  // TODO:要らなくない？
   /// itemsのindex
   pub current_item: usize,
   /// itemsの最大の長さ
