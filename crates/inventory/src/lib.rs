@@ -69,3 +69,11 @@ impl<T> Inventory<T> {
 
 #[derive(Reflect, Debug)]
 pub struct Item(pub Entity);
+
+pub struct InventoryPlugin;
+
+impl Plugin for InventoryPlugin {
+  fn build(&self, app: &mut App) {
+    app.register_type::<Inventory>().register_type::<Item>();
+  }
+}

@@ -15,7 +15,8 @@ impl Plugin for GamePlugin {
   fn build(&self, app: &mut bevy::prelude::App) {
     let app = app.add_plugins((
       RapierPhysicsPlugin::<NoUserData>::default(),
-      RapierDebugRenderPlugin::default(),
+      // inventory crateのPlugin
+      inventory::InventoryPlugin,
       InventoryPlugin,
       PlayerPlugin,
       ShaderPlugin,
@@ -26,7 +27,7 @@ impl Plugin for GamePlugin {
     ));
 
     if cfg!(debug_assertions) {
-      app.add_plugins(TestPlugin);
+      app.add_plugins((TestPlugin, RapierDebugRenderPlugin::default()));
     }
   }
 }
