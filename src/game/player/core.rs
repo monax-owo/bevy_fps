@@ -34,9 +34,9 @@ pub(super) fn init_player(
   // (`Shooter`,`Children`)
   //                 +
   // [(`ExampleGun`,`Parent`)]
-  let item_user = commands
+  let inventory = commands
     .spawn((
-      Name::new("Item user"),
+      Name::new("Inventory"),
       TransformBundle {
         local: Transform::from_xyz(1.0, -0.8, -1.0),
         ..default()
@@ -126,7 +126,7 @@ pub(super) fn init_player(
     .id();
 
   commands.entity(player).add_child(camera);
-  commands.entity(camera).push_children(&[body, item_user]);
+  commands.entity(camera).push_children(&[body, inventory]);
 }
 
 pub(super) fn update_grounded_color(

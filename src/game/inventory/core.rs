@@ -40,7 +40,7 @@ pub(super) fn update_item(
   current_item_query: Query<Entity, With<CurrentWeapon>>,
 ) {
   for children in inventory_query.into_iter() {
-    // childrenからWith<CurrentItem>に当てはまるエンティティを探す
+    // childrenからcurrent_item_queryに当てはまるエンティティを探す
     let find: Vec<&Entity> = children
       .into_iter()
       .filter(|v| current_item_query.get(**v).is_ok())

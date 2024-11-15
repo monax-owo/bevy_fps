@@ -1,8 +1,11 @@
 use bevy::prelude::*;
 
-use crate::game::shooting::{
-  bullet::{ProjectileBulletAssets, ProjectileBulletBundle, ProjectileBulletGroup},
-  FireEvent,
+use crate::game::{
+  inventory::CurrentWeapon,
+  shooting::{
+    bullet::{ProjectileBulletAssets, ProjectileBulletBundle, ProjectileBulletGroup},
+    FireEvent,
+  },
 };
 
 #[derive(Component, Reflect, Debug)]
@@ -23,7 +26,7 @@ pub(super) fn update(
   time: Res<Time>,
   group: Res<ProjectileBulletGroup>,
   assets: Res<ProjectileBulletAssets>,
-  mut gun: Query<(&mut ExampleGun, &GlobalTransform)>,
+  mut gun: Query<(&mut ExampleGun, &GlobalTransform), With<CurrentWeapon>>,
 ) {
   for (mut gun, global_transform) in gun.iter_mut() {
     if gun.cool_time > 0.0 {
