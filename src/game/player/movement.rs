@@ -16,7 +16,7 @@ impl Default for GroundSensor {
     Self {
       grounded: Default::default(),
       // TODO:調整する
-      toi: 0.06,
+      toi: 0.16,
     }
   }
 }
