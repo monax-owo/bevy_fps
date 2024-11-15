@@ -3,6 +3,8 @@ use std::any::Any;
 use bevy::prelude::*;
 use inventory::Inventory;
 
+use crate::game::player::input::PlayerInput;
+
 #[derive(Component, Reflect)]
 #[reflect(Default)]
 pub struct PlayerInventory {
@@ -34,13 +36,19 @@ impl PlayerInventory {
   }
 }
 
-pub(super) fn update_item(
+pub(super) fn update_current_item(
   mut commands: Commands,
-  mut inventory_query: Query<(&mut Inventory, &Children), Changed<Children>>,
+  key: Res<PlayerInput>,
+  mut inventory_query: Query<(&mut Inventory, &Children)>,
   current_item_query: Query<Entity, With<CurrentWeapon>>,
 ) {
   for (mut inventory, children) in inventory_query.iter_mut() {
     inventory.current_item = inventory.current_item.clamp(0, inventory.max_count());
+
+    if key.blink {
+      dbg!(inventory.current_item);
+      inventory.current_item = if inventory.current_item != 0 { 0 } else { 1 };
+    }
 
     // childrenからcurrent_item_queryに当てはまるエンティティを探す
     let find: Vec<&Entity> = children
