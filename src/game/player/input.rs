@@ -1,37 +1,34 @@
 use bevy::prelude::*;
 
-#[derive(Resource, Debug, Default)]
+#[derive(Resource, Debug)]
 pub struct PlayerInput {
   // キーボード
-  pub forward: bool,
-  pub left: bool,
-  pub back: bool,
-  pub right: bool,
+  pub forward: KeyCode,
+  pub left: KeyCode,
+  pub back: KeyCode,
+  pub right: KeyCode,
   /// ジャンプ
-  pub jump: bool,
+  pub jump: KeyCode,
   /// 走る
-  pub dash: bool,
+  pub dash: KeyCode,
   /// 高速移動
-  pub blink: bool,
+  pub blink: KeyCode,
   // マウス
   /// 発射
-  pub fire: bool,
+  pub fire: MouseButton,
 }
 
-pub(super) fn update_input(
-  keyboard: Res<ButtonInput<KeyCode>>,
-  mouse: Res<ButtonInput<MouseButton>>,
-  mut player_input: ResMut<PlayerInput>,
-) {
-  player_input.forward = keyboard.pressed(KeyCode::KeyW);
-  player_input.left = keyboard.pressed(KeyCode::KeyA);
-  player_input.back = keyboard.pressed(KeyCode::KeyS);
-  player_input.right = keyboard.pressed(KeyCode::KeyD);
-
-  player_input.jump = keyboard.pressed(KeyCode::Space);
-  player_input.dash = keyboard.pressed(KeyCode::KeyV);
-  player_input.blink = keyboard.pressed(KeyCode::KeyQ);
-
-  // TODO:切り離す
-  player_input.fire = mouse.pressed(MouseButton::Left);
+impl Default for PlayerInput {
+  fn default() -> Self {
+    Self {
+      forward: KeyCode::KeyW,
+      left: KeyCode::KeyA,
+      back: KeyCode::KeyS,
+      right: KeyCode::KeyD,
+      jump: KeyCode::Space,
+      dash: KeyCode::KeyV,
+      blink: KeyCode::KeyQ,
+      fire: MouseButton::Left,
+    }
+  }
 }

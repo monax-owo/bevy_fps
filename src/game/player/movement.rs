@@ -22,6 +22,7 @@ impl Default for GroundSensor {
 }
 
 pub(super) fn update_movement(
+  keyboard_input: Res<ButtonInput<KeyCode>>,
   key: Res<PlayerInput>,
   time: Res<Time>,
   mut player_query: Query<(
@@ -39,24 +40,24 @@ pub(super) fn update_movement(
   {
     let mut direction = Vec3::ZERO;
 
-    if key.forward {
+    if keyboard_input.pressed(key.forward) {
       direction.x += 1.0;
     }
 
-    if key.left {
+    if keyboard_input.pressed(key.left) {
       direction.z += -1.0;
     }
 
-    if key.back {
+    if keyboard_input.pressed(key.back) {
       direction.x += -1.0;
     }
 
-    if key.right {
+    if keyboard_input.pressed(key.right) {
       direction.z += 1.0;
     }
 
     // TODO:プレイヤーが止まったら歩きの速度にする
-    if key.dash {
+    if keyboard_input.pressed(key.dash) {
       player.horizontal_speed = 20.0;
     }
 
@@ -69,7 +70,7 @@ pub(super) fn update_movement(
       .clamp(9.8, 20.0);
 
       // jump
-      if key.jump {
+      if keyboard_input.pressed(key.jump) {
         player.vertical_accel += JUMP_HEIGHT;
       }
     } else {

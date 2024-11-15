@@ -38,6 +38,7 @@ impl PlayerInventory {
 
 pub(super) fn update_current_item(
   mut commands: Commands,
+  keyboard_input: Res<ButtonInput<KeyCode>>,
   key: Res<PlayerInput>,
   mut inventory_query: Query<(&mut Inventory, &Children)>,
   current_item_query: Query<Entity, With<CurrentWeapon>>,
@@ -45,7 +46,7 @@ pub(super) fn update_current_item(
   for (mut inventory, children) in inventory_query.iter_mut() {
     inventory.current_item = inventory.current_item.clamp(0, inventory.max_count());
 
-    if key.blink {
+    if keyboard_input.pressed(key.blink) {
       dbg!(inventory.current_item);
       inventory.current_item = if inventory.current_item != 0 { 0 } else { 1 };
     }
@@ -69,7 +70,7 @@ pub(super) fn update_current_item(
         // findの最初以外のエンティティから削除
         let mut iter = find.into_iter();
         let next = iter.next();
-        iter.enumerate().for_each(|(i, e)| {
+        iter.for_each(|e| {
           commands.entity(*e).remove::<CurrentWeapon>();
         });
         *next.unwrap_or(&children[0])

@@ -5,7 +5,7 @@ use crate::game::state::GameState;
 use super::{
   camera_controller::{update_camera_controller, CameraController},
   init_player,
-  input::{update_input, PlayerInput},
+  input::PlayerInput,
   movement::{update_grounded, update_movement, GroundSensor},
   update_grounded_color, Body, Player,
 };
@@ -24,11 +24,7 @@ impl Plugin for PlayerPlugin {
             update_grounded_color,
             update_grounded.before(update_movement),
           ),
-          (
-            update_camera_controller,
-            update_input.before(update_movement),
-          )
-            .run_if(in_state(GameState::InGame)),
+          update_camera_controller.run_if(in_state(GameState::InGame)),
         ),
       )
       .init_resource::<PlayerInput>()
