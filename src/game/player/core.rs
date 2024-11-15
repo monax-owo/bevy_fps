@@ -2,7 +2,10 @@ use bevy::{color::palettes::css, core_pipeline::tonemapping::DebandDither, prelu
 use bevy_rapier3d::prelude::*;
 use inventory::Inventory;
 
-use crate::game::shooting::{weapons::ExampleGun, Shooter};
+use crate::game::{
+  inventory::CurrentWeapon,
+  shooting::{weapons::ExampleGun, Shooter},
+};
 
 use super::{camera_controller::CameraController, movement::GroundSensor};
 
@@ -53,6 +56,18 @@ pub(super) fn init_player(
           bullet_speed: 140.0,
           bullet_lifetime: 10.0,
         },
+        CurrentWeapon,
+      ));
+
+      parent.spawn((
+        Name::new("TestGun 2"),
+        SpatialBundle::default(),
+        ExampleGun {
+          cool_time: 1.0,
+          bullet_speed: 3.0,
+          bullet_lifetime: 20.0,
+        },
+        CurrentWeapon,
       ));
     })
     .id();

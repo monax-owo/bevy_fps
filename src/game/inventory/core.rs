@@ -60,9 +60,7 @@ pub(super) fn update_item(
         let mut iter = find.into_iter();
         let next = iter.next();
         iter.enumerate().for_each(|(i, e)| {
-          if i != 0 {
-            commands.entity(*e).remove::<CurrentWeapon>();
-          }
+          commands.entity(*e).remove::<CurrentWeapon>();
         });
         *next.unwrap_or(&children[0])
       }
