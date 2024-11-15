@@ -36,10 +36,12 @@ impl PlayerInventory {
 
 pub(super) fn update_item(
   mut commands: Commands,
-  inventory_query: Query<&Children, (With<Inventory>, Changed<Children>)>,
+  mut inventory_query: Query<(&mut Inventory, &Children), Changed<Children>>,
   current_item_query: Query<Entity, With<CurrentWeapon>>,
 ) {
-  for children in inventory_query.into_iter() {
+  for (mut inventory, children) in inventory_query.iter_mut() {
+    inventory.current_item = inventory.current_item.clamp(0, inventory.max_count());
+
     // childrenからcurrent_item_queryに当てはまるエンティティを探す
     let find: Vec<&Entity> = children
       .into_iter()
@@ -65,5 +67,8 @@ pub(super) fn update_item(
         *next.unwrap_or(&children[0])
       }
     };
+    //
+
+    //
   }
 }
