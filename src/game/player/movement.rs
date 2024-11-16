@@ -32,7 +32,6 @@ pub(super) fn update_movement(
     &GroundSensor,
   )>,
 ) {
-  const GRAVITY: f32 = 9.8;
   const JUMP_HEIGHT: f32 = -80.0;
 
   if let Ok((mut player, player_transform, mut controller, ground_sensor)) =
@@ -63,26 +62,44 @@ pub(super) fn update_movement(
 
     direction = direction.x * player_transform.forward() + direction.z * player_transform.right();
 
+    // jump
+    if ground_sensor.grounded && keyboard_input.pressed(key.jump) {
+      player.vertical_accel += JUMP_HEIGHT;
+    }
+
+    player.direction =
+      (direction * player.horizontal_speed).with_y(player.direction.y) * time.delta_seconds();
+
+    controller.translation = Some(player.direction);
+  }
+}
+
+pub(super) fn update_gravity(
+  time: Res<Time>,
+  mut player_query: Query<(
+    &mut Player,
+    &Transform,
+    &mut KinematicCharacterController,
+    &GroundSensor,
+  )>,
+) {
+  const GRAVITY: f32 = 9.8;
+
+  if let Ok((mut player, player_transform, mut controller, ground_sensor)) =
+    player_query.get_single_mut()
+  {
     // 地面に付いて無いときは重力を加える
     if ground_sensor.grounded {
       player.vertical_accel = (player.vertical_accel
         - player.vertical_speed * 2.2 * time.delta_seconds())
       .clamp(9.8, 20.0);
-
-      // jump
-      if keyboard_input.pressed(key.jump) {
-        player.vertical_accel += JUMP_HEIGHT;
-      }
     } else {
       player.vertical_accel = (player.vertical_accel
         + GRAVITY * player.vertical_speed * time.delta_seconds())
       .clamp(-500.0, 500.0);
     }
 
-    player.direction.y -= player.vertical_accel * 0.2;
-
-    player.direction =
-      (direction * player.horizontal_speed).with_y(player.direction.y) * time.delta_seconds();
+    player.direction.y -= player.vertical_accel * 0.2 * time.delta_seconds();
 
     controller.translation = Some(player.direction);
   }

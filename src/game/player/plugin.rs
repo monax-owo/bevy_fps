@@ -6,7 +6,7 @@ use super::{
   camera_controller::{update_camera_controller, CameraController},
   init_player,
   input::PlayerInput,
-  movement::{update_grounded, update_movement, GroundSensor},
+  movement::{update_gravity, update_grounded, update_movement, GroundSensor},
   update_grounded_color, Body, Player,
 };
 
@@ -20,11 +20,11 @@ impl Plugin for PlayerPlugin {
         Update,
         (
           (
-            update_movement,
+            update_gravity,
             update_grounded_color,
-            update_grounded.before(update_movement),
+            update_grounded.before(update_gravity),
           ),
-          update_camera_controller.run_if(in_state(GameState::InGame)),
+          (update_camera_controller, update_movement).run_if(in_state(GameState::InGame)),
         ),
       )
       .init_resource::<PlayerInput>()
