@@ -33,7 +33,6 @@ pub(super) fn update_movement_input(
     &GroundSensor,
   )>,
 ) {
-  const GRAVITY: f32 = 9.8;
   const JUMP_HEIGHT: f32 = -80.0;
 
   if let Ok((mut player, player_transform, mut controller, ground_sensor)) =
@@ -66,18 +65,10 @@ pub(super) fn update_movement_input(
 
     // 地面に付いて無いときは重力を加える
     if ground_sensor.grounded {
-      player.vertical_accel = (player.vertical_accel
-        - player.vertical_speed * 2.2 * time.delta_seconds())
-      .clamp(9.8, 20.0);
-
       // jump
       if keyboard_input.pressed(key.jump) {
         player.vertical_accel += JUMP_HEIGHT;
       }
-    } else {
-      player.vertical_accel = (player.vertical_accel
-        + GRAVITY * player.vertical_speed * time.delta_seconds())
-      .clamp(-500.0, 500.0);
     }
 
     player.direction.y -= player.vertical_accel * 0.2;
@@ -100,7 +91,6 @@ pub(super) fn update_movement(
   )>,
 ) {
   const GRAVITY: f32 = 9.8;
-  const JUMP_HEIGHT: f32 = -80.0;
 
   if let Ok((mut player, player_transform, mut controller, ground_sensor)) =
     player_query.get_single_mut()
