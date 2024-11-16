@@ -26,18 +26,11 @@ pub(super) fn update_movement_input(
   keyboard_input: Res<ButtonInput<KeyCode>>,
   key: Res<PlayerInput>,
   time: Res<Time>,
-  mut player_query: Query<(
-    &mut Player,
-    &Transform,
-    &mut KinematicCharacterController,
-    &GroundSensor,
-  )>,
+  mut player_query: Query<(&mut Player, &Transform, &GroundSensor)>,
 ) {
   const JUMP_HEIGHT: f32 = -80.0;
 
-  if let Ok((mut player, player_transform, mut controller, ground_sensor)) =
-    player_query.get_single_mut()
-  {
+  if let Ok((mut player, player_transform, ground_sensor)) = player_query.get_single_mut() {
     let mut direction = Vec3::ZERO;
 
     if keyboard_input.pressed(key.forward) {
@@ -75,8 +68,6 @@ pub(super) fn update_movement_input(
 
     player.direction =
       (direction * player.horizontal_speed).with_y(player.direction.y) * time.delta_seconds();
-
-    controller.translation = Some(player.direction);
   }
 }
 
