@@ -2,10 +2,7 @@ use bevy::{color::palettes::css, core_pipeline::tonemapping::DebandDither, prelu
 use bevy_rapier3d::prelude::*;
 use inventory::Inventory;
 
-use crate::game::{
-  inventory::CurrentWeapon,
-  shooting::{weapons::ExampleGun, Shooter},
-};
+use crate::game::shooting::{weapons::ExampleGun, Shooter};
 
 use super::{camera_controller::CameraController, movement::GroundSensor};
 
@@ -26,12 +23,12 @@ pub struct Player {
 #[derive(Component, Reflect, Debug, Default)]
 pub(super) struct Body;
 
-// TODO:別のファイルに移す
 pub(super) fn init_player(
   mut commands: Commands,
   mut meshes: ResMut<Assets<Mesh>>,
   mut materials: ResMut<Assets<StandardMaterial>>,
 ) {
+  // TODO: フローチャートにする
   // (`Player`,`Inventory`,`PlayerInventory`)
   //                               \/
   // (`Shooter`,`Children`)
@@ -56,7 +53,6 @@ pub(super) fn init_player(
           bullet_speed: 140.0,
           bullet_lifetime: 10.0,
         },
-        CurrentWeapon,
       ));
 
       parent.spawn((
@@ -67,7 +63,6 @@ pub(super) fn init_player(
           bullet_speed: 3.0,
           bullet_lifetime: 20.0,
         },
-        CurrentWeapon,
       ));
     })
     .id();
