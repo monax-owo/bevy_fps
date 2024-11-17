@@ -27,7 +27,7 @@ pub(super) fn update_movement_input(
   key: Res<PlayerInput>,
   mut player_query: Query<(&mut Player, &GroundSensor)>,
 ) {
-  const JUMP_HEIGHT: f32 = -80.0;
+  const JUMP_HEIGHT: f32 = -20.0;
 
   if let Ok((mut player, ground_sensor)) = player_query.get_single_mut() {
     if keyboard_input.pressed(key.forward) {
@@ -77,15 +77,14 @@ pub(super) fn update_movement(
       + player.direction.z * player_transform.right();
 
     if !ground_sensor.grounded {
-      // 地面に付いていないときは重力を加える
+      // 重力を加える
       player.vertical_accel = (player.vertical_accel
         + GRAVITY * player.vertical_speed * time.delta_seconds())
       .clamp(-500.0, 500.0);
     } else {
-      // 地面に付いているときは弱い重力を加える
-      player.vertical_accel = (player.vertical_accel
-        - player.vertical_speed * 2.2 * time.delta_seconds())
-      .clamp(9.8, 20.0);
+      // 弱い重力を加える
+      player.vertical_accel =
+        player.vertical_accel - player.vertical_speed * 6.0 * time.delta_seconds();
     }
 
     // TODO:tempを消す
