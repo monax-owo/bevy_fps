@@ -28,9 +28,58 @@ pub(super) fn update_movement_input(
   time: Res<Time>,
   mut player_query: Query<(&mut Player, &Transform, &GroundSensor)>,
 ) {
+  // const JUMP_HEIGHT: f32 = -80.0;
+
+  // if let Ok((mut player, player_transform, ground_sensor)) = player_query.get_single_mut() {
+  //   if keyboard_input.pressed(key.forward) {
+  //     player.test.x += 1.0;
+  //   }
+
+  //   if keyboard_input.pressed(key.left) {
+  //     player.test.z += -1.0;
+  //   }
+
+  //   if keyboard_input.pressed(key.back) {
+  //     player.test.x += -1.0;
+  //   }
+
+  //   if keyboard_input.pressed(key.right) {
+  //     player.test.z += 1.0;
+  //   }
+
+  //   // TODO:プレイヤーが止まったら歩きの速度にする
+  //   if keyboard_input.pressed(key.dash) {
+  //     player.horizontal_speed = 20.0;
+  //   }
+
+  //   // 地面に付いて無いときは重力を加える
+  //   if ground_sensor.grounded {
+  //     // jump
+  //     if keyboard_input.pressed(key.jump) {
+  //       player.vertical_accel += JUMP_HEIGHT;
+  //     }
+  //   }
+  // }
+}
+
+// Playerのプロパティを使用してエンティティを移動させる
+pub(super) fn update_movement(
+  keyboard_input: Res<ButtonInput<KeyCode>>,
+  key: Res<PlayerInput>,
+  time: Res<Time>,
+  mut player_query: Query<(
+    &mut Player,
+    &Transform,
+    &mut KinematicCharacterController,
+    &GroundSensor,
+  )>,
+) {
+  const GRAVITY: f32 = 9.8;
   const JUMP_HEIGHT: f32 = -80.0;
 
-  if let Ok((mut player, player_transform, ground_sensor)) = player_query.get_single_mut() {
+  if let Ok((mut player, player_transform, mut controller, ground_sensor)) =
+    player_query.get_single_mut()
+  {
     let mut direction = Vec3::ZERO;
 
     if keyboard_input.pressed(key.forward) {
@@ -58,44 +107,14 @@ pub(super) fn update_movement_input(
 
     // 地面に付いて無いときは重力を加える
     if ground_sensor.grounded {
+      player.vertical_accel = (player.vertical_accel
+        - player.vertical_speed * 2.2 * time.delta_seconds())
+      .clamp(9.8, 20.0);
+
       // jump
       if keyboard_input.pressed(key.jump) {
         player.vertical_accel += JUMP_HEIGHT;
       }
-    }
-
-    player.direction.y -= player.vertical_accel * 0.2;
-
-    player.direction =
-      (direction * player.horizontal_speed).with_y(player.direction.y) * time.delta_seconds();
-  }
-}
-
-// Playerのプロパティを使用してエンティティを移動させる
-pub(super) fn update_movement(
-  time: Res<Time>,
-  mut player_query: Query<(
-    &mut Player,
-    &Transform,
-    &mut KinematicCharacterController,
-    &GroundSensor,
-  )>,
-) {
-  const GRAVITY: f32 = 9.8;
-
-  if let Ok((mut player, player_transform, mut controller, ground_sensor)) =
-    player_query.get_single_mut()
-  {
-    let mut direction = Vec3::ZERO;
-
-    direction = direction.x * player_transform.forward() + direction.z * player_transform.right();
-
-    // 地面に付いて無いときは重力を加える
-    if ground_sensor.grounded {
-      player.vertical_accel = (player.vertical_accel
-        - player.vertical_speed * 2.2 * time.delta_seconds())
-      .clamp(9.8, 20.0);
-    // TODO: jump
     } else {
       player.vertical_accel = (player.vertical_accel
         + GRAVITY * player.vertical_speed * time.delta_seconds())
