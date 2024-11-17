@@ -1,7 +1,4 @@
 ```mermaid
-%% 書き方が合ってるかわからない
-%% そもそもフローチャートが何なのか知らない
-
 graph LR
 subgraph S1["update_movement_input"]
   direction TB

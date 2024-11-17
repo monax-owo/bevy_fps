@@ -51,7 +51,6 @@ pub(super) fn update_movement_input(
       player.horizontal_speed = 20.0;
     }
 
-    // TODO: jump
     if ground_sensor.grounded && keyboard_input.pressed(key.jump) {
       player.vertical_accel += JUMP_HEIGHT;
     }
@@ -88,7 +87,7 @@ pub(super) fn update_movement(
       .clamp(-500.0, 500.0);
     }
 
-    // TODO:tempを消す
+    // TODO:translationを消せたら消す
     player.translation.y -= player.vertical_accel * 0.2;
 
     player.translation = (player.direction * player.horizontal_speed).with_y(player.translation.y)
@@ -103,9 +102,6 @@ pub(super) fn update_grounded(
   rapier_context: Res<RapierContext>,
   mut ground_sensor_query: Query<(&mut GroundSensor, &Transform)>,
 ) {
-  // const HALF_HEIGHT: f32 = 0.2;
-  // const RADIUS: f32 = 0.16;
-
   // ray castでも良さそう？->ray castにした
   // todo:おかしかったらshape castに戻す
   for (mut ground_sensor, transform) in ground_sensor_query.iter_mut() {
