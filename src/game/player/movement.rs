@@ -87,6 +87,7 @@ pub(super) fn update_movement(
       .clamp(-500.0, 500.0);
     }
 
+    // TODO:tempを消す
     player.temp.y -= player.vertical_accel * 0.2;
 
     player.temp =
