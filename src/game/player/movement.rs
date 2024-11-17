@@ -76,15 +76,16 @@ pub(super) fn update_movement(
     player.direction = player.direction.x * player_transform.forward()
       + player.direction.z * player_transform.right();
 
-    // 地面に付いて無いときは重力を加える
-    if ground_sensor.grounded && player.vertical_accel >= GRAVITY {
-      player.vertical_accel = (player.vertical_accel
-        - player.vertical_speed * 2.2 * time.delta_seconds())
-      .clamp(9.8, 20.0);
-    } else {
+    if !ground_sensor.grounded {
+      // 地面に付いていないときは重力を加える
       player.vertical_accel = (player.vertical_accel
         + GRAVITY * player.vertical_speed * time.delta_seconds())
       .clamp(-500.0, 500.0);
+    } else {
+      // 地面に付いているときは弱い重力を加える
+      player.vertical_accel = (player.vertical_accel
+        - player.vertical_speed * 2.2 * time.delta_seconds())
+      .clamp(9.8, 20.0);
     }
 
     // TODO:tempを消す
