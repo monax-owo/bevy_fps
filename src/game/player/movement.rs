@@ -25,61 +25,11 @@ impl Default for GroundSensor {
 pub(super) fn update_movement_input(
   keyboard_input: Res<ButtonInput<KeyCode>>,
   key: Res<PlayerInput>,
-  time: Res<Time>,
-  mut player_query: Query<(&mut Player, &Transform, &GroundSensor)>,
+  mut player_query: Query<(&mut Player, &GroundSensor)>,
 ) {
-  // const JUMP_HEIGHT: f32 = -80.0;
-
-  // if let Ok((mut player, player_transform, ground_sensor)) = player_query.get_single_mut() {
-  //   if keyboard_input.pressed(key.forward) {
-  //     player.test.x += 1.0;
-  //   }
-
-  //   if keyboard_input.pressed(key.left) {
-  //     player.test.z += -1.0;
-  //   }
-
-  //   if keyboard_input.pressed(key.back) {
-  //     player.test.x += -1.0;
-  //   }
-
-  //   if keyboard_input.pressed(key.right) {
-  //     player.test.z += 1.0;
-  //   }
-
-  //   // TODO:プレイヤーが止まったら歩きの速度にする
-  //   if keyboard_input.pressed(key.dash) {
-  //     player.horizontal_speed = 20.0;
-  //   }
-
-  //   // 地面に付いて無いときは重力を加える
-  //   if ground_sensor.grounded {
-  //     // jump
-  //     if keyboard_input.pressed(key.jump) {
-  //       player.vertical_accel += JUMP_HEIGHT;
-  //     }
-  //   }
-  // }
-}
-
-// Playerのプロパティを使用してエンティティを移動させる
-pub(super) fn update_movement(
-  keyboard_input: Res<ButtonInput<KeyCode>>,
-  key: Res<PlayerInput>,
-  time: Res<Time>,
-  mut player_query: Query<(
-    &mut Player,
-    &Transform,
-    &mut KinematicCharacterController,
-    &GroundSensor,
-  )>,
-) {
-  const GRAVITY: f32 = 9.8;
   const JUMP_HEIGHT: f32 = -80.0;
 
-  if let Ok((mut player, player_transform, mut controller, ground_sensor)) =
-    player_query.get_single_mut()
-  {
+  if let Ok((mut player, ground_sensor)) = player_query.get_single_mut() {
     if keyboard_input.pressed(key.forward) {
       player.direction.x += 1.0;
     }
@@ -100,7 +50,27 @@ pub(super) fn update_movement(
     if keyboard_input.pressed(key.dash) {
       player.horizontal_speed = 20.0;
     }
+  }
+}
 
+// Playerのプロパティを使用してエンティティを移動させる
+pub(super) fn update_movement(
+  keyboard_input: Res<ButtonInput<KeyCode>>,
+  key: Res<PlayerInput>,
+  time: Res<Time>,
+  mut player_query: Query<(
+    &mut Player,
+    &Transform,
+    &mut KinematicCharacterController,
+    &GroundSensor,
+  )>,
+) {
+  const GRAVITY: f32 = 9.8;
+  const JUMP_HEIGHT: f32 = -80.0;
+
+  if let Ok((mut player, player_transform, mut controller, ground_sensor)) =
+    player_query.get_single_mut()
+  {
     player.direction = player.direction.x * player_transform.forward()
       + player.direction.z * player_transform.right();
 
