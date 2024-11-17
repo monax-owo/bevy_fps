@@ -76,24 +76,25 @@ pub(super) fn update_movement(
     player.direction = player.direction.x * player_transform.forward()
       + player.direction.z * player_transform.right();
 
-    if !ground_sensor.grounded {
+    if ground_sensor.grounded && !(player.vertical_accel < 0.0) {
+      // 弱い重力を加える
+      player.vertical_accel = (player.vertical_accel
+        - player.vertical_speed * 6.0 * time.delta_seconds())
+      .clamp(GRAVITY, 500.0);
+    } else {
       // 重力を加える
       player.vertical_accel = (player.vertical_accel
         + GRAVITY * player.vertical_speed * time.delta_seconds())
       .clamp(-500.0, 500.0);
-    } else {
-      // 弱い重力を加える
-      player.vertical_accel =
-        player.vertical_accel - player.vertical_speed * 6.0 * time.delta_seconds();
     }
 
     // TODO:tempを消す
-    player.temp.y -= player.vertical_accel * 0.2;
+    player.translation.y -= player.vertical_accel * 0.2;
 
-    player.temp =
-      (player.direction * player.horizontal_speed).with_y(player.temp.y) * time.delta_seconds();
+    player.translation = (player.direction * player.horizontal_speed).with_y(player.translation.y)
+      * time.delta_seconds();
 
-    controller.translation = Some(player.temp);
+    controller.translation = Some(player.translation);
     player.direction = Vec3::ZERO;
   }
 }
