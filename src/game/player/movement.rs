@@ -87,13 +87,12 @@ pub(super) fn update_movement(
       .clamp(-500.0, 500.0);
     }
 
-    // TODO:translationを消せたら消す
-    player.translation.y -= player.vertical_accel * 0.2;
+    player.direction.y -= player.vertical_accel * 0.2;
 
-    player.translation = (player.direction * player.horizontal_speed).with_y(player.translation.y)
+    let translation = (player.direction * player.horizontal_speed).with_y(player.direction.y)
       * time.delta_seconds();
 
-    controller.translation = Some(player.translation);
+    controller.translation = Some(translation);
     player.direction = Vec3::ZERO;
   }
 }

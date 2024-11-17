@@ -13,7 +13,6 @@ use super::{camera_controller::CameraController, movement::GroundSensor};
 pub struct Player {
   /// 力が加わる向きと速度(大きさ)
   pub direction: Vec3,
-  pub translation: Vec3,
   /// 重力の掛かる方向
   /// 正の値だと下向きの力が掛かり
   /// 負の値だと上向きの力が掛かる(ジャンプ)
