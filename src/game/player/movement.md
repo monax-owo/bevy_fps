@@ -23,9 +23,9 @@ subgraph S2["update_movement"]
   B3{接地}
   B3 -->|していない| B4[重力を加える] --> B6
   B3 -->|している| B7
-  B7{direction.y < 0.0}
-  B7 -->|YES| B4
-  B7 -->|NO| B5
+  B7{vertical_accel >= 0.0}
+  B7 -->|YES| B5
+  B7 -->|NO| B4
   B5[弱い重力を加える] --> B6
 
   B6(プレイヤーを移動させる)
