@@ -6,16 +6,23 @@
     {
       "type": "cargo",
       "command": "watch",
-      "args": ["-x", "run -- --gui"],
+      "args": ["-w", "./src", "-i", "*.md", "-x", "run"],
       "problemMatcher": ["$rustc"],
-      "label": "rust: hot reload with gui"
+      "label": "hot reload"
+    },
+    {
+      "type": "cargo",
+      "command": "watch",
+      "args": ["-w", "./src", "-i", "*.md", "-x", "run -- --gui"],
+      "problemMatcher": ["$rustc"],
+      "label": "hot reload with gui"
     },
     {
       "type": "cargo",
       "command": "sweep",
       "args": ["--time", "1"],
       "problemMatcher": ["$rustc"],
-      "label": "rust: sweep (1 DAY)"
+      "label": "sweep (1 DAY)"
     }
   ]
 }
