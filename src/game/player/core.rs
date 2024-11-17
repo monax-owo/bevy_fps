@@ -45,6 +45,7 @@ pub(super) fn init_player(
       Shooter::default(),
     ))
     .with_children(|parent| {
+      // TODO: Bundle化する
       parent.spawn((
         Name::new("TestGun"),
         SpatialBundle::default(),
