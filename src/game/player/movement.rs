@@ -101,8 +101,8 @@ pub(super) fn update_movement(
       player.horizontal_speed = 20.0;
     }
 
-    player.direction =
-      player.direction.x * player_transform.forward() + player.direction.z * player_transform.right();
+    player.direction = player.direction.x * player_transform.forward()
+      + player.direction.z * player_transform.right();
 
     // 地面に付いて無いときは重力を加える
     if ground_sensor.grounded {
