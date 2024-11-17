@@ -6,6 +6,7 @@ use crate::game::player::input::PlayerInput;
 #[derive(Component, Reflect, Debug)]
 pub struct CurrentWeapon;
 
+// TODO: フローチャートにする
 pub(super) fn update_current_item(
   mut commands: Commands,
   keyboard_input: Res<ButtonInput<KeyCode>>,
