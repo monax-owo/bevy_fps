@@ -81,19 +81,19 @@ pub(super) fn update_movement(
     player_query.get_single_mut()
   {
     if keyboard_input.pressed(key.forward) {
-      player.test.x += 1.0;
+      player.direction.x += 1.0;
     }
 
     if keyboard_input.pressed(key.left) {
-      player.test.z += -1.0;
+      player.direction.z += -1.0;
     }
 
     if keyboard_input.pressed(key.back) {
-      player.test.x += -1.0;
+      player.direction.x += -1.0;
     }
 
     if keyboard_input.pressed(key.right) {
-      player.test.z += 1.0;
+      player.direction.z += 1.0;
     }
 
     // TODO:プレイヤーが止まったら歩きの速度にする
@@ -101,8 +101,8 @@ pub(super) fn update_movement(
       player.horizontal_speed = 20.0;
     }
 
-    player.test =
-      player.test.x * player_transform.forward() + player.test.z * player_transform.right();
+    player.direction =
+      player.direction.x * player_transform.forward() + player.direction.z * player_transform.right();
 
     // 地面に付いて無いときは重力を加える
     if ground_sensor.grounded {
@@ -120,13 +120,13 @@ pub(super) fn update_movement(
       .clamp(-500.0, 500.0);
     }
 
-    player.direction.y -= player.vertical_accel * 0.2;
+    player.temp.y -= player.vertical_accel * 0.2;
 
-    player.direction =
-      (player.test * player.horizontal_speed).with_y(player.direction.y) * time.delta_seconds();
+    player.temp =
+      (player.direction * player.horizontal_speed).with_y(player.temp.y) * time.delta_seconds();
 
-    controller.translation = Some(player.direction);
-    player.test = Vec3::ZERO;
+    controller.translation = Some(player.temp);
+    player.direction = Vec3::ZERO;
   }
 }
 
