@@ -15,22 +15,24 @@ pub(super) fn update_current_item(
   current_item_query: Query<Entity, With<CurrentWeapon>>,
 ) {
   for (mut inventory, children) in inventory_query.iter_mut() {
-    inventory.current_item = inventory.current_item.clamp(0, inventory.max_count());
+    if inventory.current_item > inventory.max_count() {
+      inventory.current_item = inventory.max_count();
+    }
 
-    if keyboard_input.pressed(key.blink) {
+    if keyboard_input.just_pressed(key.blink) {
       dbg!(inventory.current_item);
       inventory.current_item = if inventory.current_item != 0 { 0 } else { 1 };
     }
 
     // childrenからcurrent_item_queryに当てはまるエンティティを探す
-    let find: Vec<&Entity> = children
+    let find_current_item: Vec<&Entity> = children
       .into_iter()
       .filter(|v| current_item_query.get(**v).is_ok())
       .collect();
 
     // TODO: CurrentWeaponを変えれるようにする
-    let _current_weapon = match find.len() {
-      1 => *find[0],
+    let _current_weapon = match find_current_item.len() {
+      1 => *find_current_item[0],
       0 => {
         dbg!("0");
         // childrenの最初のエンティティに付与
@@ -39,7 +41,7 @@ pub(super) fn update_current_item(
       _ => {
         dbg!("_");
         // findの最初以外のエンティティから削除
-        let mut iter = find.into_iter();
+        let mut iter = find_current_item.into_iter();
         let next = iter.next();
         iter.for_each(|e| {
           commands.entity(*e).remove::<CurrentWeapon>();
