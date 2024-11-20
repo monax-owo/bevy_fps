@@ -30,7 +30,7 @@ pub(super) fn update_current_item(
       .filter(|v| current_item_query.get(**v).is_ok())
       .collect();
 
-    // TODO: CurrentWeaponを変えれるようにする
+    //
     let _current_weapon = match find_current_item.len() {
       1 => *find_current_item[0],
       0 => {
@@ -51,6 +51,6 @@ pub(super) fn update_current_item(
     };
     //
 
-    //
+    // TODO: CurrentWeaponを変えれるようにする
   }
 }
