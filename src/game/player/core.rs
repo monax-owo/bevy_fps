@@ -27,6 +27,7 @@ pub(super) fn init_player(
   mut commands: Commands,
   mut meshes: ResMut<Assets<Mesh>>,
   mut materials: ResMut<Assets<StandardMaterial>>,
+  asset_server: Res<AssetServer>,
 ) {
   // TODO: フローチャートにする
   // (`Player`,`Inventory`,`PlayerInventory`)
@@ -48,12 +49,18 @@ pub(super) fn init_player(
       // TODO: Bundle化する
       parent.spawn((
         Name::new("TestGun"),
-        SpatialBundle::default(),
+        // SpatialBundle::default(),
         ExampleGun {
           cool_time: 1.0,
           bullet_speed: 140.0,
           bullet_lifetime: 10.0,
         },
+        SceneBundle {
+          scene: asset_server.load("models/test_gun2.glb#Scene0"),
+          transform: Transform::from_scale(Vec3::splat(4.0)),
+          ..default()
+        },
+        AnimationPlayer::default(),
       ));
 
       parent.spawn((
