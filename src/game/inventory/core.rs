@@ -51,6 +51,13 @@ pub(super) fn update_current_item(
     };
     //
 
-    // TODO: CurrentWeaponを変えれるようにする
+    // TODO: 上のコードと重複している気がする
+    for (i, child) in children.iter().enumerate() {
+      if i == inventory.current_item {
+        commands.entity(*child).insert(CurrentWeapon);
+      } else {
+        commands.entity(*child).remove::<CurrentWeapon>();
+      }
+    }
   }
 }
