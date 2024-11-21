@@ -13,6 +13,7 @@ pub(super) fn update_current_item(
   key: Res<PlayerInput>,
   mut inventory_query: Query<(&mut Inventory, &Children)>,
   current_item_query: Query<Entity, With<CurrentWeapon>>,
+  mut visibility_query: Query<&mut Visibility>,
 ) {
   for (mut inventory, children) in inventory_query.iter_mut() {
     if inventory.current_item > inventory.max_count() {
@@ -53,10 +54,14 @@ pub(super) fn update_current_item(
 
     // TODO: 上のコードと重複している気がする
     for (i, child) in children.iter().enumerate() {
-      if i == inventory.current_item {
-        commands.entity(*child).insert(CurrentWeapon);
-      } else {
-        commands.entity(*child).remove::<CurrentWeapon>();
+      if let Ok(mut visibility) = visibility_query.get_mut(*child) {
+        if i == inventory.current_item {
+          commands.entity(*child).insert(CurrentWeapon);
+          *visibility = Visibility::Inherited;
+        } else {
+          commands.entity(*child).remove::<CurrentWeapon>();
+          *visibility = Visibility::Hidden;
+        }
       }
     }
   }
