@@ -31,7 +31,7 @@ impl Default for Player {
       horizontal_speed: 1.0,
       vertical_speed: 1.0,
       jump_max_count: 1,
-      jump_cool_time: 1.2,
+      jump_cool_time: Default::default(),
     }
   }
 }
@@ -97,6 +97,7 @@ pub(super) fn init_player(
       Player {
         horizontal_speed: 8.0,
         vertical_speed: 18.0,
+        jump_cool_time: 1.2,
         ..default()
       },
       Collider::capsule_y(1.0, 0.4),
