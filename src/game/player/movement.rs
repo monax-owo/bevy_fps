@@ -54,11 +54,12 @@ pub(super) fn update_movement_input(
     }
 
     if ground_sensor.grounded && player.vertical_accel > 0.0 && keyboard_input.pressed(key.jump) {
+      // 重力とJUMP_HEIGHTで打ち消されないようにする
       if player.vertical_accel > GRAVITY {
         player.vertical_accel = GRAVITY;
       }
+
       player.vertical_accel += JUMP_HEIGHT;
-      dbg!(player.vertical_accel);
     }
   }
 }
