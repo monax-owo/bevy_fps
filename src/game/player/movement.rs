@@ -1,7 +1,7 @@
 use bevy::prelude::*;
 use bevy_rapier3d::prelude::*;
 
-use super::{input::PlayerInput, Player, PLAYER_HALF_HEIGHT, PLAYER_RADIUS};
+use super::{input::PlayerInput, Player, PLAYER_HEIGHT};
 
 pub const GRAVITY: f32 = 9.8;
 
@@ -113,7 +113,7 @@ pub(super) fn update_grounded(
       .cast_ray(
         transform
           .translation
-          .with_y(transform.translation.y - (PLAYER_HALF_HEIGHT + PLAYER_RADIUS)),
+          .with_y(transform.translation.y - PLAYER_HEIGHT),
         -Vec3::Y,
         ground_sensor.toi,
         true,

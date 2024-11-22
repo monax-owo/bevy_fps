@@ -8,6 +8,7 @@ use super::{camera_controller::CameraController, movement::GroundSensor};
 
 pub const PLAYER_HALF_HEIGHT: f32 = 1.0;
 pub const PLAYER_RADIUS: f32 = 0.4;
+pub const PLAYER_HEIGHT: f32 = PLAYER_HALF_HEIGHT + PLAYER_RADIUS;
 
 #[derive(Component, Reflect, Debug)]
 pub struct Player {
