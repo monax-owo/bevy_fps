@@ -6,11 +6,10 @@ use crate::game::shooting::{weapons::ExampleGun, Shooter};
 
 use super::{camera_controller::CameraController, movement::GroundSensor};
 
-#[derive(Component, Reflect, Debug, Default)]
+#[derive(Component, Reflect, Debug)]
 pub struct Player {
   /// 力が加わる向きと速度(大きさ)
   pub direction: Vec3,
-  /// 重力の掛かる方向
   /// 正の値だと下向きの力が掛かり
   /// 負の値だと上向きの力が掛かる(ジャンプ)
   pub vertical_accel: f32,
@@ -18,6 +17,23 @@ pub struct Player {
   pub horizontal_speed: f32,
   /// 垂直方向の移動速度
   pub vertical_speed: f32,
+  /// 連続でジャンプできる回数(ダブルジャンプをさせたいなら2)
+  pub jump_max_count: u32,
+  /// 連続でジャンプする際のクールタイム
+  pub jump_cool_time: f32,
+}
+
+impl Default for Player {
+  fn default() -> Self {
+    Self {
+      direction: Default::default(),
+      vertical_accel: Default::default(),
+      horizontal_speed: 1.0,
+      vertical_speed: 1.0,
+      jump_max_count: 1,
+      jump_cool_time: 1.2,
+    }
+  }
 }
 
 #[derive(Component, Reflect, Debug, Default)]
@@ -79,7 +95,6 @@ pub(super) fn init_player(
     .spawn((
       Name::new("Player"),
       Player {
-        vertical_accel: 1.0,
         horizontal_speed: 8.0,
         vertical_speed: 18.0,
         ..default()
