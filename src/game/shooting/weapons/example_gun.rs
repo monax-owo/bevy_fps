@@ -24,8 +24,6 @@ pub(super) fn update(
   mut gun: Query<(&mut ExampleGun, &GlobalTransform), With<CurrentWeapon>>,
 ) {
   for (mut gun, global_transform) in gun.iter_mut() {
-    gun.cool_time.tick(time.delta());
-
     for _ in fire_event_reader.read() {
       if gun.cool_time.finished() {
         // TODO:弾の発射処理はbulletの実装に移し、イベントで発火させる
@@ -42,5 +40,7 @@ pub(super) fn update(
         gun.cool_time.reset();
       }
     }
+
+    gun.cool_time.tick(time.delta());
   }
 }
