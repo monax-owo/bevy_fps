@@ -19,8 +19,13 @@ fn main() {
   ));
 
   if env::args().any(|v| &v == "--gui") {
+    use bevy::diagnostic::FrameTimeDiagnosticsPlugin;
     use bevy_editor_pls::EditorPlugin;
-    app.add_plugins(EditorPlugin::default());
+
+    app.add_plugins((
+      EditorPlugin::default(),
+      FrameTimeDiagnosticsPlugin::default(),
+    ));
   }
 
   app.run();
