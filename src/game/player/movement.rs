@@ -1,7 +1,7 @@
 use bevy::prelude::*;
 use bevy_rapier3d::prelude::*;
 
-use super::{input::PlayerInput, Player};
+use super::{input::PlayerInput, Player, PLAYER_HALF_HEIGHT, PLAYER_RADIUS};
 
 pub const GRAVITY: f32 = 9.8;
 
@@ -111,7 +111,9 @@ pub(super) fn update_grounded(
   for (mut ground_sensor, transform) in ground_sensor_query.iter_mut() {
     ground_sensor.grounded = rapier_context
       .cast_ray(
-        transform.translation.with_y(transform.translation.y - 1.4),
+        transform
+          .translation
+          .with_y(transform.translation.y - PLAYER_HALF_HEIGHT + PLAYER_RADIUS),
         -Vec3::Y,
         ground_sensor.toi,
         true,

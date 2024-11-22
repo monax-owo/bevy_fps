@@ -6,6 +6,9 @@ use crate::game::shooting::{weapons::ExampleGun, Shooter};
 
 use super::{camera_controller::CameraController, movement::GroundSensor};
 
+pub const PLAYER_HALF_HEIGHT: f32 = 1.0;
+pub const PLAYER_RADIUS: f32 = 0.4;
+
 #[derive(Component, Reflect, Debug)]
 pub struct Player {
   /// 力が加わる向きと速度(大きさ)
@@ -100,9 +103,9 @@ pub(super) fn init_player(
         jump_cool_time: 1.2,
         ..default()
       },
-      Collider::capsule_y(1.0, 0.4),
+      Collider::capsule_y(PLAYER_HALF_HEIGHT, PLAYER_RADIUS),
       PbrBundle {
-        mesh: meshes.add(Capsule3d::new(0.4, 2.0)),
+        mesh: meshes.add(Capsule3d::new(PLAYER_RADIUS, PLAYER_HALF_HEIGHT * 2.0)),
         material: materials.add(Color::Srgba(css::LIGHT_CYAN)),
         transform: Transform::from_xyz(0.0, 1.5, 0.0),
         ..default()
