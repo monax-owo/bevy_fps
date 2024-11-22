@@ -6,8 +6,7 @@ pub struct RaycastBullet {
   pub axis: Dir3,
   /// m/sec
   pub speed: f32,
-  // TODO: 時間の計測にTimerを使う
-  /// sec
+  /// 銃弾が消滅するまでの時間
   pub lifetime: Timer,
 }
 
@@ -53,11 +52,4 @@ pub(super) fn update_raycast(
 
   // TODO:判定を通り抜けないように進行方向の軸に対してrayを伸ばす
   // もしくは毎フレーム進む距離だけRaycastする
-  // TODO:↓これはプロジェクタイルのやつ
-  //   transform.translation += bullet.axis * bullet.speed * time.delta_seconds();
-  //   bullet.lifetime -= time.delta_seconds();
-
-  //   if bullet.lifetime <= 0.0 {
-  //     commands.entity(entity).despawn();
-  //   }
 }

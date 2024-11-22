@@ -4,8 +4,7 @@ use bevy::{color::palettes::css, prelude::*};
 pub struct ProjectileBullet {
   /// m/sec
   pub speed: f32,
-  // TODO: 時間の計測にTimerを使う
-  /// sec
+  /// 銃弾が消滅するまでの時間
   pub lifetime: Timer,
 }
 
