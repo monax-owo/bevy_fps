@@ -2,7 +2,7 @@ pub mod game;
 
 use std::env;
 
-use bevy::prelude::*;
+use bevy::{prelude::*, window::PresentMode};
 use game::GamePlugin;
 
 fn main() {
@@ -11,6 +11,7 @@ fn main() {
     DefaultPlugins.set(WindowPlugin {
       primary_window: Some(Window {
         title: "bevy_fps".into(),
+        present_mode: PresentMode::AutoNoVsync,
         ..default()
       }),
       ..default()
