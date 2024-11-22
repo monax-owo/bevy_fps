@@ -29,7 +29,7 @@ pub(super) fn update_movement_input(
   key: Res<PlayerInput>,
   mut player_query: Query<(&mut Player, &GroundSensor)>,
 ) {
-  const JUMP_HEIGHT: f32 = -20.0;
+  const JUMP_HEIGHT: f32 = -80.0;
 
   if let Ok((mut player, ground_sensor)) = player_query.get_single_mut() {
     if keyboard_input.pressed(key.forward) {
@@ -55,7 +55,7 @@ pub(super) fn update_movement_input(
 
     // TODO: BUG: フレームレートによって高さが変わってしまう
     if ground_sensor.grounded && player.vertical_accel > 0.0 && keyboard_input.pressed(key.jump) {
-      player.vertical_accel += -80.0;
+      player.vertical_accel += JUMP_HEIGHT;
       dbg!(player.vertical_accel);
     }
   }
