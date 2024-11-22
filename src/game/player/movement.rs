@@ -3,6 +3,8 @@ use bevy_rapier3d::prelude::*;
 
 use super::{input::PlayerInput, Player};
 
+pub const GRAVITY: f32 = 9.8;
+
 #[derive(Component, Reflect)]
 pub(super) struct GroundSensor {
   /// 接地しているか
@@ -52,8 +54,9 @@ pub(super) fn update_movement_input(
     }
 
     // TODO: BUG: フレームレートによって高さが変わってしまう
-    if ground_sensor.grounded && keyboard_input.pressed(key.jump) {
-      player.vertical_accel += JUMP_HEIGHT;
+    if ground_sensor.grounded && player.vertical_accel > 0.0 && keyboard_input.pressed(key.jump) {
+      player.vertical_accel += -80.0;
+      dbg!(player.vertical_accel);
     }
   }
 }
@@ -68,8 +71,6 @@ pub(super) fn update_movement(
     &GroundSensor,
   )>,
 ) {
-  const GRAVITY: f32 = 9.8;
-
   if let Ok((mut player, player_transform, mut controller, ground_sensor)) =
     player_query.get_single_mut()
   {
