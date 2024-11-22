@@ -8,7 +8,7 @@ pub struct RaycastBullet {
   pub speed: f32,
   // TODO: 時間の計測にTimerを使う
   /// sec
-  pub lifetime: f32,
+  pub lifetime: Timer,
 }
 
 // TODO:公開範囲を狭める

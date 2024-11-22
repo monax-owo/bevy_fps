@@ -6,7 +6,7 @@ pub struct ProjectileBullet {
   pub speed: f32,
   // TODO: 時間の計測にTimerを使う
   /// sec
-  pub lifetime: f32,
+  pub lifetime: Timer,
 }
 
 #[derive(Bundle)]
@@ -31,7 +31,10 @@ impl ProjectileBulletBundle {
         transform,
         ..Default::default()
       },
-      projectile_bullet: ProjectileBullet { speed, lifetime },
+      projectile_bullet: ProjectileBullet {
+        speed,
+        lifetime: Timer::from_seconds(lifetime, TimerMode::Once),
+      },
     }
   }
 }
@@ -71,12 +74,12 @@ pub(super) fn update_projectile(
   mut bullet_query: Query<(Entity, &mut ProjectileBullet, &mut Transform)>,
 ) {
   for (entity, mut bullet, mut transform) in bullet_query.iter_mut() {
-    if bullet.lifetime <= 0.0 {
+    if bullet.lifetime.finished() {
       commands.entity(entity).despawn_recursive();
     } else {
       let translation = -transform.local_z() * bullet.speed * time.delta_seconds();
       transform.translation += translation;
-      bullet.lifetime -= time.delta_seconds();
+      bullet.lifetime.tick(time.delta());
     }
   }
 }

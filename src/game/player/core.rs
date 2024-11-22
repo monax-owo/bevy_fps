@@ -26,7 +26,7 @@ pub struct Player {
   pub jump_max_count: u32,
   /// 連続でジャンプする際のクールタイム
   /// sec
-  pub jump_cool_time: f32,
+  pub jump_cool_time: Timer,
 }
 
 impl Default for Player {
@@ -103,7 +103,7 @@ pub(super) fn init_player(
       Player {
         horizontal_speed: 8.0,
         vertical_speed: 18.0,
-        jump_cool_time: 1.2,
+        jump_cool_time: Timer::from_seconds(1.2, TimerMode::Once),
         ..default()
       },
       Collider::capsule_y(PLAYER_HALF_HEIGHT, PLAYER_RADIUS),
