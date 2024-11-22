@@ -73,7 +73,7 @@ pub(super) fn init_player(
         Name::new("TestGun"),
         // SpatialBundle::default(),
         ExampleGun {
-          cool_time: 1.0,
+          cool_time: Timer::from_seconds(0.4, TimerMode::Once),
           bullet_speed: 140.0,
           bullet_lifetime: 10.0,
         },
@@ -89,7 +89,7 @@ pub(super) fn init_player(
         Name::new("TestGun 2"),
         SpatialBundle::default(),
         ExampleGun {
-          cool_time: 1.0,
+          cool_time: Timer::from_seconds(0.4, TimerMode::Once),
           bullet_speed: 3.0,
           bullet_lifetime: 20.0,
         },

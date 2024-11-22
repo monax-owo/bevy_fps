@@ -12,13 +12,9 @@ use crate::game::{
 pub struct ExampleGun {
   // TODO: 時間の計測にTimerを使う
   /// sec
-  pub cool_time: f32,
+  pub cool_time: Timer,
   pub bullet_speed: f32,
   pub bullet_lifetime: f32,
-}
-
-impl ExampleGun {
-  const COOL_TIME: f32 = 0.4;
 }
 
 pub(super) fn update(
@@ -30,12 +26,10 @@ pub(super) fn update(
   mut gun: Query<(&mut ExampleGun, &GlobalTransform), With<CurrentWeapon>>,
 ) {
   for (mut gun, global_transform) in gun.iter_mut() {
-    if gun.cool_time > 0.0 {
-      gun.cool_time -= time.delta_seconds();
-    }
+    gun.cool_time.tick(time.delta());
 
     for _ in fire_event_reader.read() {
-      if gun.cool_time <= 0.0 {
+      if gun.cool_time.finished() {
         // TODO:弾の発射処理はbulletの実装に移し、イベントで発火させる
         commands.entity(group.0).with_children(|parent| {
           parent.spawn(ProjectileBulletBundle::new(
@@ -47,7 +41,7 @@ pub(super) fn update(
           ));
         });
 
-        gun.cool_time = ExampleGun::COOL_TIME;
+        gun.cool_time.reset();
       }
     }
   }
