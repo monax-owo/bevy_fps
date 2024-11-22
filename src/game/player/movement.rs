@@ -53,8 +53,10 @@ pub(super) fn update_movement_input(
       player.horizontal_speed = 20.0;
     }
 
-    // TODO: BUG: フレームレートによって高さが変わってしまう
     if ground_sensor.grounded && player.vertical_accel > 0.0 && keyboard_input.pressed(key.jump) {
+      if player.vertical_accel > GRAVITY {
+        player.vertical_accel = GRAVITY;
+      }
       player.vertical_accel += JUMP_HEIGHT;
       dbg!(player.vertical_accel);
     }
