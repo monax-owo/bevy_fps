@@ -13,7 +13,8 @@
     "srgb",
     "srgba",
     "tonemapping",
-    "Unorm",
+    "unorm",
+    "vsync",
     "wgsl"
   ]
 }
