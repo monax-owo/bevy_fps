@@ -25,6 +25,7 @@ pub struct Player {
   /// 連続でジャンプできる回数(ダブルジャンプをさせたいなら2)
   pub jump_max_count: u32,
   /// 連続でジャンプする際のクールタイム
+  /// sec
   pub jump_cool_time: f32,
 }
 

@@ -4,6 +4,7 @@ use bevy::{color::palettes::css, prelude::*};
 pub struct ProjectileBullet {
   /// m/sec
   pub speed: f32,
+  // TODO: 時間の計測にTimerを使う
   /// sec
   pub lifetime: f32,
 }

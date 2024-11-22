@@ -10,6 +10,7 @@ use crate::game::{
 
 #[derive(Component, Reflect, Debug)]
 pub struct ExampleGun {
+  // TODO: 時間の計測にTimerを使う
   /// sec
   pub cool_time: f32,
   pub bullet_speed: f32,
