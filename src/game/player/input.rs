@@ -13,6 +13,10 @@ pub struct PlayerInput {
   pub dash: KeyCode,
   /// 高速移動
   pub blink: KeyCode,
+  // アイテム切り替え
+  pub item_1: KeyCode,
+  pub item_2: KeyCode,
+  pub item_3: KeyCode,
   // マウス
   /// 発射
   pub fire: MouseButton,
@@ -28,6 +32,9 @@ impl Default for PlayerInput {
       jump: KeyCode::Space,
       dash: KeyCode::KeyV,
       blink: KeyCode::KeyQ,
+      item_1: KeyCode::Numpad1,
+      item_2: KeyCode::Numpad2,
+      item_3: KeyCode::Numpad3,
       fire: MouseButton::Left,
     }
   }
