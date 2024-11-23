@@ -58,6 +58,7 @@ pub(super) fn update_current_item(
     //
 
     // TODO: 上のコードと重複している気がする
+    // TODO: Localを使ってinventory.current_itemが変更されたときのみ実行する
     for (i, child) in children.iter().enumerate() {
       if let Ok(mut visibility) = visibility_query.get_mut(*child) {
         if i == inventory.current_item {
