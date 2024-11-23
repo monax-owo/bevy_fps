@@ -32,9 +32,9 @@ impl Default for PlayerInput {
       jump: KeyCode::Space,
       dash: KeyCode::KeyV,
       blink: KeyCode::KeyQ,
-      item_1: KeyCode::Numpad1,
-      item_2: KeyCode::Numpad2,
-      item_3: KeyCode::Numpad3,
+      item_1: KeyCode::Digit1,
+      item_2: KeyCode::Digit2,
+      item_3: KeyCode::Digit3,
       fire: MouseButton::Left,
     }
   }

@@ -16,13 +16,18 @@ pub(super) fn update_current_item(
   mut visibility_query: Query<&mut Visibility>,
 ) {
   for (mut inventory, children) in inventory_query.iter_mut() {
-    if inventory.current_item > inventory.max_count() {
-      inventory.current_item = inventory.max_count();
+    if keyboard_input.just_pressed(key.item_1) {
+      inventory.current_item = 1;
+    }
+    if keyboard_input.just_pressed(key.item_2) {
+      inventory.current_item = 2;
+    }
+    if keyboard_input.just_pressed(key.item_3) {
+      inventory.current_item = if inventory.current_item != 0 { 0 } else { 1 };
     }
 
-    if keyboard_input.just_pressed(key.blink) {
-      dbg!(inventory.current_item);
-      inventory.current_item = if inventory.current_item != 0 { 0 } else { 1 };
+    if inventory.current_item > inventory.max_count() {
+      inventory.current_item = inventory.max_count();
     }
 
     // childrenからcurrent_item_queryに当てはまるエンティティを探す
@@ -35,8 +40,8 @@ pub(super) fn update_current_item(
     let _current_weapon = match find_current_item.len() {
       1 => *find_current_item[0],
       0 => {
-        dbg!("0");
         // childrenの最初のエンティティに付与
+        inventory.current_item = 0;
         commands.entity(children[0]).insert(CurrentWeapon).id()
       }
       _ => {
