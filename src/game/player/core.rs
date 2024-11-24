@@ -77,7 +77,7 @@ pub(super) fn init_player(
           bullet_lifetime: 10.0,
         },
         SceneBundle {
-          scene: asset_server.load("models/test_gun2.glb#Scene0"),
+          scene: asset_server.load("models/test_gun3.glb#Scene0"),
           transform: Transform::from_scale(Vec3::splat(4.0)),
           ..default()
         },

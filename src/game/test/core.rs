@@ -18,7 +18,7 @@ pub(super) fn update_tester(
   for (entity, mut player) in &mut q {
     let mut transitions = AnimationTransitions::new();
     let animation =
-      asset_server.load(GltfAssetLabel::Animation(0).from_asset("models/test_gun2.glb"));
+      asset_server.load(GltfAssetLabel::Animation(0).from_asset("models/test_gun3.glb"));
 
     let (graph, animation) = AnimationGraph::from_clip(animation);
 
