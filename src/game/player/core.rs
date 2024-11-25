@@ -65,7 +65,7 @@ pub(super) fn init_player(
     .spawn((
       Name::new("Inventory"),
       TransformBundle {
-        local: Transform::from_xyz(1.0, -0.8, -1.0),
+        local: Transform::from_xyz(1.0, -1.0, -0.6),
         ..default()
       },
       Inventory::new(2),
@@ -107,7 +107,7 @@ pub(super) fn init_player(
           bullet_lifetime: 10.0,
         },
         SceneBundle {
-          scene: asset_server.load("models/mox47_12.glb#Scene0"),
+          scene: asset_server.load("models/mox47_13.glb#Scene0"),
           transform: Transform::from_scale(Vec3::splat(MODEL_SCALE)),
           ..default()
         },
@@ -159,7 +159,7 @@ pub(super) fn init_player(
           fov: 90.0,
           ..default()
         }),
-        transform: Transform::from_xyz(0.0, 2.0, 0.0),
+        transform: Transform::from_xyz(0.0, 1.8, 0.0),
         ..default()
       },
       CameraController { sensitivity: 0.001 },
