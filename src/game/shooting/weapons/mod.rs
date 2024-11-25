@@ -1,5 +1,6 @@
 pub(super) mod core;
 pub(super) mod example_gun;
+pub(super) mod mox_47;
 pub(super) mod plugin;
 
 // pub use core::*;
