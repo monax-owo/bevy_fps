@@ -2,7 +2,10 @@ use bevy::{color::palettes::css, core_pipeline::tonemapping::DebandDither, prelu
 use bevy_rapier3d::prelude::*;
 use inventory::Inventory;
 
-use crate::game::shooting::{weapons::ExampleGun, Shooter};
+use crate::game::shooting::{
+  weapons::{ExampleGun, Mox47},
+  Shooter,
+};
 
 use super::{camera_controller::CameraController, movement::GroundSensor};
 
@@ -10,6 +13,8 @@ pub const PLAYER_HALF_HEIGHT: f32 = 1.0;
 pub const PLAYER_RADIUS: f32 = 0.4;
 pub const PLAYER_HEIGHT: f32 = PLAYER_HALF_HEIGHT + PLAYER_RADIUS;
 pub const PLAYER_OFFSET: f32 = 0.01;
+
+pub const MODEL_SCALE: f32 = 4.0;
 
 #[derive(Component, Reflect, Debug)]
 pub struct Player {
@@ -78,7 +83,7 @@ pub(super) fn init_player(
         },
         SceneBundle {
           scene: asset_server.load("models/test_gun3.glb#Scene0"),
-          transform: Transform::from_scale(Vec3::splat(4.0)),
+          transform: Transform::from_scale(Vec3::splat(MODEL_SCALE)),
           ..default()
         },
         AnimationPlayer::default(),
@@ -92,6 +97,21 @@ pub(super) fn init_player(
           bullet_speed: 3.0,
           bullet_lifetime: 20.0,
         },
+      ));
+
+      parent.spawn((
+        Name::new("Mox 47"),
+        Mox47 {
+          cool_time: Timer::from_seconds(0.2, TimerMode::Once),
+          bullet_speed: 140.0,
+          bullet_lifetime: 10.0,
+        },
+        SceneBundle {
+          scene: asset_server.load("models/mox47_12.glb#Scene0"),
+          transform: Transform::from_scale(Vec3::splat(MODEL_SCALE)),
+          ..default()
+        },
+        AnimationPlayer::default(),
       ));
     })
     .id();
