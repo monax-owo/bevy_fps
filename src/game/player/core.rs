@@ -107,7 +107,7 @@ pub(super) fn init_player(
           bullet_lifetime: 10.0,
         },
         SceneBundle {
-          scene: asset_server.load("models/mox47_13.glb#Scene0"),
+          scene: asset_server.load("models/mox47_15.glb#Scene0"),
           transform: Transform::from_scale(Vec3::splat(MODEL_SCALE)),
           ..default()
         },
