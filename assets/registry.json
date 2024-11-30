@@ -3887,7 +3887,7 @@
     },
     "bevy_fps::game::player::camera_controller::CameraController": {
       "additionalProperties": false,
-      "isComponent": false,
+      "isComponent": true,
       "isResource": false,
       "long_name": "bevy_fps::game::player::camera_controller::CameraController",
       "properties": {
@@ -3906,7 +3906,7 @@
     },
     "bevy_fps::game::player::core::Body": {
       "additionalProperties": false,
-      "isComponent": false,
+      "isComponent": true,
       "isResource": false,
       "long_name": "bevy_fps::game::player::core::Body",
       "properties": {},
@@ -3917,7 +3917,7 @@
     },
     "bevy_fps::game::player::core::Player": {
       "additionalProperties": false,
-      "isComponent": false,
+      "isComponent": true,
       "isResource": false,
       "long_name": "bevy_fps::game::player::core::Player",
       "properties": {
@@ -3966,7 +3966,7 @@
     },
     "bevy_fps::game::player::movement::GroundSensor": {
       "additionalProperties": false,
-      "isComponent": false,
+      "isComponent": true,
       "isResource": false,
       "long_name": "bevy_fps::game::player::movement::GroundSensor",
       "properties": {
@@ -3991,7 +3991,7 @@
     },
     "bevy_fps::game::shooting::bullet::projectile::ProjectileBullet": {
       "additionalProperties": false,
-      "isComponent": false,
+      "isComponent": true,
       "isResource": false,
       "long_name": "bevy_fps::game::shooting::bullet::projectile::ProjectileBullet",
       "properties": {
@@ -4016,7 +4016,7 @@
     },
     "bevy_fps::game::shooting::bullet::raycast::RaycastBullet": {
       "additionalProperties": false,
-      "isComponent": false,
+      "isComponent": true,
       "isResource": false,
       "long_name": "bevy_fps::game::shooting::bullet::raycast::RaycastBullet",
       "properties": {
@@ -4047,7 +4047,7 @@
     },
     "bevy_fps::game::shooting::core::Shooter": {
       "additionalProperties": false,
-      "isComponent": false,
+      "isComponent": true,
       "isResource": false,
       "long_name": "bevy_fps::game::shooting::core::Shooter",
       "properties": {},
@@ -4058,7 +4058,7 @@
     },
     "bevy_fps::game::shooting::weapons::example_gun::ExampleGun": {
       "additionalProperties": false,
-      "isComponent": false,
+      "isComponent": true,
       "isResource": false,
       "long_name": "bevy_fps::game::shooting::weapons::example_gun::ExampleGun",
       "properties": {
@@ -4088,7 +4088,7 @@
       "typeInfo": "Struct"
     },
     "bevy_fps::game::test::core::TestTag": {
-      "isComponent": false,
+      "isComponent": true,
       "isResource": false,
       "items": false,
       "long_name": "bevy_fps::game::test::core::TestTag",
@@ -4105,7 +4105,7 @@
     },
     "bevy_fps::game::ui::core::PauseMenu": {
       "additionalProperties": false,
-      "isComponent": false,
+      "isComponent": true,
       "isResource": false,
       "long_name": "bevy_fps::game::ui::core::PauseMenu",
       "properties": {},
@@ -4116,7 +4116,7 @@
     },
     "bevy_fps::game::ui::crosshair::Crosshair": {
       "additionalProperties": false,
-      "isComponent": false,
+      "isComponent": true,
       "isResource": false,
       "long_name": "bevy_fps::game::ui::crosshair::Crosshair",
       "properties": {
@@ -15542,7 +15542,7 @@
     },
     "inventory::Inventory": {
       "additionalProperties": false,
-      "isComponent": false,
+      "isComponent": true,
       "isResource": false,
       "long_name": "inventory::Inventory",
       "properties": {
