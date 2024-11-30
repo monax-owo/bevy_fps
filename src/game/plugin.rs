@@ -38,10 +38,8 @@ impl Plugin for GamePlugin {
 
 // blenvy
 fn setup_blenvy(mut commands: Commands) {
-  commands.spawn(
-    (BluePrintBundle {
-      blueprint: BlueprintInfo::from_path("levels/World.glb"),
-      ..default()
-    }),
-  )
+  commands.spawn(BluePrintBundle {
+    blueprint: BlueprintInfo::from_path("levels/World.glb"),
+    ..default()
+  });
 }
