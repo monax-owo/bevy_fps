@@ -9,6 +9,7 @@ use crate::game::{
 };
 
 #[derive(Component, Reflect, Debug)]
+#[reflect(Component)]
 pub struct ExampleGun {
   pub cool_time: Timer,
   pub bullet_speed: f32,

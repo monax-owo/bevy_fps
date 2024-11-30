@@ -17,6 +17,7 @@ pub const PLAYER_OFFSET: f32 = 0.01;
 pub const MODEL_SCALE: f32 = 4.0;
 
 #[derive(Component, Reflect, Debug)]
+#[reflect(Component)]
 pub struct Player {
   /// 力が加わる向きと速度(大きさ)
   pub direction: Vec3,
@@ -47,6 +48,7 @@ impl Default for Player {
 }
 
 #[derive(Component, Reflect, Debug, Default)]
+#[reflect(Component)]
 pub(super) struct Body;
 
 pub(super) fn init_player(

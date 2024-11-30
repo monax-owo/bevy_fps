@@ -1,6 +1,7 @@
 use bevy::prelude::*;
 
 #[derive(Component, Reflect, Debug)]
+#[reflect(Component)]
 pub(super) struct PauseMenu;
 
 // TODO:メインメニューからInGameに移ったらアセットをロードする

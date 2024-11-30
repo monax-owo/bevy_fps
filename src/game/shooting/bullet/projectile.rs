@@ -1,6 +1,7 @@
 use bevy::{color::palettes::css, prelude::*};
 
 #[derive(Component, Reflect, Debug)]
+#[reflect(Component)]
 pub struct ProjectileBullet {
   /// m/sec
   pub speed: f32,

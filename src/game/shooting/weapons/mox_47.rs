@@ -9,6 +9,7 @@ use crate::game::{
 };
 
 #[derive(Component, Reflect, Debug)]
+#[reflect(Component)]
 pub struct Mox47 {
   pub cool_time: Timer,
   pub bullet_speed: f32,

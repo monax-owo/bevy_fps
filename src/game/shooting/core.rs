@@ -3,6 +3,7 @@ use bevy::prelude::*;
 use crate::game::player::input::PlayerInput;
 
 #[derive(Component, Reflect, Debug, Default)]
+#[reflect(Component)]
 pub struct Shooter {}
 
 #[derive(Event, Debug)]

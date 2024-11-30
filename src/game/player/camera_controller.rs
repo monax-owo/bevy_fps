@@ -5,6 +5,7 @@ use bevy::{input::mouse::MouseMotion, prelude::*};
 use super::Player;
 
 #[derive(Component, Reflect, Debug)]
+#[reflect(Component)]
 pub(super) struct CameraController {
   /// カメラの感度
   pub(super) sensitivity: f32,

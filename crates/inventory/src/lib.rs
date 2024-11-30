@@ -4,6 +4,7 @@ pub enum InventoryError {
 }
 
 #[derive(Component, Reflect, Debug)]
+#[reflect(Component)]
 pub struct Inventory {
   /// itemsのindex
   pub current_item: usize,

@@ -3,6 +3,7 @@ use std::time::Duration;
 use bevy::prelude::*;
 
 #[derive(Component, Reflect, Debug)]
+#[reflect(Component)]
 pub(super) struct TestTag(pub String);
 
 // 使い終わったら消す

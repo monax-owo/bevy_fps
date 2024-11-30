@@ -6,6 +6,7 @@ use super::{input::PlayerInput, Player, PLAYER_HEIGHT, PLAYER_OFFSET};
 pub const GRAVITY: f32 = 9.8;
 
 #[derive(Component, Reflect)]
+#[reflect(Component)]
 pub(super) struct GroundSensor {
   /// 接地しているか
   pub grounded: bool,

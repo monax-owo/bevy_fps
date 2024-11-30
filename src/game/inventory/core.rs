@@ -4,6 +4,7 @@ use inventory::Inventory;
 use crate::game::player::input::PlayerInput;
 
 #[derive(Component, Reflect, Debug)]
+#[reflect(Component)]
 pub struct CurrentWeapon;
 
 // TODO: フローチャートにする

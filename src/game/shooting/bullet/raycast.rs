@@ -2,6 +2,7 @@ use bevy::{color::palettes::css, prelude::*};
 
 // TODO:Bundle化して公開範囲を狭める
 #[derive(Component, Reflect, Debug)]
+#[reflect(Component)]
 pub struct RaycastBullet {
   pub axis: Dir3,
   /// m/sec
