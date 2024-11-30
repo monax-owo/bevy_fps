@@ -8,14 +8,19 @@ use game::GamePlugin;
 fn main() {
   let mut app = App::new();
   app.add_plugins((
-    DefaultPlugins.set(WindowPlugin {
-      primary_window: Some(Window {
-        title: "bevy_fps".into(),
-        present_mode: PresentMode::AutoNoVsync,
+    DefaultPlugins
+      .set(WindowPlugin {
+        primary_window: Some(Window {
+          title: "bevy_fps".into(),
+          present_mode: PresentMode::AutoNoVsync,
+          ..default()
+        }),
+        ..default()
+      })
+      .set(AssetPlugin {
+        watch_for_changes_override: Some(true),
         ..default()
       }),
-      ..default()
-    }),
     GamePlugin,
   ));
 
