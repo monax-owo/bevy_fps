@@ -10,6 +10,7 @@ bevy = { workspace = true }
 bevy-inspector-egui = "0.27.0"
 bevy_editor_pls = "0.10.0"
 bevy_rapier3d = "0.27.0"
+blenvy = "0.1.0-alpha.1"
 inventory = { version = "0.1.0", path = "crates/inventory" }
 serde = { version = "1.0.214", features = ["derive"] }
 serde_json = "1.0.132"
