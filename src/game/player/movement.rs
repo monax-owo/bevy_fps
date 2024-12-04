@@ -33,22 +33,26 @@ pub(super) fn update_movement_input(
   const JUMP_HEIGHT: f32 = -80.0;
 
   if let Ok((mut player, ground_sensor)) = player_query.get_single_mut() {
+    let mut direction = Vec3::ZERO;
+
     if keyboard_input.pressed(key.forward) {
-      player.direction.x += 1.0;
+      direction.x += 1.0;
     }
 
     if keyboard_input.pressed(key.left) {
-      player.direction.z += -1.0;
+      direction.z += -1.0;
     }
 
     if keyboard_input.pressed(key.back) {
-      player.direction.x += -1.0;
+      direction.x += -1.0;
     }
 
     if keyboard_input.pressed(key.right) {
-      player.direction.z += 1.0;
+      direction.z += 1.0;
     }
 
+    player.direction = direction.normalize_or_zero();
+    dbg!(player.direction);
     // TODO:プレイヤーが止まったら歩きの速度にする
     if keyboard_input.pressed(key.dash) {
       player.horizontal_speed = 20.0;
