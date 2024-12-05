@@ -1,0 +1,7 @@
+(
+  assets:
+   [ 
+    ("ground", File ( path: "blueprints/ground.glb" )),
+    ("Material.004", File ( path: "materials/Material.004.glb" )),
+   ]
+)
