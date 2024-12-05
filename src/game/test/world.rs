@@ -1,5 +1,6 @@
 use bevy::prelude::*;
 use bevy_rapier3d::prelude::*;
+use blenvy::{BluePrintBundle, BlueprintInfo};
 use serde::Deserialize;
 use serde_json::Value;
 
@@ -22,11 +23,11 @@ pub(super) fn init_world(
   });
 
   commands.spawn((
-    SceneBundle {
-      scene: asset_server.load("models/kusa1.glb#Scene0"),
+    BluePrintBundle {
+      blueprint: BlueprintInfo::from_path("blueprints/ground.glb"),
       ..default()
     },
-    Name::new("Kusa"),
+    Name::new("Ground"),
   ));
 }
 

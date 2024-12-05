@@ -3,7 +3,7 @@ use bevy_rapier3d::{
   plugin::{NoUserData, RapierPhysicsPlugin},
   render::RapierDebugRenderPlugin,
 };
-use blenvy::{BlenvyPlugin, BluePrintBundle, BlueprintInfo};
+use blenvy::BlenvyPlugin;
 
 use super::{
   inventory::plugin::InventoryPlugin, player::PlayerPlugin, shader::ShaderPlugin,
