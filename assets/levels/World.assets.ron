@@ -1,0 +1,4 @@
+({
+    "ground": File ( path: "blueprints/ground.glb" ),
+    "Ground": File ( path: "materials/Ground.glb" ),
+})
