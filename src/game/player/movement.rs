@@ -52,7 +52,7 @@ pub(super) fn update_movement_input(
     }
 
     player.direction = direction.normalize_or_zero();
-    dbg!(player.direction);
+
     // TODO:プレイヤーが止まったら歩きの速度にする
     if keyboard_input.pressed(key.dash) {
       player.horizontal_speed = 20.0;
