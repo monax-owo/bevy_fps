@@ -7,7 +7,7 @@
     ("ground", File ( path: "blueprints/ground.glb" )),
     ("Ground", File ( path: "materials/Ground.glb" )),
     ("mox_47", File ( path: "blueprints/mox_47.glb" )),
-    ("Material.001", File ( path: "materials/Material.001.glb" )),
     ("Material.002", File ( path: "materials/Material.002.glb" )),
+    ("Material.001", File ( path: "materials/Material.001.glb" )),
    ]
 )
