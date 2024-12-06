@@ -10,6 +10,7 @@
     "gltf",
     "numpad",
     "raycast",
+    "serde",
     "signum",
     "skybox",
     "srgb",
