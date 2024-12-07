@@ -16,13 +16,12 @@ impl Plugin for GamePlugin {
   fn build(&self, app: &mut bevy::prelude::App) {
     let app = app
       .add_plugins((
-        RapierPhysicsPlugin::<NoUserData>::default(),
+        // RapierPhysicsPlugin::<NoUserData>::default(),
         BlenvyPlugin::default(),
         // inventory crateのPlugin
         inventory::InventoryPlugin,
         InventoryPlugin,
         PlayerPlugin,
-        ShaderPlugin,
         ShootingPlugin,
         StatePlugin,
         UiPlugin,
@@ -38,8 +37,8 @@ impl Plugin for GamePlugin {
 
 // blenvy
 fn setup_blenvy(mut commands: Commands) {
-  // commands.spawn(BluePrintBundle {
-  //   blueprint: BlueprintInfo::from_path("levels/World.glb"),
-  //   ..default()
-  // });
+  commands.spawn(blenvy::BluePrintBundle {
+    blueprint: blenvy::BlueprintInfo::from_path("levels/World.glb"),
+    ..default()
+  });
 }
