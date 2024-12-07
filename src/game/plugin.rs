@@ -6,8 +6,8 @@ use bevy_rapier3d::{
 use blenvy::BlenvyPlugin;
 
 use super::{
-  inventory::plugin::InventoryPlugin, player::PlayerPlugin, shader::ShaderPlugin,
-  shooting::ShootingPlugin, state::StatePlugin, test::TestPlugin, ui::UiPlugin, world::WorldPlugin,
+  inventory::plugin::InventoryPlugin, player::PlayerPlugin, shooting::ShootingPlugin,
+  state::StatePlugin, test::TestPlugin, ui::UiPlugin, world::WorldPlugin,
 };
 
 pub struct GamePlugin;
