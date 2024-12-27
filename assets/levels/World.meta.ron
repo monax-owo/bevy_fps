@@ -13,7 +13,8 @@
     ("Mat.001", File ( path: "materials/Mat.001.glb" )),
     ("Mat", File ( path: "materials/Mat.glb" )),
     ("noname", File ( path: "blueprints/noname.glb" )),
-    ("Mat.001", File ( path: "materials/Mat.001.glb" )),
-    ("Mat", File ( path: "materials/Mat.glb" )),
+    ("Noname.white", File ( path: "materials/Noname.white.glb" )),
+    ("Noname.slide", File ( path: "materials/Noname.slide.glb" )),
+    ("Noname.black", File ( path: "materials/Noname.black.glb" )),
    ]
 )
