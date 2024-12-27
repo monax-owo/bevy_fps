@@ -30,3 +30,10 @@ pub(super) fn update_tester(
     commands.entity(entity).insert(graphs.add(graph));
   }
 }
+
+pub(super) fn hot_reload(key: Res<ButtonInput<KeyCode>>, asset_server: Res<AssetServer>) {
+  if key.just_released(KeyCode::KeyR) {
+    asset_server.reload("assets/");
+    println!("reload");
+  }
+}

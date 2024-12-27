@@ -1,17 +1,11 @@
 use bevy::prelude::*;
 use bevy_rapier3d::prelude::*;
-use blenvy::{BluePrintBundle, BlueprintInfo};
+use blenvy::{BlueprintInfo, SpawnBlueprint};
 use serde::Deserialize;
 use serde_json::Value;
 
 pub(super) fn init_world(mut commands: Commands) {
-  commands.spawn((
-    BluePrintBundle {
-      blueprint: BlueprintInfo::from_path("blueprints/ground.glb"),
-      ..default()
-    },
-    Name::new("Ground"),
-  ));
+  commands.spawn((BlueprintInfo::from_path("blueprints/ground.glb"), SpawnBlueprint));
 }
 
 #[derive(Deserialize, Debug)]

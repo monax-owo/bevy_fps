@@ -3,7 +3,6 @@ use bevy_rapier3d::{
   plugin::{NoUserData, RapierPhysicsPlugin},
   render::RapierDebugRenderPlugin,
 };
-use blenvy::BlenvyPlugin;
 
 use super::{
   inventory::plugin::InventoryPlugin, player::PlayerPlugin, shooting::ShootingPlugin,
@@ -16,8 +15,7 @@ impl Plugin for GamePlugin {
   fn build(&self, app: &mut bevy::prelude::App) {
     let app = app
       .add_plugins((
-        // RapierPhysicsPlugin::<NoUserData>::default(),
-        BlenvyPlugin::default(),
+        RapierPhysicsPlugin::<NoUserData>::default(),
         // inventory crateのPlugin
         inventory::InventoryPlugin,
         InventoryPlugin,

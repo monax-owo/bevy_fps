@@ -1,5 +1,6 @@
 use bevy::{color::palettes::css, core_pipeline::tonemapping::DebandDither, prelude::*};
 use bevy_rapier3d::prelude::*;
+use blenvy::BlueprintInfo;
 use inventory::Inventory;
 
 use crate::game::shooting::{
@@ -108,11 +109,13 @@ pub(super) fn init_player(
           bullet_speed: 140.0,
           bullet_lifetime: 10.0,
         },
-        SceneBundle {
-          scene: asset_server.load("models/mox47_15.glb#Scene0"),
-          transform: Transform::from_scale(Vec3::splat(MODEL_SCALE)),
-          ..default()
-        },
+        // SceneBundle {
+        //   scene: asset_server.load("models/mox47_15.glb#Scene0"),
+        //   transform: Transform::from_scale(Vec3::splat(MODEL_SCALE)),
+        //   ..default()
+        // },
+        BlueprintInfo::from_path("blueprints/mox_47.glb"),
+        TransformBundle::from_transform(Transform::from_scale(Vec3::splat(MODEL_SCALE))),
         AnimationPlayer::default(),
       ));
     })
