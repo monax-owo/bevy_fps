@@ -89,7 +89,7 @@ pub(super) fn update_movement(
       // 弱い重力を加える
       player.vertical_accel = (player.vertical_accel
         - player.vertical_speed * 6.0 * time.delta_seconds())
-      .clamp(GRAVITY, 500.0);
+      .clamp(0.0, 500.0);
     } else {
       // 重力を加える
       player.vertical_accel = (player.vertical_accel
