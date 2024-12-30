@@ -5,8 +5,8 @@ use bevy_rapier3d::{
 };
 
 use super::{
-  inventory::plugin::InventoryPlugin, player::PlayerPlugin, shooting::ShootingPlugin,
-  state::StatePlugin, test::TestPlugin, ui::UiPlugin, world::WorldPlugin,
+  inventory::InventoryPlugin, player::PlayerPlugin, shooting::ShootingPlugin, state::StatePlugin,
+  test::TestPlugin, ui::UiPlugin, world::WorldPlugin,
 };
 
 pub struct GamePlugin;
