@@ -5,7 +5,10 @@ use serde::Deserialize;
 use serde_json::Value;
 
 pub(super) fn init_world(mut commands: Commands) {
-  commands.spawn((BlueprintInfo::from_path("blueprints/ground.glb"), SpawnBlueprint));
+  commands.spawn((
+    BlueprintInfo::from_path("blueprints/ground.glb"),
+    SpawnBlueprint,
+  ));
 }
 
 #[derive(Deserialize, Debug)]
